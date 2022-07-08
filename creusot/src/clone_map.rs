@@ -104,7 +104,9 @@ impl<'tcx> Drop for CloneMap<'tcx> {
                 self.last_cloned,
                 self.names.len(),
                 self.self_id,
-            )
+            );
+
+            debug_assert!(false);
         }
     }
 }
