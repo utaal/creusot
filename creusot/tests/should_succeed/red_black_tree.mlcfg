@@ -482,11 +482,11 @@ module RedBlackTree_Impl0_HasMappingModelAcc
   clone RedBlackTree_Impl0_HasMapping_Interface as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl5_BstInvariant_Interface as BstInvariant0 with type k = k, type v = v
-  clone CreusotContracts_Logic_Model_Model_Model_Interface as Model0 with type self = k,
-  type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_ModelAccHasMapping_Interface as ModelAccHasMapping0 with type k = k, type v = v,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   type ModelTy0.modelTy = ModelTy0.modelTy, axiom .
+  clone CreusotContracts_Logic_Model_Model_Model_Interface as Model0 with type self = k,
+  type ModelTy0.modelTy = ModelTy0.modelTy
   function has_mapping_model_acc [#"../red_black_tree.rs" 82 4 84 29] (self : Type.redblacktree_tree k v) (accu : Map.map ModelTy0.modelTy (Type.core_option_option v)) (k : ModelTy0.modelTy) : ()
     
    =
@@ -505,16 +505,10 @@ module RedBlackTree_Impl0_HasMappingModelAcc_Impl
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -525,23 +519,29 @@ module RedBlackTree_Impl0_HasMappingModelAcc_Impl
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function Model0.model = Model0.model
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model0.model, predicate LtLog0.lt_log = LtLog0.lt_log
-  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
+  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function Model0.model = Model0.model
   clone RedBlackTree_Impl0_ModelAccHasMapping as ModelAccHasMapping0 with type k = k, type v = v,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model, axiom .
+  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
   let rec ghost function has_mapping_model_acc (self : Type.redblacktree_tree k v) (accu : Map.map ModelTy0.modelTy (Type.core_option_option v)) (k : ModelTy0.modelTy) : ()
     requires {[#"../red_black_tree.rs" 80 15 80 35] BstInvariant0.bst_invariant self}
     ensures { [#"../red_black_tree.rs" 81 4 81 94] forall v : (v) . HasMapping0.has_mapping self k v -> Map.get (ModelAcc0.model_acc self accu) k = Type.Core_Option_Option_Some v }
@@ -591,9 +591,9 @@ module RedBlackTree_Impl3
   clone CreusotContracts_Logic_Model_Model_Model as Model2 with type self = k, type ModelTy0.modelTy = ModelTy2.modelTy
   clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy2.modelTy,
   function Model0.model = Model2.model
+  clone RedBlackTree_Impl3_ModelTy as ModelTy0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy2.modelTy
   clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy2.modelTy,
   function ModelAcc0.model_acc = ModelAcc0.model_acc
-  clone RedBlackTree_Impl3_ModelTy as ModelTy0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy2.modelTy
   clone CreusotContracts_Logic_Model_Model_Model_Interface as Model1 with type self = Type.redblacktree_tree k v,
   function model = Model0.model, type ModelTy0.modelTy = ModelTy0.modelTy
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy1 with type self = Type.redblacktree_tree k v,
@@ -626,12 +626,12 @@ module RedBlackTree_Impl0_HasMappingModel
   use map.Const
   clone RedBlackTree_Impl0_ModelAcc_Interface as ModelAcc0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl0_ModelAccHasMapping_Interface as ModelAccHasMapping0 with type k = k, type v = v,
-  function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
-  type ModelTy0.modelTy = ModelTy0.modelTy, axiom .
   clone RedBlackTree_Impl0_HasMappingModelAcc_Interface as HasMappingModelAcc0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function ModelAcc0.model_acc = ModelAcc0.model_acc,
+  type ModelTy0.modelTy = ModelTy0.modelTy, axiom .
+  clone RedBlackTree_Impl0_ModelAccHasMapping_Interface as ModelAccHasMapping0 with type k = k, type v = v,
+  function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   type ModelTy0.modelTy = ModelTy0.modelTy, axiom .
   function has_mapping_model [#"../red_black_tree.rs" 103 4 105 29] (self : Type.redblacktree_tree k v) (k : ModelTy0.modelTy) : ()
     
@@ -649,16 +649,10 @@ module RedBlackTree_Impl0_HasMappingModel_Impl
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -669,30 +663,36 @@ module RedBlackTree_Impl0_HasMappingModel_Impl
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Model_Model_Model as Model1 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
   function Model0.model = Model1.model
-  clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model1.model, predicate LtLog0.lt_log = LtLog0.lt_log
-  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
   clone RedBlackTree_Impl0_ModelAccHasMapping as ModelAccHasMapping0 with type k = k, type v = v,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model, axiom .
+  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
   clone RedBlackTree_Impl0_HasMappingModelAcc as HasMappingModelAcc0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function ModelAcc0.model_acc = ModelAcc0.model_acc,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model,
   function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping, axiom .
+  clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function ModelAcc0.model_acc = ModelAcc0.model_acc
   let rec ghost function has_mapping_model (self : Type.redblacktree_tree k v) (k : ModelTy0.modelTy) : ()
     requires {[#"../red_black_tree.rs" 101 15 101 35] BstInvariant0.bst_invariant self}
     ensures { [#"../red_black_tree.rs" 102 4 102 82] forall v : (v) . HasMapping0.has_mapping self k v = (Map.get (Model0.model self) k = Type.Core_Option_Option_Some v) }
@@ -744,16 +744,10 @@ module RedBlackTree_Impl0_HasMappingInj_Impl
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -764,17 +758,21 @@ module RedBlackTree_Impl0_HasMappingInj_Impl
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Model_Model_Model as Model1 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function Model0.model = Model1.model
-  clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model
+  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function Model0.model = Model1.model
   clone RedBlackTree_Impl0_ModelAccHasMapping as ModelAccHasMapping0 with type k = k, type v = v,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model, axiom .
@@ -788,6 +786,8 @@ module RedBlackTree_Impl0_HasMappingInj_Impl
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function ModelAcc0.model_acc = ModelAcc0.model_acc,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model,
   function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping, axiom .
+  clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMappingModel as HasMappingModel0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function Model0.model = Model0.model,
@@ -1229,10 +1229,10 @@ module RedBlackTree_Impl12_RotateRight_Interface
   use mach.int.Int
   use prelude.Prelude
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy0 with type self = k
+  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog_Interface as LtLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Model_Model_Model_Interface as Model0 with type self = k,
   type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
   clone RedBlackTree_Impl8_HasHeight_Interface as HasHeight0 with type k = k, type v = v,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl1_SameMappings_Interface as SameMappings0 with type k = k, type v = v
@@ -1260,16 +1260,10 @@ module RedBlackTree_Impl12_RotateRight
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -1280,30 +1274,37 @@ module RedBlackTree_Impl12_RotateRight
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
   clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
   clone RedBlackTree_Impl0_SameMappings as SameMappings1 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
-  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
-  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model0.model, predicate LtLog0.lt_log = LtLog0.lt_log
   clone RedBlackTree_Impl5_BstInvariant as BstInvariant1 with type k = k, type v = v,
   predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
+  clone RedBlackTree_Impl8_HasHeight as HasHeight0 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
+  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
   clone RedBlackTree_Impl4_BstInvariant as BstInvariant0 with type k = k, type v = v,
   predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
   predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight0 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
   use mach.int.Int64
+  clone CreusotContracts_Std1_Option_Impl0_DefaultLog as DefaultLog0 with type t = Type.redblacktree_node k v
   clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve7 with type self = Type.redblacktree_tree k v
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve6 with type t = Type.redblacktree_node k v
   clone Core_Mem_Swap_Interface as Swap1 with type t = Type.redblacktree_node k v
@@ -1313,7 +1314,6 @@ module RedBlackTree_Impl12_RotateRight
   clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve3 with type self = Type.core_option_option (Type.redblacktree_node k v)
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve2 with type t = Type.redblacktree_node k v
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.core_option_option (Type.redblacktree_node k v)
-  clone CreusotContracts_Std1_Option_Impl0_DefaultLog as DefaultLog0 with type t = Type.redblacktree_node k v
   clone Core_Mem_Take_Interface as Take0 with type t = Type.core_option_option (Type.redblacktree_node k v),
   function DefaultLog0.default_log = DefaultLog0.default_log
   clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_node k v)
@@ -1472,10 +1472,10 @@ module RedBlackTree_Impl12_RotateLeft_Interface
   use mach.int.Int
   use prelude.Prelude
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy0 with type self = k
+  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog_Interface as LtLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Model_Model_Model_Interface as Model0 with type self = k,
   type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
   clone RedBlackTree_Impl8_HasHeight_Interface as HasHeight0 with type k = k, type v = v,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl1_SameMappings_Interface as SameMappings0 with type k = k, type v = v
@@ -1503,16 +1503,10 @@ module RedBlackTree_Impl12_RotateLeft
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -1523,30 +1517,37 @@ module RedBlackTree_Impl12_RotateLeft
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
   clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
   clone RedBlackTree_Impl0_SameMappings as SameMappings1 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
-  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
-  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model0.model, predicate LtLog0.lt_log = LtLog0.lt_log
   clone RedBlackTree_Impl5_BstInvariant as BstInvariant1 with type k = k, type v = v,
   predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
+  clone RedBlackTree_Impl8_HasHeight as HasHeight0 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
+  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
   clone RedBlackTree_Impl4_BstInvariant as BstInvariant0 with type k = k, type v = v,
   predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
   predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight0 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
   use mach.int.Int64
+  clone CreusotContracts_Std1_Option_Impl0_DefaultLog as DefaultLog0 with type t = Type.redblacktree_node k v
   clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve7 with type self = Type.redblacktree_tree k v
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve6 with type t = Type.redblacktree_node k v
   clone Core_Mem_Swap_Interface as Swap1 with type t = Type.redblacktree_node k v
@@ -1556,7 +1557,6 @@ module RedBlackTree_Impl12_RotateLeft
   clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve3 with type self = Type.core_option_option (Type.redblacktree_node k v)
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve2 with type t = Type.redblacktree_node k v
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.core_option_option (Type.redblacktree_node k v)
-  clone CreusotContracts_Std1_Option_Impl0_DefaultLog as DefaultLog0 with type t = Type.redblacktree_node k v
   clone Core_Mem_Take_Interface as Take0 with type t = Type.core_option_option (Type.redblacktree_node k v),
   function DefaultLog0.default_log = DefaultLog0.default_log
   clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_node k v)
@@ -1748,8 +1748,8 @@ module RedBlackTree_Impl12_FlipColors_Interface
   use Type
   use mach.int.Int
   use prelude.Prelude
-  clone RedBlackTree_Impl1_SameMappings_Interface as SameMappings0 with type k = k, type v = v
   clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl1_SameMappings_Interface as SameMappings0 with type k = k, type v = v
   clone RedBlackTree_Impl8_HasHeight_Interface as HasHeight0 with type k = k, type v = v,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl6_Color_Interface as Color0 with type k = k, type v = v
@@ -1777,16 +1777,10 @@ module RedBlackTree_Impl12_FlipColors
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -1797,29 +1791,35 @@ module RedBlackTree_Impl12_FlipColors
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
-  clone RedBlackTree_Impl0_SameMappings as SameMappings1 with type k = k, type v = v,
-  type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
-  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
-  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model0.model, predicate LtLog0.lt_log = LtLog0.lt_log
   clone RedBlackTree_Impl5_BstInvariant as BstInvariant1 with type k = k, type v = v,
   predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
-  clone RedBlackTree_Impl4_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
-  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl0_SameMappings as SameMappings1 with type k = k, type v = v,
+  type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
+  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
+  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
   clone RedBlackTree_Impl8_HasHeight as HasHeight0 with type k = k, type v = v,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl4_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
+  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve2 with type t = Type.redblacktree_color
   clone Core_Mem_Swap_Interface as Swap0 with type t = Type.redblacktree_color
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_node k v
@@ -1965,16 +1965,10 @@ module RedBlackTree_Impl12_Balance
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -1985,40 +1979,43 @@ module RedBlackTree_Impl12_Balance
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
   clone RedBlackTree_Impl0_SameMappings as SameMappings1 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
-  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
-  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model0.model, predicate LtLog0.lt_log = LtLog0.lt_log
   clone RedBlackTree_Impl5_BstInvariant as BstInvariant1 with type k = k, type v = v,
   predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
-  clone RedBlackTree_Impl4_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
-  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
   clone RedBlackTree_Impl8_HasHeight as HasHeight0 with type k = k, type v = v,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
   clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
   predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   clone RedBlackTree_Impl7_ColorInvariant as ColorInvariant1 with type k = k, type v = v,
   predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant
+  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
+  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
+  clone RedBlackTree_Impl4_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
+  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = Type.redblacktree_node k v
-  clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = Type.redblacktree_node k v
-  clone Core_Option_Impl0_AsRef_Interface as AsRef0 with type t = Type.redblacktree_node k v
   clone RedBlackTree_Impl12_FlipColors_Interface as FlipColors0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant, function Color0.color = Color0.color,
   predicate HasHeight0.has_height = HasHeight0.has_height,
@@ -2030,6 +2027,9 @@ module RedBlackTree_Impl12_Balance
   predicate HasHeight0.has_height = HasHeight0.has_height, function Model0.model = Model0.model,
   predicate LtLog0.lt_log = LtLog0.lt_log, predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec,
   type ModelTy0.modelTy = ModelTy0.modelTy
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = Type.redblacktree_node k v
+  clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = Type.redblacktree_node k v
+  clone Core_Option_Impl0_AsRef_Interface as AsRef0 with type t = Type.redblacktree_node k v
   clone RedBlackTree_Impl12_RotateLeft_Interface as RotateLeft0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant, function Color0.color = Color0.color,
   predicate SameMappings0.same_mappings = SameMappings0.same_mappings,
@@ -2241,12 +2241,12 @@ module RedBlackTree_Impl12_MoveRedLeft_Interface
   use mach.int.Int
   use prelude.Prelude
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy0 with type self = k
+  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog_Interface as LeLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Model_Model_Model_Interface as Model0 with type self = k,
   type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl6_ColorInvariant_Interface as ColorInvariant1 with type k = k, type v = v
   clone RedBlackTree_Impl1_SameMappings_Interface as SameMappings0 with type k = k, type v = v
-  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
   clone RedBlackTree_Impl8_HasHeight_Interface as HasHeight0 with type k = k, type v = v,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl6_Color_Interface as Color0 with type k = k, type v = v
@@ -2276,16 +2276,13 @@ module RedBlackTree_Impl12_MoveRedLeft
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
-  predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
+  clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
+  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -2296,41 +2293,40 @@ module RedBlackTree_Impl12_MoveRedLeft
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
+  predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
   predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
-  clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
-  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
   clone RedBlackTree_Impl0_SameMappings as SameMappings1 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
-  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
-  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model0.model, predicate LtLog0.lt_log = LtLog0.lt_log
   clone RedBlackTree_Impl5_BstInvariant as BstInvariant1 with type k = k, type v = v,
   predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
-  clone RedBlackTree_Impl4_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
-  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight0 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
   clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant1 with type k = k, type v = v,
   predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
+  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
+  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
+  clone RedBlackTree_Impl8_HasHeight as HasHeight0 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl7_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
   predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here,
   predicate ColorInvariant0.color_invariant = ColorInvariant1.color_invariant
+  clone RedBlackTree_Impl4_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
+  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve2 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_node k v
-  clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = borrowed (Type.redblacktree_node k v)
-  clone Core_Option_Impl0_AsMut_Interface as AsMut0 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_node k v)
   clone RedBlackTree_Impl12_RotateLeft_Interface as RotateLeft0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant, function Color0.color = Color0.color,
   predicate SameMappings0.same_mappings = SameMappings0.same_mappings,
@@ -2344,11 +2340,15 @@ module RedBlackTree_Impl12_MoveRedLeft
   predicate LtLog0.lt_log = LtLog0.lt_log, predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec,
   type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl11_IsRed_Interface as IsRed0 with type k = k, type v = v, function Color0.color = Color0.color
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_node k v
+  clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = borrowed (Type.redblacktree_node k v)
+  clone Core_Option_Impl0_AsMut_Interface as AsMut0 with type t = Type.redblacktree_node k v
   clone RedBlackTree_Impl12_FlipColors_Interface as FlipColors0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant, function Color0.color = Color0.color,
   predicate HasHeight0.has_height = HasHeight0.has_height,
   predicate SameMappings0.same_mappings = SameMappings0.same_mappings,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_node k v)
   let rec cfg move_red_left [@cfg:stackify] [#"../red_black_tree.rs" 475 4 475 31] (self : borrowed (Type.redblacktree_node k v)) : ()
     requires {[#"../red_black_tree.rs" 458 15 458 41] Type.redblacktree_tree_Tree_node (Type.redblacktree_node_Node_right ( * self)) <> Type.Core_Option_Option_None}
     requires {[#"../red_black_tree.rs" 459 15 459 38] BstInvariant0.bst_invariant ( * self)}
@@ -2478,12 +2478,12 @@ module RedBlackTree_Impl12_MoveRedRight_Interface
   use mach.int.Int
   use prelude.Prelude
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy0 with type self = k
+  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog_Interface as LtLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Model_Model_Model_Interface as Model0 with type self = k,
   type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl6_ColorInvariant_Interface as ColorInvariant1 with type k = k, type v = v
   clone RedBlackTree_Impl1_SameMappings_Interface as SameMappings0 with type k = k, type v = v
-  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
   clone RedBlackTree_Impl8_HasHeight_Interface as HasHeight0 with type k = k, type v = v,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl6_Color_Interface as Color0 with type k = k, type v = v
@@ -2514,16 +2514,13 @@ module RedBlackTree_Impl12_MoveRedRight
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
+  clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
+  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -2534,46 +2531,46 @@ module RedBlackTree_Impl12_MoveRedRight
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
-  clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
-  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone RedBlackTree_Impl0_SameMappings as SameMappings1 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
-  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
-  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model0.model, predicate LtLog0.lt_log = LtLog0.lt_log
   clone RedBlackTree_Impl5_BstInvariant as BstInvariant1 with type k = k, type v = v,
   predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
-  clone RedBlackTree_Impl4_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
-  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight0 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
   clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant1 with type k = k, type v = v,
   predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
+  clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
+  predicate SameMappings0.same_mappings = SameMappings1.same_mappings
+  clone RedBlackTree_Impl8_HasHeight as HasHeight0 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl7_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
   predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here,
   predicate ColorInvariant0.color_invariant = ColorInvariant1.color_invariant
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = Type.redblacktree_node k v
-  clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = borrowed (Type.redblacktree_node k v)
-  clone Core_Option_Impl0_AsMut_Interface as AsMut0 with type t = Type.redblacktree_node k v
+  clone RedBlackTree_Impl4_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
+  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant
   clone RedBlackTree_Impl12_RotateLeft_Interface as RotateLeft0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant, function Color0.color = Color0.color,
   predicate SameMappings0.same_mappings = SameMappings0.same_mappings,
   predicate HasHeight0.has_height = HasHeight0.has_height, function Model0.model = Model0.model,
   predicate LtLog0.lt_log = LtLog0.lt_log, predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec,
   type ModelTy0.modelTy = ModelTy0.modelTy
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_node k v
   clone RedBlackTree_Impl12_RotateRight_Interface as RotateRight0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant, function Color0.color = Color0.color,
   predicate SameMappings0.same_mappings = SameMappings0.same_mappings,
@@ -2581,6 +2578,9 @@ module RedBlackTree_Impl12_MoveRedRight
   predicate LtLog0.lt_log = LtLog0.lt_log, predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec,
   type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl11_IsRed_Interface as IsRed0 with type k = k, type v = v, function Color0.color = Color0.color
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = Type.redblacktree_node k v
+  clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = borrowed (Type.redblacktree_node k v)
+  clone Core_Option_Impl0_AsMut_Interface as AsMut0 with type t = Type.redblacktree_node k v
   clone RedBlackTree_Impl12_FlipColors_Interface as FlipColors0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant, function Color0.color = Color0.color,
   predicate HasHeight0.has_height = HasHeight0.has_height,
@@ -2704,8 +2704,8 @@ module RedBlackTree_Impl13_New_Interface
   type v
   use Type
   use map.Const
-  clone RedBlackTree_Impl10_Invariant_Interface as Invariant0 with type k = k, type v = v
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy0 with type self = k
+  clone RedBlackTree_Impl10_Invariant_Interface as Invariant0 with type k = k, type v = v
   clone RedBlackTree_Impl3_Model_Interface as Model0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy
   val new [@cfg:stackify] (_ : ()) : Type.redblacktree_tree k v
@@ -2718,31 +2718,14 @@ module RedBlackTree_Impl13_New
   type v
   use Type
   use map.Const
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
-  predicate HasHeight0.has_height = HasHeight1.has_height,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
-  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
-  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy0 with type self = k
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -2753,25 +2736,42 @@ module RedBlackTree_Impl13_New
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Model_Model_Model as Model1 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model1.model, predicate LtLog0.lt_log = LtLog0.lt_log
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
+  predicate HasHeight0.has_height = HasHeight1.has_height,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
+  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
   predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
+  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function Model0.model = Model1.model
   clone RedBlackTree_Impl10_Invariant as Invariant0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant, function Color0.color = Color0.color,
   predicate HasHeight0.has_height = HasHeight0.has_height, predicate HasHeight1.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec
-  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function Model0.model = Model1.model
   clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
   function ModelAcc0.model_acc = ModelAcc0.model_acc
   let rec cfg new [@cfg:stackify] [#"../red_black_tree.rs" 529 4 529 30] (_ : ()) : Type.redblacktree_tree k v
@@ -2877,26 +2877,14 @@ module RedBlackTree_Impl13_InsertRec
   use Type
   use mach.int.Int
   use prelude.Prelude
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
-  predicate HasHeight0.has_height = HasHeight1.has_height,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy0 with type self = k
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -2907,47 +2895,50 @@ module RedBlackTree_Impl13_InsertRec
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
   clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model0.model, predicate LtLog0.lt_log = LtLog0.lt_log
-  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
+  clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
+  predicate HasHeight0.has_height = HasHeight1.has_height,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
   predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
+  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
   use mach.int.Int64
   use prelude.Int8
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve6 with type self = Type.core_option_option (Type.redblacktree_node k v)
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve5 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve4 with type self = k
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve3 with type t = Type.core_option_option (Type.redblacktree_node k v)
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = k
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = Type.redblacktree_tree k v
-  clone CreusotContracts_Logic_Model_Impl0_Model as Model1 with type t = k, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function Model0.model = Model0.model
-  clone Core_Cmp_Ord_Cmp_Interface as Cmp0 with type self = k, function Model0.model = Model1.model,
-  function Model1.model = Model0.model, function CmpLog0.cmp_log = CmpLog0.cmp_log,
-  type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_SameMappings as SameMappings1 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
+  clone RedBlackTree_Impl7_ColorInvariant as ColorInvariant1 with type k = k, type v = v,
+  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here,
+  predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant
   clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
   predicate SameMappings0.same_mappings = SameMappings1.same_mappings
   clone RedBlackTree_Impl4_BstInvariant as BstInvariant1 with type k = k, type v = v,
   predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant
-  clone RedBlackTree_Impl7_ColorInvariant as ColorInvariant1 with type k = k, type v = v,
-  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here,
-  predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant
+  clone CreusotContracts_Logic_Model_Impl0_Model as Model1 with type t = k, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function Model0.model = Model0.model
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve6 with type self = Type.core_option_option (Type.redblacktree_node k v)
   clone RedBlackTree_Impl12_Balance_Interface as Balance0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant, function Color0.color = Color0.color,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant,
@@ -2955,6 +2946,15 @@ module RedBlackTree_Impl13_InsertRec
   predicate ColorInvariant1.color_invariant = ColorInvariant1.color_invariant,
   predicate HasHeight0.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve5 with type t = Type.redblacktree_node k v
+  clone Core_Cmp_Ord_Cmp_Interface as Cmp0 with type self = k, function Model0.model = Model1.model,
+  function Model1.model = Model0.model, function CmpLog0.cmp_log = CmpLog0.cmp_log,
+  type ModelTy0.modelTy = ModelTy0.modelTy
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve4 with type self = k
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve3 with type t = Type.core_option_option (Type.redblacktree_node k v)
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = v
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = k
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = Type.redblacktree_tree k v
   let rec cfg insert_rec [@cfg:stackify] [#"../red_black_tree.rs" 542 4 542 44] (self : borrowed (Type.redblacktree_tree k v)) (key : k) (val' : v) : ()
     requires {[#"../red_black_tree.rs" 533 15 533 38] BstInvariant0.bst_invariant ( * self)}
     requires {[#"../red_black_tree.rs" 534 15 534 40] ColorInvariant0.color_invariant ( * self)}
@@ -3198,16 +3198,10 @@ module RedBlackTree_Impl13_Insert
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -3218,28 +3212,42 @@ module RedBlackTree_Impl13_Insert
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
   clone CreusotContracts_Logic_Model_Model_Model as Model1 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model1.model, predicate LtLog0.lt_log = LtLog0.lt_log
-  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
   clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
   function Model0.model = Model1.model
   clone RedBlackTree_Impl0_ModelAccHasMapping as ModelAccHasMapping0 with type k = k, type v = v,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model, axiom .
+  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
   clone RedBlackTree_Impl0_HasMappingModelAcc as HasMappingModelAcc0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function ModelAcc0.model_acc = ModelAcc0.model_acc,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model,
   function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping, axiom .
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
+  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
   function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMappingModel as HasMappingModel0 with type k = k, type v = v,
@@ -3249,17 +3257,9 @@ module RedBlackTree_Impl13_Insert
   function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping,
   function HasMappingModelAcc0.has_mapping_model_acc = HasMappingModelAcc0.has_mapping_model_acc,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, axiom .
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
   predicate HasHeight0.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
-  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
-  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   clone RedBlackTree_Impl10_Invariant as Invariant0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant, function Color0.color = Color0.color,
@@ -3269,9 +3269,6 @@ module RedBlackTree_Impl13_Insert
   clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = borrowed (Type.redblacktree_node k v)
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve3 with type t = Type.redblacktree_tree k v
   clone Core_Option_Impl0_AsMut_Interface as AsMut0 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = k
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_tree k v)
   clone RedBlackTree_Impl13_InsertRec_Interface as InsertRec0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant, function Color0.color = Color0.color,
@@ -3279,6 +3276,9 @@ module RedBlackTree_Impl13_Insert
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasHeight0.has_height = HasHeight0.has_height,
   predicate HasHeight1.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = v
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = k
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_tree k v)
   let rec cfg insert [@cfg:stackify] [#"../red_black_tree.rs" 571 4 571 44] (self : borrowed (Type.redblacktree_tree k v)) (key : k) (val' : v) : ()
     requires {[#"../red_black_tree.rs" 568 15 568 34] Invariant0.invariant' ( * self)}
     ensures { [#"../red_black_tree.rs" 569 14 569 33] Invariant0.invariant' ( ^ self) }
@@ -3383,15 +3383,15 @@ module RedBlackTree_Impl13_DeleteMinRec_Interface
   use Type
   use mach.int.Int
   use prelude.Prelude
+  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl8_HasHeight_Interface as HasHeight1 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy0 with type self = k
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog_Interface as LeLog0 with type self = ModelTy0.modelTy
   clone RedBlackTree_Impl0_HasMapping_Interface as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy
   clone CreusotContracts_Logic_Model_Model_Model_Interface as Model0 with type self = k,
   type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight_Interface as HasHeight1 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl9_HasHeight_Interface as HasHeight0 with type k = k, type v = v,
   predicate HasHeight0.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
@@ -3423,16 +3423,10 @@ module RedBlackTree_Impl13_DeleteMinRec
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
-  predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -3443,59 +3437,57 @@ module RedBlackTree_Impl13_DeleteMinRec
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
+  predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
   predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
   clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model0.model, predicate LtLog0.lt_log = LtLog0.lt_log
-  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
   clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
   predicate HasHeight0.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
   clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
   predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
+  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
   use mach.int.Int64
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve8 with type self = Type.redblacktree_node k v
-  clone Core_Option_Impl0_Unwrap_Interface as Unwrap2 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve5 with type t = Type.core_option_option (Type.redblacktree_node k v)
-  clone CreusotContracts_Std1_Option_Impl0_DefaultLog as DefaultLog0 with type t = Type.redblacktree_node k v
-  clone Core_Mem_Take_Interface as Take0 with type t = Type.core_option_option (Type.redblacktree_node k v),
-  function DefaultLog0.default_log = DefaultLog0.default_log
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve7 with type self = v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve6 with type self = k
-  clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve4 with type t1 = k, type t2 = v,
-  predicate Resolve0.resolve = Resolve6.resolve, predicate Resolve1.resolve = Resolve7.resolve
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve3 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = Type.redblacktree_node k v
-  clone Core_Option_Impl0_Unwrap_Interface as Unwrap1 with type t = Type.redblacktree_node k v
-  clone Core_Option_Impl0_AsRef_Interface as AsRef0 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_tree k v
-  clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = borrowed (Type.redblacktree_node k v)
-  clone Core_Option_Impl0_AsMut_Interface as AsMut0 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_tree k v)
   clone RedBlackTree_Impl0_SameMappings as SameMappings1 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
+  clone CreusotContracts_Std1_Option_Impl0_DefaultLog as DefaultLog0 with type t = Type.redblacktree_node k v
   clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
   predicate SameMappings0.same_mappings = SameMappings1.same_mappings
-  clone RedBlackTree_Impl4_BstInvariant as BstInvariant1 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
-  predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant
-  clone RedBlackTree_Impl11_IsRed_Interface as IsRed0 with type k = k, type v = v, function Color0.color = Color0.color
   clone RedBlackTree_Impl7_ColorInvariant as ColorInvariant1 with type k = k, type v = v,
   predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant
+  clone RedBlackTree_Impl4_BstInvariant as BstInvariant1 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
+  predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve8 with type self = Type.redblacktree_node k v
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve7 with type self = v
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve6 with type self = k
+  clone Core_Option_Impl0_Unwrap_Interface as Unwrap2 with type t = Type.redblacktree_node k v
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve5 with type t = Type.core_option_option (Type.redblacktree_node k v)
+  clone Core_Mem_Take_Interface as Take0 with type t = Type.core_option_option (Type.redblacktree_node k v),
+  function DefaultLog0.default_log = DefaultLog0.default_log
+  clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve4 with type t1 = k, type t2 = v,
+  predicate Resolve0.resolve = Resolve6.resolve, predicate Resolve1.resolve = Resolve7.resolve
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve3 with type t = Type.redblacktree_node k v
   clone RedBlackTree_Impl12_Balance_Interface as Balance0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant, function Color0.color = Color0.color,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant,
@@ -3511,6 +3503,14 @@ module RedBlackTree_Impl13_DeleteMinRec
   predicate ColorInvariant1.color_invariant = ColorInvariant0.color_invariant, function Model0.model = Model0.model,
   predicate LeLog0.le_log = LeLog0.le_log, predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec,
   type ModelTy0.modelTy = ModelTy0.modelTy
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = Type.redblacktree_node k v
+  clone Core_Option_Impl0_Unwrap_Interface as Unwrap1 with type t = Type.redblacktree_node k v
+  clone Core_Option_Impl0_AsRef_Interface as AsRef0 with type t = Type.redblacktree_node k v
+  clone RedBlackTree_Impl11_IsRed_Interface as IsRed0 with type k = k, type v = v, function Color0.color = Color0.color
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_tree k v
+  clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = borrowed (Type.redblacktree_node k v)
+  clone Core_Option_Impl0_AsMut_Interface as AsMut0 with type t = Type.redblacktree_node k v
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_tree k v)
   let rec cfg delete_min_rec [@cfg:stackify] [#"../red_black_tree.rs" 595 4 595 42] (self : borrowed (Type.redblacktree_tree k v)) : (k, v)
     requires {[#"../red_black_tree.rs" 580 15 580 38] BstInvariant0.bst_invariant ( * self)}
     requires {[#"../red_black_tree.rs" 581 15 581 40] ColorInvariant0.color_invariant ( * self)}
@@ -3742,16 +3742,31 @@ module RedBlackTree_Impl13_DeleteMin
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
-  predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
+  clone CreusotContracts_Logic_Model_Model_Model as Model1 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
+  clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
+  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model
+  clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
+  type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
+  function Model0.model = Model1.model, predicate LtLog0.lt_log = LtLog0.lt_log
+  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function Model0.model = Model1.model
+  clone RedBlackTree_Impl0_ModelAccHasMapping as ModelAccHasMapping0 with type k = k, type v = v,
+  function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
+  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model, axiom .
+  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
+  clone RedBlackTree_Impl0_HasMappingModelAcc as HasMappingModelAcc0 with type k = k, type v = v,
+  predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
+  predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function ModelAcc0.model_acc = ModelAcc0.model_acc,
+  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model,
+  function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -3762,30 +3777,21 @@ module RedBlackTree_Impl13_DeleteMin
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
+  predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
   predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
-  clone CreusotContracts_Logic_Model_Model_Model as Model1 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
-  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model
-  clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
-  type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
-  function Model0.model = Model1.model, predicate LtLog0.lt_log = LtLog0.lt_log
-  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
-  clone RedBlackTree_Impl0_SameMappings as SameMappings0 with type k = k, type v = v,
-  type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
-  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function Model0.model = Model1.model
-  clone RedBlackTree_Impl0_ModelAccHasMapping as ModelAccHasMapping0 with type k = k, type v = v,
-  function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
-  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model, axiom .
-  clone RedBlackTree_Impl0_HasMappingModelAcc as HasMappingModelAcc0 with type k = k, type v = v,
-  predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
-  predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function ModelAcc0.model_acc = ModelAcc0.model_acc,
-  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model,
-  function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping, axiom .
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
+  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
   function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMappingModel as HasMappingModel0 with type k = k, type v = v,
@@ -3795,17 +3801,11 @@ module RedBlackTree_Impl13_DeleteMin
   function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping,
   function HasMappingModelAcc0.has_mapping_model_acc = HasMappingModelAcc0.has_mapping_model_acc,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, axiom .
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl0_SameMappings as SameMappings0 with type k = k, type v = v,
+  type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
   clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
   predicate HasHeight0.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
-  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
-  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   clone RedBlackTree_Impl10_Invariant as Invariant0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant, function Color0.color = Color0.color,
@@ -3818,11 +3818,6 @@ module RedBlackTree_Impl13_DeleteMin
   predicate Resolve0.resolve = Resolve5.resolve, predicate Resolve1.resolve = Resolve6.resolve
   clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = borrowed (Type.redblacktree_node k v)
   clone Core_Option_Impl0_AsMut_Interface as AsMut0 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve3 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve2 with type t = Type.core_option_option (Type.redblacktree_node k v)
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_tree k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_tree k v)
-  clone RedBlackTree_Impl11_IsRed_Interface as IsRed0 with type k = k, type v = v, function Color0.color = Color0.color
   clone RedBlackTree_Impl13_DeleteMinRec_Interface as DeleteMinRec0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant, function Color0.color = Color0.color,
@@ -3830,6 +3825,11 @@ module RedBlackTree_Impl13_DeleteMin
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, type ModelTy0.modelTy = ModelTy0.modelTy,
   predicate LeLog0.le_log = LeLog0.le_log, predicate HasHeight1.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve3 with type t = Type.redblacktree_node k v
+  clone RedBlackTree_Impl11_IsRed_Interface as IsRed0 with type k = k, type v = v, function Color0.color = Color0.color
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve2 with type t = Type.core_option_option (Type.redblacktree_node k v)
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_tree k v
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_tree k v)
   let rec cfg delete_min [@cfg:stackify] [#"../red_black_tree.rs" 619 4 619 50] (self : borrowed (Type.redblacktree_tree k v)) : Type.core_option_option (k, v)
     requires {[#"../red_black_tree.rs" 612 15 612 34] Invariant0.invariant' ( * self)}
     ensures { [#"../red_black_tree.rs" 613 14 613 33] Invariant0.invariant' ( ^ self) }
@@ -4035,14 +4035,14 @@ module RedBlackTree_Impl13_DeleteRec_Interface
   use Type
   use mach.int.Int
   use prelude.Prelude
+  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl8_HasHeight_Interface as HasHeight1 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy0 with type self = k
   clone RedBlackTree_Impl0_HasMapping_Interface as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy
   clone CreusotContracts_Logic_Model_Model_Model_Interface as Model0 with type self = k,
   type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl9_HasHeightRec_Interface as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight_Interface as HasHeight1 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl9_HasHeight_Interface as HasHeight0 with type k = k, type v = v,
   predicate HasHeight0.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
@@ -4074,16 +4074,10 @@ module RedBlackTree_Impl13_DeleteRec
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -4094,17 +4088,21 @@ module RedBlackTree_Impl13_DeleteRec
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Model_Model_Model as Model0 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function Model0.model = Model0.model
-  clone RedBlackTree_Impl3_Model as Model1 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
+  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function Model0.model = Model0.model
   clone RedBlackTree_Impl0_ModelAccHasMapping as ModelAccHasMapping0 with type k = k, type v = v,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model, axiom .
@@ -4118,6 +4116,8 @@ module RedBlackTree_Impl13_DeleteRec
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function ModelAcc0.model_acc = ModelAcc0.model_acc,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model,
   function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping, axiom .
+  clone RedBlackTree_Impl3_Model as Model1 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMappingModel as HasMappingModel0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function Model0.model = Model1.model,
@@ -4125,70 +4125,36 @@ module RedBlackTree_Impl13_DeleteRec
   function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping,
   function HasMappingModelAcc0.has_mapping_model_acc = HasMappingModelAcc0.has_mapping_model_acc,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, axiom .
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
   clone RedBlackTree_Impl0_HasMappingInj as HasMappingInj0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, type ModelTy0.modelTy = ModelTy0.modelTy,
   function Model0.model = Model1.model,
   function HasMappingModel0.has_mapping_model = HasMappingModel0.has_mapping_model, axiom .
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
   predicate HasHeight0.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
   clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
   predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   use prelude.Int8
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve12 with type self = Type.redblacktree_node k v
-  clone Core_Option_Impl0_Unwrap_Interface as Unwrap2 with type t = Type.redblacktree_node k v
-  clone Core_Option_Impl0_AsRef_Interface as AsRef0 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve11 with type self = Type.redblacktree_node k v
-  clone Core_Option_Impl0_Unwrap_Interface as Unwrap1 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve8 with type t = Type.core_option_option (Type.redblacktree_node k v)
-  clone CreusotContracts_Std1_Option_Impl0_DefaultLog as DefaultLog0 with type t = Type.redblacktree_node k v
-  clone Core_Mem_Take_Interface as Take0 with type t = Type.core_option_option (Type.redblacktree_node k v),
-  function DefaultLog0.default_log = DefaultLog0.default_log
-  clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve10 with type self = v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve9 with type self = k
-  clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve7 with type t1 = k, type t2 = v,
-  predicate Resolve0.resolve = Resolve9.resolve, predicate Resolve1.resolve = Resolve10.resolve
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve6 with type t = v
-  clone Core_Mem_Swap_Interface as Swap1 with type t = v
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve5 with type t = k
-  clone Core_Mem_Swap_Interface as Swap0 with type t = k
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve4 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve3 with type self = Type.core_option_option (k, v)
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve2 with type t = Type.redblacktree_tree k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = k
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = Type.redblacktree_node k v
-  clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = borrowed (Type.redblacktree_node k v)
-  clone Core_Option_Impl0_AsMut_Interface as AsMut0 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Model_Impl0_Model as Model2 with type t = k, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function Model0.model = Model0.model
-  clone Core_Cmp_Ord_Cmp_Interface as Cmp0 with type self = k, function Model0.model = Model2.model,
-  function Model1.model = Model0.model, function CmpLog0.cmp_log = CmpLog0.cmp_log,
-  type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_SameMappings as SameMappings1 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping
+  clone CreusotContracts_Std1_Option_Impl0_DefaultLog as DefaultLog0 with type t = Type.redblacktree_node k v
+  clone RedBlackTree_Impl7_ColorInvariant as ColorInvariant1 with type k = k, type v = v,
+  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here,
+  predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant
   clone RedBlackTree_Impl1_SameMappings as SameMappings0 with type k = k, type v = v,
   predicate SameMappings0.same_mappings = SameMappings1.same_mappings
   clone RedBlackTree_Impl4_BstInvariant as BstInvariant1 with type k = k, type v = v,
   predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant
-  clone RedBlackTree_Impl12_RotateRight_Interface as RotateRight0 with type k = k, type v = v,
-  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant, function Color0.color = Color0.color,
-  predicate SameMappings0.same_mappings = SameMappings0.same_mappings,
-  predicate HasHeight0.has_height = HasHeight1.has_height, function Model0.model = Model0.model,
-  predicate LtLog0.lt_log = LtLog0.lt_log, predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec,
-  type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl11_IsRed_Interface as IsRed0 with type k = k, type v = v, function Color0.color = Color0.color
-  clone RedBlackTree_Impl7_ColorInvariant as ColorInvariant1 with type k = k, type v = v,
-  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here,
-  predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant
+  clone CreusotContracts_Logic_Model_Impl0_Model as Model2 with type t = k, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function Model0.model = Model0.model
   clone RedBlackTree_Impl12_MoveRedLeft_Interface as MoveRedLeft0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant,
   predicate ColorInvariant0.color_invariant = ColorInvariant1.color_invariant, function Color0.color = Color0.color,
@@ -4205,13 +4171,23 @@ module RedBlackTree_Impl13_DeleteRec
   predicate ColorInvariant1.color_invariant = ColorInvariant0.color_invariant, function Model0.model = Model0.model,
   predicate LtLog0.lt_log = LtLog0.lt_log, predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec,
   type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl12_Balance_Interface as Balance0 with type k = k, type v = v,
-  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant, function Color0.color = Color0.color,
-  predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant,
-  predicate SameMappings0.same_mappings = SameMappings0.same_mappings,
-  predicate ColorInvariant1.color_invariant = ColorInvariant1.color_invariant,
-  predicate HasHeight0.has_height = HasHeight1.has_height,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve12 with type self = Type.redblacktree_node k v
+  clone Core_Option_Impl0_Unwrap_Interface as Unwrap2 with type t = Type.redblacktree_node k v
+  clone Core_Option_Impl0_AsRef_Interface as AsRef0 with type t = Type.redblacktree_node k v
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve11 with type self = Type.redblacktree_node k v
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve10 with type self = v
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve9 with type self = k
+  clone Core_Option_Impl0_Unwrap_Interface as Unwrap1 with type t = Type.redblacktree_node k v
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve8 with type t = Type.core_option_option (Type.redblacktree_node k v)
+  clone Core_Mem_Take_Interface as Take0 with type t = Type.core_option_option (Type.redblacktree_node k v),
+  function DefaultLog0.default_log = DefaultLog0.default_log
+  clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = Type.redblacktree_node k v
+  clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve7 with type t1 = k, type t2 = v,
+  predicate Resolve0.resolve = Resolve9.resolve, predicate Resolve1.resolve = Resolve10.resolve
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve6 with type t = v
+  clone Core_Mem_Swap_Interface as Swap1 with type t = v
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve5 with type t = k
+  clone Core_Mem_Swap_Interface as Swap0 with type t = k
   clone RedBlackTree_Impl13_DeleteMinRec_Interface as DeleteMinRec0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant, function Color0.color = Color0.color,
@@ -4219,6 +4195,30 @@ module RedBlackTree_Impl13_DeleteRec
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, type ModelTy0.modelTy = ModelTy0.modelTy,
   predicate LeLog0.le_log = LeLog0.le_log, predicate HasHeight1.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve4 with type t = Type.redblacktree_node k v
+  clone RedBlackTree_Impl12_Balance_Interface as Balance0 with type k = k, type v = v,
+  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant, function Color0.color = Color0.color,
+  predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant,
+  predicate SameMappings0.same_mappings = SameMappings0.same_mappings,
+  predicate ColorInvariant1.color_invariant = ColorInvariant1.color_invariant,
+  predicate HasHeight0.has_height = HasHeight1.has_height,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve3 with type self = Type.core_option_option (k, v)
+  clone RedBlackTree_Impl12_RotateRight_Interface as RotateRight0 with type k = k, type v = v,
+  predicate BstInvariant0.bst_invariant = BstInvariant1.bst_invariant, function Color0.color = Color0.color,
+  predicate SameMappings0.same_mappings = SameMappings0.same_mappings,
+  predicate HasHeight0.has_height = HasHeight1.has_height, function Model0.model = Model0.model,
+  predicate LtLog0.lt_log = LtLog0.lt_log, predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec,
+  type ModelTy0.modelTy = ModelTy0.modelTy
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve2 with type t = Type.redblacktree_tree k v
+  clone RedBlackTree_Impl11_IsRed_Interface as IsRed0 with type k = k, type v = v, function Color0.color = Color0.color
+  clone Core_Cmp_Ord_Cmp_Interface as Cmp0 with type self = k, function Model0.model = Model2.model,
+  function Model1.model = Model0.model, function CmpLog0.cmp_log = CmpLog0.cmp_log,
+  type ModelTy0.modelTy = ModelTy0.modelTy
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = k
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = Type.redblacktree_node k v
+  clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = borrowed (Type.redblacktree_node k v)
+  clone Core_Option_Impl0_AsMut_Interface as AsMut0 with type t = Type.redblacktree_node k v
   let rec cfg delete_rec [@cfg:stackify] [#"../red_black_tree.rs" 658 4 658 55] (self : borrowed (Type.redblacktree_tree k v)) (key : k) : Type.core_option_option (k, v)
     requires {[#"../red_black_tree.rs" 642 15 642 38] BstInvariant0.bst_invariant ( * self)}
     requires {[#"../red_black_tree.rs" 643 15 643 40] ColorInvariant0.color_invariant ( * self)}
@@ -4762,16 +4762,10 @@ module RedBlackTree_Impl13_Delete
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -4782,29 +4776,43 @@ module RedBlackTree_Impl13_Delete
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
-  clone RedBlackTree_Impl3_ModelTy as ModelTy1 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
   clone CreusotContracts_Logic_Model_Model_Model as Model1 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model1.model, predicate LtLog0.lt_log = LtLog0.lt_log
-  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
   clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
   function Model0.model = Model1.model
   clone RedBlackTree_Impl0_ModelAccHasMapping as ModelAccHasMapping0 with type k = k, type v = v,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model, axiom .
+  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
   clone RedBlackTree_Impl0_HasMappingModelAcc as HasMappingModelAcc0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function ModelAcc0.model_acc = ModelAcc0.model_acc,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model,
   function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping, axiom .
+  clone RedBlackTree_Impl3_ModelTy as ModelTy1 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
+  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
   function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMappingModel as HasMappingModel0 with type k = k, type v = v,
@@ -4816,17 +4824,9 @@ module RedBlackTree_Impl13_Delete
   function ModelAcc0.model_acc = ModelAcc0.model_acc, axiom .
   clone CreusotContracts_Logic_Model_Impl1_Model as Model2 with type t = Type.redblacktree_tree k v,
   type ModelTy0.modelTy = ModelTy1.modelTy, function Model0.model = Model0.model
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
   clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
   predicate HasHeight0.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
-  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
-  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   clone RedBlackTree_Impl10_Invariant as Invariant0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant, function Color0.color = Color0.color,
@@ -4836,12 +4836,6 @@ module RedBlackTree_Impl13_Delete
   clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve5 with type self = Type.core_option_option (k, v)
   clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = borrowed (Type.redblacktree_node k v)
   clone Core_Option_Impl0_AsMut_Interface as AsMut0 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve4 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve3 with type t = Type.core_option_option (Type.redblacktree_node k v)
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = k
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_tree k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_tree k v)
-  clone RedBlackTree_Impl11_IsRed_Interface as IsRed0 with type k = k, type v = v, function Color0.color = Color0.color
   clone RedBlackTree_Impl13_DeleteRec_Interface as DeleteRec0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant, function Color0.color = Color0.color,
@@ -4849,6 +4843,12 @@ module RedBlackTree_Impl13_Delete
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, type ModelTy0.modelTy = ModelTy0.modelTy,
   predicate HasHeight1.has_height = HasHeight1.has_height,
   predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve4 with type t = Type.redblacktree_node k v
+  clone RedBlackTree_Impl11_IsRed_Interface as IsRed0 with type k = k, type v = v, function Color0.color = Color0.color
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve3 with type t = Type.core_option_option (Type.redblacktree_node k v)
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = k
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.redblacktree_tree k v
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = borrowed (Type.redblacktree_tree k v)
   let rec cfg delete [@cfg:stackify] [#"../red_black_tree.rs" 708 4 708 55] (self : borrowed (Type.redblacktree_tree k v)) (key : k) : Type.core_option_option (k, v)
     requires {[#"../red_black_tree.rs" 702 15 702 34] Invariant0.invariant' ( * self)}
     ensures { [#"../red_black_tree.rs" 703 14 703 33] Invariant0.invariant' ( ^ self) }
@@ -5073,16 +5073,10 @@ module RedBlackTree_Impl13_Get
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -5093,30 +5087,47 @@ module RedBlackTree_Impl13_Get
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
   clone CreusotContracts_Logic_Model_Model_Model as Model1 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function Model0.model = Model1.model
-  clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model1.model, predicate LtLog0.lt_log = LtLog0.lt_log
-  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
+  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function Model0.model = Model1.model
   clone RedBlackTree_Impl0_ModelAccHasMapping as ModelAccHasMapping0 with type k = k, type v = v,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model, axiom .
+  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
   clone RedBlackTree_Impl0_HasMappingModelAcc as HasMappingModelAcc0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function ModelAcc0.model_acc = ModelAcc0.model_acc,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model,
   function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping, axiom .
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
+  predicate HasHeight0.has_height = HasHeight1.has_height,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
+  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
+  clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMappingModel as HasMappingModel0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function Model0.model = Model0.model,
@@ -5124,17 +5135,6 @@ module RedBlackTree_Impl13_Get
   function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping,
   function HasMappingModelAcc0.has_mapping_model_acc = HasMappingModelAcc0.has_mapping_model_acc,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, axiom .
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
-  predicate HasHeight0.has_height = HasHeight1.has_height,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
-  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
-  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   clone RedBlackTree_Impl10_Invariant as Invariant0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant, function Color0.color = Color0.color,
@@ -5143,16 +5143,16 @@ module RedBlackTree_Impl13_Get
   use mach.int.Int
   use mach.int.Int64
   use prelude.Int8
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve4 with type self = v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve3 with type self = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = Type.core_option_option (Type.redblacktree_node k v)
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = k
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = Type.redblacktree_tree k v
   clone CreusotContracts_Logic_Model_Impl0_Model as Model2 with type t = k, type ModelTy0.modelTy = ModelTy0.modelTy,
   function Model0.model = Model1.model
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve4 with type self = v
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve3 with type self = Type.redblacktree_node k v
   clone Core_Cmp_Ord_Cmp_Interface as Cmp0 with type self = k, function Model0.model = Model2.model,
   function Model1.model = Model1.model, function CmpLog0.cmp_log = CmpLog0.cmp_log,
   type ModelTy0.modelTy = ModelTy0.modelTy
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = Type.core_option_option (Type.redblacktree_node k v)
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = k
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = Type.redblacktree_tree k v
   let rec cfg get [@cfg:stackify] [#"../red_black_tree.rs" 736 4 736 44] (self : Type.redblacktree_tree k v) (key : k) : Type.core_option_option v
     requires {[#"../red_black_tree.rs" 733 15 733 34] Invariant0.invariant' self}
     ensures { [#"../red_black_tree.rs" 734 4 734 83] forall v : (v) . result = Type.Core_Option_Option_Some v -> Map.get (Model0.model self) (Model1.model key) = Type.Core_Option_Option_Some v }
@@ -5310,16 +5310,10 @@ module RedBlackTree_Impl13_GetMut
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLog as CmpLog0 with type self = ModelTy0.modelTy
   clone CreusotContracts_Logic_Ord_OrdLogic_GtLog as GtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
-  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_GeLog as GeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
-  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LeLog as LeLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
-  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
-  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_EqCmp as EqCmp0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Antisym2 as Antisym20 with type self = ModelTy0.modelTy,
@@ -5330,30 +5324,47 @@ module RedBlackTree_Impl13_GetMut
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_Refl as Refl0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGtLog as CmpGtLog0 with type self = ModelTy0.modelTy,
+  predicate GtLog0.gt_log = GtLog0.gt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpGeLog as CmpGeLog0 with type self = ModelTy0.modelTy,
+  predicate GeLog0.ge_log = GeLog0.ge_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
   clone CreusotContracts_Logic_Ord_OrdLogic_LtLog as LtLog0 with type self = ModelTy0.modelTy,
   function CmpLog0.cmp_log = CmpLog0.cmp_log
   clone CreusotContracts_Logic_Ord_OrdLogic_CmpLtLog as CmpLtLog0 with type self = ModelTy0.modelTy,
   predicate LtLog0.lt_log = LtLog0.lt_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone CreusotContracts_Logic_Ord_OrdLogic_CmpLeLog as CmpLeLog0 with type self = ModelTy0.modelTy,
+  predicate LeLog0.le_log = LeLog0.le_log, function CmpLog0.cmp_log = CmpLog0.cmp_log, axiom .
+  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
+  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
+  function Color0.color = Color0.color
   clone CreusotContracts_Logic_Model_Model_Model as Model1 with type self = k, type ModelTy0.modelTy = ModelTy0.modelTy
-  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function Model0.model = Model1.model
-  clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
-  function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMapping as HasMapping0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model
   clone RedBlackTree_Impl4_BstInvariantHere as BstInvariantHere0 with type k = k, type v = v,
   type ModelTy0.modelTy = ModelTy0.modelTy, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   function Model0.model = Model1.model, predicate LtLog0.lt_log = LtLog0.lt_log
-  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
-  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
+  clone RedBlackTree_Impl0_ModelAcc as ModelAcc0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function Model0.model = Model1.model
   clone RedBlackTree_Impl0_ModelAccHasMapping as ModelAccHasMapping0 with type k = k, type v = v,
   function ModelAcc0.model_acc = ModelAcc0.model_acc, predicate HasMapping0.has_mapping = HasMapping0.has_mapping,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model, axiom .
+  clone RedBlackTree_Impl5_BstInvariant as BstInvariant0 with type k = k, type v = v,
+  predicate BstInvariantHere0.bst_invariant_here = BstInvariantHere0.bst_invariant_here
   clone RedBlackTree_Impl0_HasMappingModelAcc as HasMappingModelAcc0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function ModelAcc0.model_acc = ModelAcc0.model_acc,
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model,
   function ModelAccHasMapping0.model_acc_has_mapping = ModelAccHasMapping0.model_acc_has_mapping, axiom .
+  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
+  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
+  predicate HasHeight0.has_height = HasHeight1.has_height,
+  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
+  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
+  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
+  clone RedBlackTree_Impl3_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy0.modelTy,
+  function ModelAcc0.model_acc = ModelAcc0.model_acc
   clone RedBlackTree_Impl0_HasMappingModel as HasMappingModel0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate HasMapping0.has_mapping = HasMapping0.has_mapping, function Model0.model = Model0.model,
@@ -5363,17 +5374,6 @@ module RedBlackTree_Impl13_GetMut
   function ModelAcc0.model_acc = ModelAcc0.model_acc, axiom .
   clone CreusotContracts_Logic_Model_Impl0_Model as Model2 with type t = k, type ModelTy0.modelTy = ModelTy0.modelTy,
   function Model0.model = Model1.model
-  clone RedBlackTree_Impl9_HasHeightRec as HasHeightRec0 with type k = k, type v = v, axiom .
-  clone RedBlackTree_Impl8_HasHeight as HasHeight1 with type k = k, type v = v,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl9_HasHeight as HasHeight0 with type k = k, type v = v,
-  predicate HasHeight0.has_height = HasHeight1.has_height,
-  predicate HasHeightRec0.has_height_rec = HasHeightRec0.has_height_rec, axiom .
-  clone RedBlackTree_Impl6_Color as Color0 with type k = k, type v = v
-  clone RedBlackTree_Impl7_ColorInvariantHere as ColorInvariantHere0 with type k = k, type v = v,
-  function Color0.color = Color0.color
-  clone RedBlackTree_Impl6_ColorInvariant as ColorInvariant0 with type k = k, type v = v,
-  predicate ColorInvariantHere0.color_invariant_here = ColorInvariantHere0.color_invariant_here
   clone RedBlackTree_Impl10_Invariant as Invariant0 with type k = k, type v = v,
   predicate BstInvariant0.bst_invariant = BstInvariant0.bst_invariant,
   predicate ColorInvariant0.color_invariant = ColorInvariant0.color_invariant, function Color0.color = Color0.color,
@@ -5383,12 +5383,12 @@ module RedBlackTree_Impl13_GetMut
   use prelude.Int8
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve4 with type t = v
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve3 with type t = Type.redblacktree_node k v
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve2 with type t = Type.core_option_option (Type.redblacktree_node k v)
-  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = k
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = Type.redblacktree_tree k v
   clone Core_Cmp_Ord_Cmp_Interface as Cmp0 with type self = k, function Model0.model = Model2.model,
   function Model1.model = Model1.model, function CmpLog0.cmp_log = CmpLog0.cmp_log,
   type ModelTy0.modelTy = ModelTy0.modelTy
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve2 with type t = Type.core_option_option (Type.redblacktree_node k v)
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = k
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = Type.redblacktree_tree k v
   let rec cfg get_mut [@cfg:stackify] [#"../red_black_tree.rs" 757 4 757 56] (self : borrowed (Type.redblacktree_tree k v)) (key : k) : Type.core_option_option (borrowed v)
     requires {[#"../red_black_tree.rs" 752 15 752 34] Invariant0.invariant' ( * self)}
     ensures { [#"../red_black_tree.rs" 753 14 753 33] Invariant0.invariant' ( ^ self) }
@@ -5585,10 +5585,10 @@ module RedBlackTree_Impl2
   function Model0.model = Model3.model
   clone RedBlackTree_Impl3_Model as Model2 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy2.modelTy,
   function ModelAcc0.model_acc = ModelAcc0.model_acc
+  clone RedBlackTree_Impl2_ModelTy as ModelTy0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy2.modelTy
   clone RedBlackTree_Impl2_Model as Model0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy2.modelTy,
   function Model0.model = Model2.model, function Model1.model = Model3.model,
   function ModelAcc0.model_acc = ModelAcc0.model_acc
-  clone RedBlackTree_Impl2_ModelTy as ModelTy0 with type k = k, type v = v, type ModelTy0.modelTy = ModelTy2.modelTy
   clone CreusotContracts_Logic_Model_Model_Model_Interface as Model1 with type self = Type.redblacktree_node k v,
   function model = Model0.model, type ModelTy0.modelTy = ModelTy0.modelTy
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy1 with type self = Type.redblacktree_node k v,
