@@ -49,7 +49,7 @@ module C04BinarySearch_SortedRange
   use mach.int.Int
   use mach.int.UInt32
   predicate sorted_range [#"../04_binary_search.rs" 5 0 5 52] (s : Seq.seq uint32) (l : int) (u : int) =
-    [#"../04_binary_search.rs" 6 4 8 5] forall j : (int) . forall i : (int) . l <= i && i < j && j < u -> Seq.get s i <= Seq.get s j
+    [#"../04_binary_search.rs" 6 4 8 5] forall j : (int) . forall i : (int) . l <= i /\ i < j /\ j < u -> Seq.get s i <= Seq.get s j
 end
 module C04BinarySearch_Sorted_Interface
   use seq.Seq
@@ -200,8 +200,8 @@ module Alloc_Vec_Impl16_Index_Interface
   use prelude.Prelude
   use Type
   use seq.Seq
-  clone Core_Slice_Index_SliceIndex_Output as Output0 with type self = i, type t = seq t
   clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy0 with type t = t
+  clone Core_Slice_Index_SliceIndex_Output as Output0 with type self = i, type t = seq t
   clone CreusotContracts_Std1_Slice_SliceIndexSpec_HasValue_Interface as HasValue0 with type self = i, type t = seq t,
   type ModelTy0.modelTy = ModelTy0.modelTy, type Output0.output = Output0.output
   clone CreusotContracts_Std1_Slice_SliceIndexSpec_InBounds_Interface as InBounds0 with type self = i, type t = seq t,
@@ -219,8 +219,8 @@ module Alloc_Vec_Impl16_Index
   use prelude.Prelude
   use Type
   use seq.Seq
-  clone Core_Slice_Index_SliceIndex_Output as Output0 with type self = i, type t = seq t
   clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy0 with type t = t
+  clone Core_Slice_Index_SliceIndex_Output as Output0 with type self = i, type t = seq t
   clone CreusotContracts_Std1_Slice_SliceIndexSpec_HasValue_Interface as HasValue0 with type self = i, type t = seq t,
   type ModelTy0.modelTy = ModelTy0.modelTy, type Output0.output = Output0.output
   clone CreusotContracts_Std1_Slice_SliceIndexSpec_InBounds_Interface as InBounds0 with type self = i, type t = seq t,
@@ -291,8 +291,8 @@ module C04BinarySearch_BinarySearch_Interface
   use mach.int.UInt64
   use Type
   use mach.int.UInt32
-  clone C04BinarySearch_Sorted_Interface as Sorted0
   clone CreusotContracts_Std1_Vec_Impl0_ModelTy as ModelTy0 with type t = uint32, type a = Type.alloc_alloc_global
+  clone C04BinarySearch_Sorted_Interface as Sorted0
   clone CreusotContracts_Logic_Model_Impl0_Model_Interface as Model0 with type t = Type.alloc_vec_vec uint32 (Type.alloc_alloc_global),
   type ModelTy0.modelTy = ModelTy0.modelTy
   val binary_search [@cfg:stackify] (arr : Type.alloc_vec_vec uint32 (Type.alloc_alloc_global)) (elem : uint32) : Type.core_result_result usize usize
@@ -300,7 +300,7 @@ module C04BinarySearch_BinarySearch_Interface
     requires {[#"../04_binary_search.rs" 17 11 17 23] Sorted0.sorted (Model0.model arr)}
     ensures { [#"../04_binary_search.rs" 18 0 18 66] forall x : (usize) . result = Type.Core_Result_Result_Ok x -> Seq.get (Model0.model arr) (UInt64.to_int x) = elem }
     ensures { [#"../04_binary_search.rs" 19 0 20 51] forall x : (usize) . result = Type.Core_Result_Result_Err x -> (forall i : (usize) . i < x -> Seq.get (Model0.model arr) (UInt64.to_int i) <= elem) }
-    ensures { [#"../04_binary_search.rs" 21 0 22 70] forall x : (usize) . result = Type.Core_Result_Result_Err x -> (forall i : (usize) . x < i && UInt64.to_int i < Seq.length (Model0.model arr) -> elem < Seq.get (Model0.model arr) (UInt64.to_int i)) }
+    ensures { [#"../04_binary_search.rs" 21 0 22 70] forall x : (usize) . result = Type.Core_Result_Result_Err x -> (forall i : (usize) . x < i /\ UInt64.to_int i < Seq.length (Model0.model arr) -> elem < Seq.get (Model0.model arr) (UInt64.to_int i)) }
     
 end
 module C04BinarySearch_BinarySearch
@@ -312,9 +312,9 @@ module C04BinarySearch_BinarySearch
   use mach.int.UInt32
   use mach.int.Int32
   clone C04BinarySearch_SortedRange as SortedRange0
-  clone C04BinarySearch_Sorted as Sorted0 with predicate SortedRange0.sorted_range = SortedRange0.sorted_range
   clone CreusotContracts_Std1_Vec_Impl0_Model as Model1 with type t = uint32, type a = Type.alloc_alloc_global, axiom .
   clone CreusotContracts_Std1_Vec_Impl0_ModelTy as ModelTy0 with type t = uint32, type a = Type.alloc_alloc_global
+  clone C04BinarySearch_Sorted as Sorted0 with predicate SortedRange0.sorted_range = SortedRange0.sorted_range
   clone CreusotContracts_Logic_Model_Impl0_Model as Model0 with type t = Type.alloc_vec_vec uint32 (Type.alloc_alloc_global),
   type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model1.model
   clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy1 with type t = uint32
@@ -332,7 +332,7 @@ module C04BinarySearch_BinarySearch
     requires {[#"../04_binary_search.rs" 17 11 17 23] Sorted0.sorted (Model0.model arr)}
     ensures { [#"../04_binary_search.rs" 18 0 18 66] forall x : (usize) . result = Type.Core_Result_Result_Ok x -> Seq.get (Model0.model arr) (UInt64.to_int x) = elem }
     ensures { [#"../04_binary_search.rs" 19 0 20 51] forall x : (usize) . result = Type.Core_Result_Result_Err x -> (forall i : (usize) . i < x -> Seq.get (Model0.model arr) (UInt64.to_int i) <= elem) }
-    ensures { [#"../04_binary_search.rs" 21 0 22 70] forall x : (usize) . result = Type.Core_Result_Result_Err x -> (forall i : (usize) . x < i && UInt64.to_int i < Seq.length (Model0.model arr) -> elem < Seq.get (Model0.model arr) (UInt64.to_int i)) }
+    ensures { [#"../04_binary_search.rs" 21 0 22 70] forall x : (usize) . result = Type.Core_Result_Result_Err x -> (forall i : (usize) . x < i /\ UInt64.to_int i < Seq.length (Model0.model arr) -> elem < Seq.get (Model0.model arr) (UInt64.to_int i)) }
     
    =
   var _0 : Type.core_result_result usize usize;
@@ -413,9 +413,9 @@ module C04BinarySearch_BinarySearch
     goto BB5
   }
   BB5 {
-    invariant size_valid { [#"../04_binary_search.rs" 30 28 30 70] 0 < UInt64.to_int size_8 && UInt64.to_int size_8 + UInt64.to_int base_10 <= Seq.length (Model0.model arr_1) };
+    invariant size_valid { [#"../04_binary_search.rs" 30 28 30 70] 0 < UInt64.to_int size_8 /\ UInt64.to_int size_8 + UInt64.to_int base_10 <= Seq.length (Model0.model arr_1) };
     invariant lower_b { [#"../04_binary_search.rs" 30 4 30 72] forall i : (usize) . i < base_10 -> Seq.get (Model0.model arr_1) (UInt64.to_int i) <= elem_2 };
-    invariant lower_b { [#"../04_binary_search.rs" 30 4 30 72] forall i : (usize) . UInt64.to_int base_10 + UInt64.to_int size_8 < UInt64.to_int i && UInt64.to_int i < Seq.length (Model0.model arr_1) -> elem_2 < Seq.get (Model0.model arr_1) (UInt64.to_int i) };
+    invariant lower_b { [#"../04_binary_search.rs" 30 4 30 72] forall i : (usize) . UInt64.to_int base_10 + UInt64.to_int size_8 < UInt64.to_int i /\ UInt64.to_int i < Seq.length (Model0.model arr_1) -> elem_2 < Seq.get (Model0.model arr_1) (UInt64.to_int i) };
     _14 <- size_8;
     _13 <- ([#"../04_binary_search.rs" 33 10 33 18] _14 > (1 : usize));
     switch (_13)

@@ -145,8 +145,8 @@ module Alloc_Vec_Impl17_IndexMut_Interface
   use seq.Seq
   use prelude.Prelude
   use Type
-  clone Core_Slice_Index_SliceIndex_Output as Output0 with type self = i, type t = seq t
   clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy0 with type t = t
+  clone Core_Slice_Index_SliceIndex_Output as Output0 with type self = i, type t = seq t
   clone CreusotContracts_Std1_Slice_SliceIndexSpec_ResolveElswhere_Interface as ResolveElswhere0 with type self = i,
   type t = seq t, type ModelTy0.modelTy = ModelTy0.modelTy
   clone CreusotContracts_Std1_Slice_SliceIndexSpec_HasValue_Interface as HasValue0 with type self = i, type t = seq t,
@@ -169,8 +169,8 @@ module Alloc_Vec_Impl17_IndexMut
   use seq.Seq
   use prelude.Prelude
   use Type
-  clone Core_Slice_Index_SliceIndex_Output as Output0 with type self = i, type t = seq t
   clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy0 with type t = t
+  clone Core_Slice_Index_SliceIndex_Output as Output0 with type self = i, type t = seq t
   clone CreusotContracts_Std1_Slice_SliceIndexSpec_ResolveElswhere_Interface as ResolveElswhere0 with type self = i,
   type t = seq t, type ModelTy0.modelTy = ModelTy0.modelTy
   clone CreusotContracts_Std1_Slice_SliceIndexSpec_HasValue_Interface as HasValue0 with type self = i, type t = seq t,
@@ -258,7 +258,7 @@ module CreusotContracts_Std1_Slice_Impl3_ResolveElswhere
   use seq.Seq
   use mach.int.Int32
   predicate resolve_elswhere [@inline:trivial] (self : usize) (old' : Seq.seq t) (fin : Seq.seq t) =
-    forall i : (int) . 0 <= i && i <> UInt64.to_int self && i < Seq.length old' -> Seq.get old' i = Seq.get fin i
+    forall i : (int) . 0 <= i /\ i <> UInt64.to_int self /\ i < Seq.length old' -> Seq.get old' i = Seq.get fin i
 end
 module Core_Slice_Index_Impl2_Output
   type t
@@ -281,7 +281,7 @@ module C01_AllZero_Interface
   clone CreusotContracts_Std1_Vec_Impl0_Model_Interface as Model0 with type t = uint32,
   type a = Type.alloc_alloc_global, axiom .
   val all_zero [@cfg:stackify] (v : borrowed (Type.alloc_vec_vec uint32 (Type.alloc_alloc_global))) : ()
-    ensures { [#"../01.rs" 5 0 5 74] forall i : (int) . 0 <= i && i < Seq.length (Model0.model ( ^ v)) -> Seq.get (Model0.model ( ^ v)) i = (0 : uint32) }
+    ensures { [#"../01.rs" 5 0 5 74] forall i : (int) . 0 <= i /\ i < Seq.length (Model0.model ( ^ v)) -> Seq.get (Model0.model ( ^ v)) i = (0 : uint32) }
     ensures { [#"../01.rs" 6 10 6 36] Seq.length (Model0.model ( * v)) = Seq.length (Model0.model ( ^ v)) }
     
 end
@@ -294,13 +294,13 @@ module C01_AllZero
   use Type
   use mach.int.UInt64
   clone CreusotContracts_Std1_Vec_Impl0_Model as Model0 with type t = uint32, type a = Type.alloc_alloc_global, axiom .
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.alloc_vec_vec uint32 (Type.alloc_alloc_global)
-  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = uint32
   clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy0 with type t = uint32
   clone Core_Slice_Index_Impl2_Output as Output0 with type t = uint32
   clone CreusotContracts_Std1_Slice_Impl3_ResolveElswhere as ResolveElswhere0 with type t = uint32
   clone CreusotContracts_Std1_Slice_Impl3_HasValue as HasValue0 with type t = uint32
   clone CreusotContracts_Std1_Slice_Impl3_InBounds as InBounds0 with type t = uint32
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = Type.alloc_vec_vec uint32 (Type.alloc_alloc_global)
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = uint32
   clone Alloc_Vec_Impl17_IndexMut_Interface as IndexMut0 with type t = uint32, type i = usize,
   type a = Type.alloc_alloc_global, function Model0.model = Model0.model,
   predicate InBounds0.in_bounds = InBounds0.in_bounds, predicate HasValue0.has_value = HasValue0.has_value,
@@ -308,7 +308,7 @@ module C01_AllZero
   clone Alloc_Vec_Impl1_Len_Interface as Len0 with type t = uint32, type a = Type.alloc_alloc_global,
   function Model0.model = Model0.model
   let rec cfg all_zero [@cfg:stackify] [#"../01.rs" 7 0 7 33] (v : borrowed (Type.alloc_vec_vec uint32 (Type.alloc_alloc_global))) : ()
-    ensures { [#"../01.rs" 5 0 5 74] forall i : (int) . 0 <= i && i < Seq.length (Model0.model ( ^ v)) -> Seq.get (Model0.model ( ^ v)) i = (0 : uint32) }
+    ensures { [#"../01.rs" 5 0 5 74] forall i : (int) . 0 <= i /\ i < Seq.length (Model0.model ( ^ v)) -> Seq.get (Model0.model ( ^ v)) i = (0 : uint32) }
     ensures { [#"../01.rs" 6 10 6 36] Seq.length (Model0.model ( * v)) = Seq.length (Model0.model ( ^ v)) }
     
    =
@@ -344,7 +344,7 @@ module C01_AllZero
   BB2 {
     invariant proph_const { [#"../01.rs" 12 29 12 49]  ^ v_1 =  ^ old_v_3 };
     invariant in_bounds { [#"../01.rs" 13 27 13 65] Seq.length (Model0.model ( * v_1)) = Seq.length (Model0.model ( * old_v_3)) };
-    invariant all_zero { [#"../01.rs" 12 4 12 51] forall j : (int) . 0 <= j && j < UInt64.to_int i_2 -> Seq.get (Model0.model ( * v_1)) j = (0 : uint32) };
+    invariant all_zero { [#"../01.rs" 12 4 12 51] forall j : (int) . 0 <= j /\ j < UInt64.to_int i_2 -> Seq.get (Model0.model ( * v_1)) j = (0 : uint32) };
     _7 <- i_2;
     _9 <-  * v_1;
     _8 <- ([#"../01.rs" 15 14 15 21] Len0.len _9);

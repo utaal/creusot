@@ -45,11 +45,11 @@ pub fn translate_function<'tcx, 'sess>(
 ) -> Module {
     let tcx = ctx.tcx;
     let mut names = CloneMap::new(tcx, def_id, true);
-    names.clone_self(def_id);
 
     assert!(def_id.is_local(), "translate_function: expected local DefId");
 
     if util::is_trusted(tcx, def_id) || !util::has_body(ctx, def_id) {
+        let _ = names.to_clones(ctx);
         return translate_trusted(tcx, ctx, def_id);
     }
 
@@ -106,7 +106,6 @@ pub fn translate_trusted<'tcx>(
     def_id: DefId,
 ) -> Module {
     let mut names = CloneMap::new(tcx, def_id, true);
-    names.clone_self(def_id);
     let mut decls = Vec::new();
     decls.extend(all_generic_decls_for(tcx, def_id));
 
@@ -521,7 +520,7 @@ pub fn closure_contract<'tcx>(
         let mut csubst = util::closure_capture_subst(ctx.tcx, names, def_id, subst, FnMut, true);
 
         let mut postcondition = postcondition.clone();
-        postcondition = postcondition.and(closure_unnest(ctx.tcx, names, def_id, subst));
+        postcondition = postcondition.lazy_and(closure_unnest(ctx.tcx, names, def_id, subst));
 
         csubst.visit_mut(&mut postcondition);
         contracts.push(Decl::PredDecl(Predicate { sig: post_sig, body: postcondition }));
@@ -560,7 +559,7 @@ fn closure_resolve<'tcx>(
 
         let param_env = ctx.param_env(def_id);
         let resolve_one = resolve_predicate_of(ctx, names, param_env, ty).exp(acc.app_to(self_));
-        resolve = resolve_one.and(resolve);
+        resolve = resolve_one.log_and(resolve);
     }
 
     let sig = Signature {
@@ -599,7 +598,7 @@ pub fn closure_unnest<'tcx>(
                 box Exp::Final(box acc.app_to(Exp::Current(box self_))),
             );
 
-            unnest = unnest_one.and(unnest);
+            unnest = unnest_one.log_and(unnest);
         }
     }
 

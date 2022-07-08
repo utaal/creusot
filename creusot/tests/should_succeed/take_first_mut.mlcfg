@@ -127,14 +127,14 @@ module Core_Slice_Impl0_SplitFirstMut_Interface
   use mach.int.Int
   use mach.int.Int32
   use prelude.Prelude
+  clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy0 with type t = t
   clone CreusotContracts_Logic_Seq_Impl2_Tail_Interface as Tail0 with type t = t
   clone CreusotContracts_Std1_Slice_Impl0_Model_Interface as Model1 with type t = t, axiom .
-  clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy0 with type t = t
   clone CreusotContracts_Logic_Model_Impl1_Model_Interface as Model0 with type t = seq t,
   type ModelTy0.modelTy = ModelTy0.modelTy
   val split_first_mut [@cfg:stackify] (self : borrowed (seq t)) : Type.core_option_option (borrowed t, borrowed (seq t))
-    ensures { result = Type.Core_Option_Option_None -> Seq.length (Model0.model self) = 0 &&  ^ self =  * self && Model1.model ( * self) = Seq.empty  }
-    ensures { forall tail : (borrowed (seq t)) . forall first : (borrowed t) . result = Type.Core_Option_Option_Some (first, tail) &&  * first = Seq.get (Model1.model ( * self)) 0 &&  ^ first = Seq.get (Model1.model ( ^ self)) 0 && Seq.length (Model1.model ( * self)) > 0 && Seq.length (Model1.model ( ^ self)) > 0 && Model1.model ( * tail) = Tail0.tail (Model1.model ( * self)) && Model1.model ( ^ tail) = Tail0.tail (Model1.model ( ^ self)) }
+    ensures { result = Type.Core_Option_Option_None -> Seq.length (Model0.model self) = 0 /\  ^ self =  * self /\ Model1.model ( * self) = Seq.empty  }
+    ensures { forall tail : (borrowed (seq t)) . forall first : (borrowed t) . result = Type.Core_Option_Option_Some (first, tail) /\  * first = Seq.get (Model1.model ( * self)) 0 /\  ^ first = Seq.get (Model1.model ( ^ self)) 0 /\ Seq.length (Model1.model ( * self)) > 0 /\ Seq.length (Model1.model ( ^ self)) > 0 /\ Model1.model ( * tail) = Tail0.tail (Model1.model ( * self)) /\ Model1.model ( ^ tail) = Tail0.tail (Model1.model ( ^ self)) }
     
 end
 module Core_Slice_Impl0_SplitFirstMut
@@ -144,14 +144,14 @@ module Core_Slice_Impl0_SplitFirstMut
   use mach.int.Int
   use mach.int.Int32
   use prelude.Prelude
+  clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy0 with type t = t
   clone CreusotContracts_Logic_Seq_Impl2_Tail_Interface as Tail0 with type t = t
   clone CreusotContracts_Std1_Slice_Impl0_Model_Interface as Model1 with type t = t, axiom .
-  clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy0 with type t = t
   clone CreusotContracts_Logic_Model_Impl1_Model_Interface as Model0 with type t = seq t,
   type ModelTy0.modelTy = ModelTy0.modelTy
   val split_first_mut [@cfg:stackify] (self : borrowed (seq t)) : Type.core_option_option (borrowed t, borrowed (seq t))
-    ensures { result = Type.Core_Option_Option_None -> Seq.length (Model0.model self) = 0 &&  ^ self =  * self && Model1.model ( * self) = Seq.empty  }
-    ensures { forall tail : (borrowed (seq t)) . forall first : (borrowed t) . result = Type.Core_Option_Option_Some (first, tail) &&  * first = Seq.get (Model1.model ( * self)) 0 &&  ^ first = Seq.get (Model1.model ( ^ self)) 0 && Seq.length (Model1.model ( * self)) > 0 && Seq.length (Model1.model ( ^ self)) > 0 && Model1.model ( * tail) = Tail0.tail (Model1.model ( * self)) && Model1.model ( ^ tail) = Tail0.tail (Model1.model ( ^ self)) }
+    ensures { result = Type.Core_Option_Option_None -> Seq.length (Model0.model self) = 0 /\  ^ self =  * self /\ Model1.model ( * self) = Seq.empty  }
+    ensures { forall tail : (borrowed (seq t)) . forall first : (borrowed t) . result = Type.Core_Option_Option_Some (first, tail) /\  * first = Seq.get (Model1.model ( * self)) 0 /\  ^ first = Seq.get (Model1.model ( ^ self)) 0 /\ Seq.length (Model1.model ( * self)) > 0 /\ Seq.length (Model1.model ( ^ self)) > 0 /\ Model1.model ( * tail) = Tail0.tail (Model1.model ( * self)) /\ Model1.model ( ^ tail) = Tail0.tail (Model1.model ( ^ self)) }
     
 end
 module CreusotContracts_Logic_Resolve_Impl1_Resolve_Interface
@@ -208,8 +208,8 @@ module TakeFirstMut_TakeFirstMut_Interface
   clone CreusotContracts_Std1_Slice_Impl0_Model_Interface as Model0 with type t = t, axiom .
   val take_first_mut [@cfg:stackify] (self_ : borrowed (borrowed (seq t))) : Type.core_option_option (borrowed t)
     ensures { [#"../take_first_mut.rs" 6 10 15 1] match (result) with
-      | Type.Core_Option_Option_Some r ->  * r = Seq.get (Model0.model ( *  * self_)) 0 &&  ^ r = Seq.get (Model0.model ( ^  * self_)) 0 && Seq.length (Model0.model ( *  * self_)) > 0 && Seq.length (Model0.model ( ^  * self_)) > 0 && Model0.model ( *  ^ self_) = Tail0.tail (Model0.model ( *  * self_)) && Model0.model ( ^  ^ self_) = Tail0.tail (Model0.model ( ^  * self_))
-      | Type.Core_Option_Option_None ->  ^ self_ =  * self_ && Seq.length (Model0.model ( *  * self_)) = 0
+      | Type.Core_Option_Option_Some r ->  * r = Seq.get (Model0.model ( *  * self_)) 0 /\  ^ r = Seq.get (Model0.model ( ^  * self_)) 0 /\ Seq.length (Model0.model ( *  * self_)) > 0 /\ Seq.length (Model0.model ( ^  * self_)) > 0 /\ Model0.model ( *  ^ self_) = Tail0.tail (Model0.model ( *  * self_)) /\ Model0.model ( ^  ^ self_) = Tail0.tail (Model0.model ( ^  * self_))
+      | Type.Core_Option_Option_None ->  ^ self_ =  * self_ /\ Seq.length (Model0.model ( *  * self_)) = 0
       end }
     
 end
@@ -223,23 +223,23 @@ module TakeFirstMut_TakeFirstMut
   clone CreusotContracts_Logic_Seq_Impl2_Tail as Tail0 with type t = t
   clone CreusotContracts_Std1_Slice_Impl0_Model as Model0 with type t = t, axiom .
   use mach.int.Int64
+  clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy0 with type t = t
+  clone CreusotContracts_Logic_Model_Impl1_Model as Model1 with type t = seq t,
+  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
+  clone CreusotContracts_Std1_Slice_Impl1_DefaultLog as DefaultLog0 with type t = t,
+  function Model0.model = Model0.model, axiom .
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve3 with type t = t
   clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = Type.core_option_option (borrowed t, borrowed (seq t))
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = borrowed (seq t)
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = seq t
-  clone CreusotContracts_Std1_Slice_Impl0_ModelTy as ModelTy0 with type t = t
-  clone CreusotContracts_Logic_Model_Impl1_Model as Model1 with type t = seq t,
-  type ModelTy0.modelTy = ModelTy0.modelTy, function Model0.model = Model0.model
   clone Core_Slice_Impl0_SplitFirstMut_Interface as SplitFirstMut0 with type t = t,
   function Model0.model = Model1.model, function Model1.model = Model0.model, function Tail0.tail = Tail0.tail
-  clone CreusotContracts_Std1_Slice_Impl1_DefaultLog as DefaultLog0 with type t = t,
-  function Model0.model = Model0.model, axiom .
   clone Core_Mem_Take_Interface as Take0 with type t = borrowed (seq t),
   function DefaultLog0.default_log = DefaultLog0.default_log
   let rec cfg take_first_mut [@cfg:stackify] [#"../take_first_mut.rs" 16 0 16 74] (self_ : borrowed (borrowed (seq t))) : Type.core_option_option (borrowed t)
     ensures { [#"../take_first_mut.rs" 6 10 15 1] match (result) with
-      | Type.Core_Option_Option_Some r ->  * r = Seq.get (Model0.model ( *  * self_)) 0 &&  ^ r = Seq.get (Model0.model ( ^  * self_)) 0 && Seq.length (Model0.model ( *  * self_)) > 0 && Seq.length (Model0.model ( ^  * self_)) > 0 && Model0.model ( *  ^ self_) = Tail0.tail (Model0.model ( *  * self_)) && Model0.model ( ^  ^ self_) = Tail0.tail (Model0.model ( ^  * self_))
-      | Type.Core_Option_Option_None ->  ^ self_ =  * self_ && Seq.length (Model0.model ( *  * self_)) = 0
+      | Type.Core_Option_Option_Some r ->  * r = Seq.get (Model0.model ( *  * self_)) 0 /\  ^ r = Seq.get (Model0.model ( ^  * self_)) 0 /\ Seq.length (Model0.model ( *  * self_)) > 0 /\ Seq.length (Model0.model ( ^  * self_)) > 0 /\ Model0.model ( *  ^ self_) = Tail0.tail (Model0.model ( *  * self_)) /\ Model0.model ( ^  ^ self_) = Tail0.tail (Model0.model ( ^  * self_))
+      | Type.Core_Option_Option_None ->  ^ self_ =  * self_ /\ Seq.length (Model0.model ( *  * self_)) = 0
       end }
     
    =

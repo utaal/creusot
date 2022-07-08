@@ -36,7 +36,7 @@ module MappingTest_Impl0_Model
   use mach.int.Int32
   use Type
   function model [#"../mapping_test.rs" 18 4 18 35] (self : Type.mappingtest_t) : Map.map int int
-  axiom model_spec : forall self : Type.mappingtest_t . [#"../mapping_test.rs" 15 4 17 76] forall i : (int) . Map.get (model self) i = (if 0 <= i && i < Int32.to_int (Type.mappingtest_t_T_a self) then
+  axiom model_spec : forall self : Type.mappingtest_t . [#"../mapping_test.rs" 15 4 17 76] forall i : (int) . Map.get (model self) i = (if 0 <= i /\ i < Int32.to_int (Type.mappingtest_t_T_a self) then
     1
   else
     0
@@ -64,8 +64,8 @@ module CreusotContracts_Logic_Model_Model_Model
 end
 module MappingTest_Impl0
   use Type
-  clone MappingTest_Impl0_Model as Model0 with axiom .
   clone MappingTest_Impl0_ModelTy as ModelTy0
+  clone MappingTest_Impl0_Model as Model0 with axiom .
   clone CreusotContracts_Logic_Model_Model_Model_Interface as Model1 with type self = Type.mappingtest_t,
   function model = Model0.model, type ModelTy0.modelTy = ModelTy0.modelTy
   clone CreusotContracts_Logic_Model_Model_ModelTy as ModelTy1 with type self = Type.mappingtest_t,
