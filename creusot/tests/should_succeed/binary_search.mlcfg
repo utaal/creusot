@@ -1,12 +1,148 @@
+module Prelude
+  use Ref
+  use mach.int.Int
+  use mach.int.Int32
+  use mach.int.Int64
+  use mach.int.UInt32
+  use mach.int.UInt64
+  use string.Char
+  use floating_point.Single
+  use floating_point.Double
+
+  type usize = uint64
+  type isize = int64
+  type opaque_ptr
+  use seq.Seq
+  type rust_array 'a = seq 'a
+
+  type borrowed 'a = { current : 'a ; final : 'a; }
+  let function ( *_ ) x = x.current
+  let function ( ^_ ) x = x.final
+  val borrow_mut (a : 'a) : borrowed 'a
+  ensures { *result = a }
+
+  let function id (x: 'a) : 'a = x
+
+  let eqb (a : bool) (b : bool) : bool =
+    ensures { result <-> a = b  }
+    match a, b with
+    | True, True -> True
+    | False, False -> True
+    | _ -> False
+    end
+end
+module Int8
+  use int.Int
+
+  type int8 = < range -0x80 0x7f >
+
+  let constant min_int8 : int = - 0x80
+  let constant max_int8 : int =   0x7f
+  function to_int (x : int8) : int = int8'int x
+
+  clone export mach.int.Bounded_int with
+    type t = int8,
+    constant min = int8'minInt,
+    constant max = int8'maxInt,
+    function to_int = int8'int,
+    lemma to_int_in_bounds,
+    axiom extensionality
+end
+module Int16
+  use int.Int
+
+  type int16 = < range -0x8000 0x7fff >
+
+  let constant min_int16 : int = - 0x8000
+  let constant max_int16 : int =   0x7fff
+  function to_int (x : int16) : int = int16'int x
+
+  clone export mach.int.Bounded_int with
+    type t = int16,
+    constant min = int16'minInt,
+    constant max = int16'maxInt,
+    function to_int = int16'int,
+    lemma to_int_in_bounds,
+    axiom extensionality
+end
+module Int128
+  use int.Int
+
+  type int128 = < range -0x80000000000000000000000000000000 0x7fffffffffffffffffffffffffffffff >
+
+  let constant min_int128 : int = - 0x80000000000000000000000000000000
+  let constant max_int128 : int =   0x7fffffffffffffffffffffffffffffff
+  function to_int (x : int128) : int = int128'int x
+
+  clone export mach.int.Bounded_int with
+    type t = int128,
+    constant min = int128'minInt,
+    constant max = int128'maxInt,
+    function to_int = int128'int,
+    lemma to_int_in_bounds,
+    axiom extensionality
+end
+module UInt8
+  use int.Int
+
+  type uint8 = < range 0x0 0xff >
+
+  let constant min_uint8 : int =  0x00
+  let constant max_uint8 : int =  0xff
+  function to_int (x : uint8) : int = uint8'int x
+
+  clone export mach.int.Bounded_int with
+    type t = uint8,
+    constant min = uint8'minInt,
+    constant max = uint8'maxInt,
+    function to_int = uint8'int,
+    lemma to_int_in_bounds,
+    axiom extensionality
+end
+module UInt16
+  use int.Int
+
+  type uint16 = < range 0x0 0xffff >
+
+  let constant min_uint16 : int =  0x00
+  let constant max_uint16 : int =  0xffff
+  function to_int (x : uint16) : int = uint16'int x
+
+  clone export mach.int.Bounded_int with
+    type t = uint16,
+    constant min = uint16'minInt,
+    constant max = uint16'maxInt,
+    function to_int = uint16'int,
+    lemma to_int_in_bounds,
+    axiom extensionality
+end
+
+module UInt128
+  use int.Int
+
+  type uint128 = < range 0x0 0xffffffffffffffffffffffffffffffff >
+
+  let constant min_uint128 : int =  0x00000000000000000000000000000000
+  let constant max_uint128 : int =  0xffffffffffffffffffffffffffffffff
+  function to_int (x : uint128) : int = uint128'int x
+
+  clone export mach.int.Bounded_int with
+    type t = uint128,
+    constant min = uint128'minInt,
+    constant max = uint128'maxInt,
+    function to_int = uint128'int,
+    lemma to_int_in_bounds,
+    axiom extensionality
+end
 module Type
   use Ref
   use mach.int.Int
-  use prelude.Int8
-  use prelude.Int16
+  use Int8
+  use Int16
   use mach.int.Int32
   use mach.int.Int64
-  use prelude.UInt8
-  use prelude.UInt16
+  use UInt8
+  use UInt16
   use mach.int.UInt32
   use mach.int.UInt64
   use string.Char
@@ -16,7 +152,7 @@ module Type
   use set.Set
   use set.Fset
   use map.Map
-  use prelude.Prelude
+  use Prelude
   type binarysearch_list 't =
     | BinarySearch_List_Cons 't (binarysearch_list 't)
     | BinarySearch_List_Nil
@@ -106,7 +242,7 @@ module BinarySearch_Impl0_Index_Interface
   use mach.int.UInt64
   use mach.int.Int
   use Type
-  use prelude.Prelude
+  use Prelude
   clone BinarySearch_Impl0_Get_Interface as Get0 with type t = t
   clone BinarySearch_Impl0_LenLogic_Interface as LenLogic0 with type t = t, axiom .
   val index [@cfg:stackify] (self : Type.binarysearch_list t) (ix : usize) : t
@@ -119,7 +255,7 @@ module BinarySearch_Impl0_Index
   use mach.int.UInt64
   use mach.int.Int
   use Type
-  use prelude.Prelude
+  use Prelude
   clone BinarySearch_Impl0_Get as Get0 with type t = t
   clone BinarySearch_Impl0_LenLogic as LenLogic0 with type t = t, axiom .
   use mach.int.Int64
@@ -211,7 +347,7 @@ module BinarySearch_Impl0_Len_Interface
   type t
   use mach.int.Int
   use mach.int.Int32
-  use prelude.Prelude
+  use Prelude
   use mach.int.UInt64
   use Type
   clone BinarySearch_Impl0_LenLogic_Interface as LenLogic0 with type t = t, axiom .
@@ -225,7 +361,7 @@ module BinarySearch_Impl0_Len
   type t
   use mach.int.Int
   use mach.int.Int32
-  use prelude.Prelude
+  use Prelude
   use mach.int.UInt64
   use Type
   clone BinarySearch_Impl0_LenLogic as LenLogic0 with type t = t, axiom .
@@ -326,7 +462,7 @@ end
 module BinarySearch_BinarySearch_Interface
   use mach.int.Int
   use mach.int.Int32
-  use prelude.Prelude
+  use Prelude
   use mach.int.UInt64
   use Type
   use mach.int.UInt32
@@ -345,7 +481,7 @@ end
 module BinarySearch_BinarySearch
   use mach.int.Int
   use mach.int.Int32
-  use prelude.Prelude
+  use Prelude
   use mach.int.UInt64
   use Type
   use mach.int.UInt32

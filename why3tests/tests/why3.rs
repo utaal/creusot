@@ -81,7 +81,7 @@ fn main() {
         if sessionfile.is_file() {
             // There is a session directory. Try to replay the session.
             command.arg("replay");
-            command.args(&["-L", "../prelude"]);
+            command.args(&["-L", "../prelude", "--use-steps"]);
             if args.lazy {
                 command.arg("--obsolete-only");
             }
