@@ -7,12 +7,12 @@
 <path name=".."/><path name="hillel.mlcfg"/>
 <theory name="Hillel_RightPad" proved="true">
  <goal name="right_pad&#39;vc" expl="VC for right_pad" proved="true">
- <proof prover="0"><result status="valid" time="0.14" steps="31319"/></proof>
+ <proof prover="0"><result status="valid" time="0.14" steps="30175"/></proof>
  </goal>
 </theory>
 <theory name="Hillel_LeftPad" proved="true">
  <goal name="left_pad&#39;vc" expl="VC for left_pad" proved="true">
- <proof prover="0"><result status="valid" time="0.17" steps="42545"/></proof>
+ <proof prover="0"><result status="valid" time="0.28" steps="38467"/></proof>
  </goal>
 </theory>
 <theory name="Hillel_SubsetPush_Impl" proved="true">
@@ -25,7 +25,7 @@
     <goal name="subset_push&#39;vc.0.0.0" expl="postcondition" proved="true">
     <transf name="split_all_full" proved="true" >
      <goal name="subset_push&#39;vc.0.0.0.0" expl="postcondition" proved="true">
-     <proof prover="0" timelimit="1"><result status="valid" time="0.07" steps="17098"/></proof>
+     <proof prover="0" timelimit="1"><result status="valid" time="0.07" steps="17211"/></proof>
      </goal>
     </transf>
     </goal>
@@ -38,12 +38,12 @@
 </theory>
 <theory name="Hillel_InsertUnique" proved="true">
  <goal name="insert_unique&#39;vc" expl="VC for insert_unique" proved="true">
- <proof prover="0"><result status="valid" time="0.34" steps="80314"/></proof>
+ <proof prover="0"><result status="valid" time="0.69" steps="80314"/></proof>
  </goal>
 </theory>
 <theory name="Hillel_Unique" proved="true">
  <goal name="unique&#39;vc" expl="VC for unique" proved="true">
- <proof prover="0"><result status="valid" time="0.99" steps="198410"/></proof>
+ <proof prover="0"><result status="valid" time="0.98" steps="103356"/></proof>
  </goal>
 </theory>
 <theory name="Hillel_SumRange_Impl" proved="true">
@@ -58,7 +58,7 @@
 </theory>
 <theory name="Hillel_Score_Impl" proved="true">
  <goal name="score&#39;vc" expl="VC for score" proved="true">
- <proof prover="0"><result status="valid" time="0.06" steps="17160"/></proof>
+ <proof prover="0"><result status="valid" time="0.06" steps="17521"/></proof>
  </goal>
 </theory>
 <theory name="Hillel_Fulcrum" proved="true">
@@ -110,7 +110,7 @@
   <proof prover="0"><result status="valid" time="0.07" steps="16277"/></proof>
   </goal>
   <goal name="fulcrum&#39;vc.15" expl="integer overflow" proved="true">
-  <proof prover="0"><result status="valid" time="0.13" steps="25238"/></proof>
+  <proof prover="0"><result status="valid" time="0.13" steps="25279"/></proof>
   </goal>
   <goal name="fulcrum&#39;vc.16" expl="integer overflow" proved="true">
   <proof prover="0"><result status="valid" time="0.10" steps="19805"/></proof>
@@ -119,7 +119,7 @@
   <proof prover="0"><result status="valid" time="0.07" steps="16598"/></proof>
   </goal>
   <goal name="fulcrum&#39;vc.18" expl="loop invariant preservation" proved="true">
-  <proof prover="0"><result status="valid" time="0.88" steps="123355"/></proof>
+  <proof prover="0"><result status="valid" time="2.07" steps="193251"/></proof>
   </goal>
   <goal name="fulcrum&#39;vc.19" expl="loop invariant preservation" proved="true">
   <proof prover="0"><result status="valid" time="0.14" steps="26840"/></proof>
@@ -149,7 +149,7 @@
   <proof prover="0"><result status="valid" time="0.05" steps="15265"/></proof>
   </goal>
   <goal name="fulcrum&#39;vc.28" expl="loop invariant preservation" proved="true">
-  <proof prover="0"><result status="valid" time="0.10" steps="29359"/></proof>
+  <proof prover="0"><result status="valid" time="0.27" steps="51669"/></proof>
   </goal>
   <goal name="fulcrum&#39;vc.29" expl="loop invariant preservation" proved="true">
   <proof prover="0"><result status="valid" time="0.09" steps="22633"/></proof>

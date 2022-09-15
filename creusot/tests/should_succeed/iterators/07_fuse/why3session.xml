@@ -3,14 +3,14 @@
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="6">
 <prover id="0" name="Alt-Ergo" version="2.4.1" timelimit="1" steplimit="0" memlimit="1000"/>
-<prover id="2" name="Z3" version="4.8.14" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="1" name="Z3" version="4.8.15" timelimit="1" steplimit="0" memlimit="1000"/>
 <file format="mlcfg" proved="true">
 <path name=".."/><path name="07_fuse.mlcfg"/>
 <theory name="C07Fuse_Impl1_Next" proved="true">
  <goal name="next&#39;vc" expl="VC for next" proved="true">
  <transf name="split_vc" proved="true" >
   <goal name="next&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.01" steps="67"/></proof>
+  <proof prover="0"><result status="valid" time="0.01" steps="68"/></proof>
   </goal>
   <goal name="next&#39;vc.1" expl="unreachable point" proved="true">
   <proof prover="0"><result status="valid" time="0.01" steps="24"/></proof>
@@ -18,7 +18,7 @@
   <goal name="next&#39;vc.2" expl="postcondition" proved="true">
   <transf name="split_vc" proved="true" >
    <goal name="next&#39;vc.2.0" expl="postcondition" proved="true">
-   <proof prover="0"><result status="valid" time="0.05" steps="826"/></proof>
+   <proof prover="0"><result status="valid" time="0.11" steps="900"/></proof>
    </goal>
    <goal name="next&#39;vc.2.1" expl="postcondition" proved="true">
    <transf name="split_vc" proved="true" >
@@ -27,10 +27,10 @@
      <goal name="next&#39;vc.2.1.0.0" expl="postcondition" proved="true">
      <transf name="split_vc" proved="true" >
       <goal name="next&#39;vc.2.1.0.0.0" expl="postcondition" proved="true">
-      <proof prover="0"><result status="valid" time="0.01" steps="169"/></proof>
+      <proof prover="0"><result status="valid" time="0.03" steps="175"/></proof>
       </goal>
       <goal name="next&#39;vc.2.1.0.0.1" expl="postcondition" proved="true">
-      <proof prover="0"><result status="valid" time="0.01" steps="152"/></proof>
+      <proof prover="0"><result status="valid" time="0.03" steps="153"/></proof>
       </goal>
      </transf>
      </goal>
@@ -45,17 +45,32 @@
    <goal name="next&#39;vc.3.0" expl="postcondition" proved="true">
    <transf name="split_vc" proved="true" >
     <goal name="next&#39;vc.3.0.0" expl="postcondition" proved="true">
-    <proof prover="0"><result status="valid" time="0.03" steps="658"/></proof>
+    <proof prover="0"><result status="valid" time="0.09" steps="666"/></proof>
     </goal>
     <goal name="next&#39;vc.3.0.1" expl="postcondition" proved="true">
-    <proof prover="0"><result status="valid" time="0.47" steps="8938"/></proof>
+    <transf name="split_vc" proved="true" >
+     <goal name="next&#39;vc.3.0.1.0" expl="postcondition" proved="true">
+     <transf name="split_vc" proved="true" >
+      <goal name="next&#39;vc.3.0.1.0.0" expl="postcondition" proved="true">
+      <transf name="split_vc" proved="true" >
+       <goal name="next&#39;vc.3.0.1.0.0.0" expl="postcondition" proved="true">
+       <proof prover="0"><result status="valid" time="0.02" steps="132"/></proof>
+       </goal>
+       <goal name="next&#39;vc.3.0.1.0.0.1" expl="postcondition" proved="true">
+       <proof prover="0"><result status="valid" time="0.02" steps="54"/></proof>
+       </goal>
+      </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
     </goal>
    </transf>
    </goal>
    <goal name="next&#39;vc.3.1" expl="postcondition" proved="true">
    <transf name="split_vc" proved="true" >
     <goal name="next&#39;vc.3.1.0" expl="postcondition" proved="true">
-    <proof prover="2"><result status="valid" time="0.07" steps="377081"/></proof>
+    <proof prover="1"><result status="valid" time="0.08" steps="172179"/></proof>
     </goal>
     <goal name="next&#39;vc.3.1.1" expl="postcondition" proved="true">
     <transf name="split_vc" proved="true" >
@@ -64,10 +79,10 @@
       <goal name="next&#39;vc.3.1.1.0.0" expl="postcondition" proved="true">
       <transf name="split_vc" proved="true" >
        <goal name="next&#39;vc.3.1.1.0.0.0" expl="postcondition" proved="true">
-       <proof prover="0"><result status="valid" time="0.01" steps="59"/></proof>
+       <proof prover="0"><result status="valid" time="0.02" steps="58"/></proof>
        </goal>
        <goal name="next&#39;vc.3.1.1.0.0.1" expl="postcondition" proved="true">
-       <proof prover="0"><result status="valid" time="0.01" steps="203"/></proof>
+       <proof prover="0"><result status="valid" time="0.03" steps="206"/></proof>
        </goal>
       </transf>
       </goal>
@@ -91,7 +106,7 @@
  <goal name="produces_trans&#39;vc" expl="VC for produces_trans" proved="true">
  <transf name="use_th" proved="true" arg1="seq.FreeMonoid">
   <goal name="produces_trans&#39;vc.0" expl="VC for produces_trans" proved="true">
-  <proof prover="0"><result status="valid" time="0.18" steps="4462"/></proof>
+  <proof prover="0"><result status="valid" time="0.49" steps="4552"/></proof>
   </goal>
  </transf>
  </goal>

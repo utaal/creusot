@@ -57,7 +57,7 @@ impl<I: Iterator, B, F: FnMut(I::Item, Ghost<Seq<I::Item>>) -> B> Iterator for M
                     &&  ^ fs[visited.len() - 1] == succ.func)
                 && (visited.len() == 0 ==> self.func == succ.func)
                 && forall<i : Int> 0 <= i && i < visited.len() ==>
-                    fs[i].postcondition_mut((succ.produced[self.produced.len() + i], Ghost(succ.produced.subsequence(0, self.produced.len() + i))), visited[i])
+                    fs[i].postcondition_mut((succ.produced[self.produced.len() + i], Ghost::new(succ.produced.subsequence(0, self.produced.len() + i))), visited[i])
         }
     }
 
@@ -135,7 +135,7 @@ impl<I: Iterator, B, F: FnMut(I::Item, Ghost<Seq<I::Item>>) -> B> Map<I, I::Item
 
     #[logic]
     fn new_logic(iter: I, func: F) -> Self {
-        Map { iter, func, init_iter: Ghost(iter), produced: Ghost(Seq::EMPTY) }
+        Map { iter, func, init_iter: Ghost::new(iter), produced: Ghost::new(Seq::EMPTY) }
     }
 
     #[predicate]
@@ -166,7 +166,7 @@ impl<I: Iterator, B, F: FnMut(I::Item, Ghost<Seq<I::Item>>) -> B> Map<I, I::Item
     }
 }
 
-#[requires(forall<e : I::Item, i2 : I> i2.invariant() ==> iter.produces(Seq::singleton(e), i2) ==> func.precondition((e, Ghost(Seq::EMPTY))))]
+#[requires(forall<e : I::Item, i2 : I> i2.invariant() ==> iter.produces(Seq::singleton(e), i2) ==> func.precondition((e, Ghost::new(Seq::EMPTY))))]
 #[requires(Map::<I, _, F>::reinitialize())]
 #[requires(iter.invariant())]
 #[requires(
@@ -178,7 +178,7 @@ impl<I: Iterator, B, F: FnMut(I::Item, Ghost<Seq<I::Item>>) -> B> Map<I, I::Item
         n.has_precond(iter, *n.produced)
 )]
 #[ensures(result.invariant())]
-#[ensures(result == Map { init_iter: Ghost(iter), iter, func, produced: Ghost(Seq::EMPTY) })]
+#[ensures(result == Map { init_iter: Ghost::new(iter), iter, func, produced: Ghost::new(Seq::EMPTY) })]
 pub fn map<I: Iterator, B, F: FnMut(I::Item, Ghost<Seq<I::Item>>) -> B>(
     iter: I,
     func: F,
@@ -220,9 +220,9 @@ pub fn counter<I: Iterator<Item = u32>>(iter: I) {
     let mut cnt = 0;
     map(
         iter,
-        #[requires(@cnt == (*prod).len() && cnt < usize::MAX)]
+        #[requires(@cnt == (*_prod).len() && cnt < usize::MAX)]
         #[ensures(@cnt == @old(cnt) + 1)]
-        |x, prod: Ghost<Seq<_>>| {
+        |x, _prod: Ghost<Seq<_>>| {
             cnt += 1;
             x
         },

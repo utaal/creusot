@@ -17,7 +17,7 @@
 </theory>
 <theory name="C02IterMut_Impl0_Next" proved="true">
  <goal name="next&#39;vc" expl="VC for next" proved="true">
- <proof prover="0"><result status="valid" time="0.03" steps="636"/></proof>
+ <proof prover="0"><result status="valid" time="0.03" steps="637"/></proof>
  </goal>
 </theory>
 <theory name="C02IterMut_Impl1_IntoIter" proved="true">
@@ -32,18 +32,18 @@
 </theory>
 <theory name="C02IterMut_AllZero" proved="true">
  <goal name="all_zero&#39;vc" expl="VC for all_zero" proved="true">
- <proof prover="0"><result status="valid" time="0.25" steps="5209"/></proof>
+ <proof prover="0"><result status="valid" time="0.60" steps="5227"/></proof>
  </goal>
 </theory>
 <theory name="C02IterMut_Impl0" proved="true">
  <goal name="produces_refl_spec" proved="true">
- <proof prover="0" timelimit="1"><result status="valid" time="0.01" steps="2"/></proof>
+ <proof prover="0"><result status="valid" time="0.01" steps="2"/></proof>
  </goal>
  <goal name="produces_trans_spec" proved="true">
- <proof prover="0" timelimit="1"><result status="valid" time="0.00" steps="2"/></proof>
+ <proof prover="0"><result status="valid" time="0.00" steps="2"/></proof>
  </goal>
  <goal name="Next1.next&#39;refn&#39;vc" expl="VC for next&#39;refn" proved="true">
- <proof prover="0" timelimit="1"><result status="valid" time="0.01" steps="105"/></proof>
+ <proof prover="0"><result status="valid" time="0.01" steps="105"/></proof>
  </goal>
 </theory>
 </file>

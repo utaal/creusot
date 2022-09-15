@@ -3,7 +3,7 @@ use crate::{
     ctx::PreludeModule,
     translation::{
         traits::resolve_opt,
-        ty::{translate_ty, variant_accessor_name},
+        ty::translate_ty,
     },
     util::get_builtin,
 };
@@ -185,19 +185,6 @@ impl<'tcx> Lower<'_, '_, 'tcx> {
             } else if !self.ctx.opts.bounds_check {
                 return Some(args.remove(0));
             }
-        } else if builtin_attr == Some(Symbol::intern("ghost_new")) {
-            return Some(args.remove(0));
-        // } else if builtin_attr == Some(Symbol::intern("ghost_inner")) {
-        //     return Some(args.remove(0));
-        } else if builtin_attr == Some(Symbol::intern("ghost_deref")) {
-            let ghost_type = self.ctx.get_diagnostic_item(Symbol::intern("ghost_type")).unwrap();
-            self.names.insert(ghost_type, substs);
-
-            let variant = &self.ctx.adt_def(ghost_type).variants()[0u32.into()];
-            self.ctx.translate_accessor(variant.fields[0].did);
-            let acc_name = variant_accessor_name(self.ctx, ghost_type, variant, 0);
-
-            return Some(Exp::pure_qvar(acc_name).app_to(args.remove(0)));
         } else if builtin_attr == Some(Symbol::intern("identity")) {
             return Some(args.remove(0));
         } else if def_id == self.ctx.tcx.get_diagnostic_item(sym::abort) {

@@ -1647,11 +1647,6 @@ module Alloc_Vec_Impl0_New
     ensures { Seq.length (Model0.model result) = 0 }
     
 end
-module CreusotContracts_Logic_Ghost_Ghost_Type
-  type t_ghost 't =
-    | C_Ghost 't
-    
-end
 module C06KnightsTour_KnightsTour_Interface
   use mach.int.Int
   use mach.int.Int32
@@ -1674,10 +1669,10 @@ module C06KnightsTour_KnightsTour
   use Core_Option_Option_Type as Core_Option_Option_Type
   use prelude.IntSize
   use prelude.Borrow
+  use prelude.Ghost
   use C06KnightsTour_Point_Type as C06KnightsTour_Point_Type
   use Alloc_Alloc_Global_Type as Alloc_Alloc_Global_Type
   use Alloc_Vec_Vec_Type as Alloc_Vec_Vec_Type
-  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
   use seq.Seq
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve6 with type t = C06KnightsTour_Point_Type.t_point
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve5 with type t = usize
@@ -1752,7 +1747,7 @@ module C06KnightsTour_KnightsTour
   var _16 : borrowed (C06KnightsTour_Board_Type.t_board);
   var _17 : C06KnightsTour_Point_Type.t_point;
   var _18 : usize;
-  var _19 : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost ();
+  var _19 : Ghost.ghost_ty ();
   var _22 : ();
   var _23 : ();
   var _27 : ();
@@ -1836,7 +1831,7 @@ module C06KnightsTour_KnightsTour
   BB2 {
     step_14 <- ([#"../06_knights_tour.rs" 152 4 152 13] step_14 + (1 : usize));
     _22 <- ();
-    _19 <- ([#"../06_knights_tour.rs" 154 4 154 41] CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (DumbNonlinearArith0.dumb_nonlinear_arith size_1));
+    _19 <- ([#"../06_knights_tour.rs" 154 4 154 41] Ghost.new (DumbNonlinearArith0.dumb_nonlinear_arith size_1));
     goto BB3
   }
   BB3 {
