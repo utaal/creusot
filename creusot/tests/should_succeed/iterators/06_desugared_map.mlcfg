@@ -1,0 +1,610 @@
+
+module CreusotContracts_Logic_Ghost_Ghost_Type
+  type creusotcontracts_logic_ghost_ghost_type 't =
+    | CreusotContracts_Logic_Ghost_Ghost_Type 't
+    
+  let function creusotcontracts_logic_ghost_ghost_type_Ghost_0 (self : creusotcontracts_logic_ghost_ghost_type 't) : 't
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | CreusotContracts_Logic_Ghost_Ghost_Type a -> a
+      end
+end
+module C06DesugaredMap_Map_Type
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type
+  type c06desugaredmap_map_type 'i 'a 'f =
+    | C06DesugaredMap_Map_Type 'i 'f (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq 'a)) (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type 'i)
+    
+  let function c06desugaredmap_map_type_Map_iter (self : c06desugaredmap_map_type 'i 'a 'f) : 'i
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | C06DesugaredMap_Map_Type a _ _ _ -> a
+      end
+  let function c06desugaredmap_map_type_Map_produced (self : c06desugaredmap_map_type 'i 'a 'f) : CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq 'a)
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | C06DesugaredMap_Map_Type _ _ a _ -> a
+      end
+  let function c06desugaredmap_map_type_Map_func (self : c06desugaredmap_map_type 'i 'a 'f) : 'f
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | C06DesugaredMap_Map_Type _ a _ _ -> a
+      end
+  let function c06desugaredmap_map_type_Map_init_iter (self : c06desugaredmap_map_type 'i 'a 'f) : CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type 'i
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | C06DesugaredMap_Map_Type _ _ _ a -> a
+      end
+end
+module C06DesugaredMap_Common_Iterator_Item_Type
+  type self
+  type item
+end
+module C06DesugaredMap_Common_Iterator_Produces_Interface
+  type self
+  use seq.Seq
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = self
+  predicate produces (self : self) (visited : Seq.seq Item0.item) (_3' : self)
+end
+module C06DesugaredMap_Common_Iterator_Produces
+  type self
+  use seq.Seq
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = self
+  predicate produces [#"../common.rs" 11 4 11 65] (self : self) (visited : Seq.seq Item0.item) (_3' : self)
+  val produces (self : self) (visited : Seq.seq Item0.item) (_3' : self) : bool
+    ensures { result = produces self visited _3' }
+    
+end
+module C06DesugaredMap_Common_Iterator_ProducesRefl_Interface
+  type self
+  use seq.Seq
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06DesugaredMap_Common_Iterator_Produces_Interface as Produces0 with type self = self,
+  type Item0.item = Item0.item
+  function produces_refl (a : self) : ()
+end
+module C06DesugaredMap_Common_Iterator_ProducesRefl
+  type self
+  use seq.Seq
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06DesugaredMap_Common_Iterator_Produces_Interface as Produces0 with type self = self,
+  type Item0.item = Item0.item
+  function produces_refl [#"../common.rs" 15 4 15 30] (a : self) : ()
+  val produces_refl (a : self) : ()
+    ensures { result = produces_refl a }
+    
+  axiom produces_refl_spec : forall a : self . [#"../common.rs" 14 14 14 39] Produces0.produces a (Seq.empty ) a
+end
+module C06DesugaredMap_Common_Iterator_ProducesTrans_Interface
+  type self
+  use seq.Seq
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06DesugaredMap_Common_Iterator_Produces_Interface as Produces0 with type self = self,
+  type Item0.item = Item0.item
+  function produces_trans (a : self) (ab : Seq.seq Item0.item) (b : self) (bc : Seq.seq Item0.item) (c : self) : ()
+end
+module C06DesugaredMap_Common_Iterator_ProducesTrans
+  type self
+  use seq.Seq
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06DesugaredMap_Common_Iterator_Produces_Interface as Produces0 with type self = self,
+  type Item0.item = Item0.item
+  function produces_trans [#"../common.rs" 21 4 21 91] (a : self) (ab : Seq.seq Item0.item) (b : self) (bc : Seq.seq Item0.item) (c : self) : ()
+    
+  val produces_trans (a : self) (ab : Seq.seq Item0.item) (b : self) (bc : Seq.seq Item0.item) (c : self) : ()
+    requires {[#"../common.rs" 18 15 18 32] Produces0.produces a ab b}
+    requires {[#"../common.rs" 19 15 19 32] Produces0.produces b bc c}
+    ensures { result = produces_trans a ab b bc c }
+    
+  axiom produces_trans_spec : forall a : self, ab : Seq.seq Item0.item, b : self, bc : Seq.seq Item0.item, c : self . ([#"../common.rs" 18 15 18 32] Produces0.produces a ab b) -> ([#"../common.rs" 19 15 19 32] Produces0.produces b bc c) -> ([#"../common.rs" 20 14 20 42] Produces0.produces a (Seq.(++) ab bc) c)
+end
+module Core_Ops_Function_FnOnce_Output_Type
+  type self
+  type args
+  type output
+end
+module CreusotContracts_Std1_Fun_Impl1_PostconditionMut_Interface
+  type args
+  type f
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = f, type args = args
+  predicate postcondition_mut (self : borrowed f) (_2' : args) (_3' : Output0.output)
+end
+module CreusotContracts_Std1_Fun_Impl1_PostconditionMut
+  type args
+  type f
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = f, type args = args
+  predicate postcondition_mut (self : borrowed f) (_2' : args) (_3' : Output0.output)
+  val postcondition_mut (self : borrowed f) (_2' : args) (_3' : Output0.output) : bool
+    ensures { result = postcondition_mut self _2' _3' }
+    
+end
+module C06DesugaredMap_Impl0_Produces_Interface
+  type i
+  type b
+  type f
+  use seq.Seq
+  use C06DesugaredMap_Map_Type
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = i
+  predicate produces (self : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f) (visited : Seq.seq b) (succ : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f)
+    
+end
+module C06DesugaredMap_Impl0_Produces
+  type i
+  type b
+  type f
+  use seq.Seq
+  use C06DesugaredMap_Map_Type
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = i
+  use prelude.Borrow
+  use mach.int.Int
+  use mach.int.Int32
+  use seq_ext.SeqExt
+  use CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut_Interface as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06DesugaredMap_Common_Iterator_Produces_Interface as Produces0 with type self = i, type Item0.item = Item0.item
+  predicate produces [#"../06_desugared_map.rs" 20 4 20 58] (self : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f) (visited : Seq.seq b) (succ : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f)
+    
+   =
+    [#"../06_desugared_map.rs" 21 8 42 9] exists fs : Seq.seq (borrowed f) . exists is : Seq.seq Item0.item . Produces0.produces (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter self) is (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter succ) /\ Seq.length is = Seq.length fs /\ Seq.length fs = Seq.length visited /\ Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type_Ghost_0 (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced self)) + Seq.length visited = Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type_Ghost_0 (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced succ)) /\ Seq.(==) (SeqExt.subsequence (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type_Ghost_0 (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced succ)) 0 (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type_Ghost_0 (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced self)))) (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type_Ghost_0 (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced self)) /\ (forall i : int . 1 <= i /\ i < Seq.length fs ->  ^ Seq.get fs (i - 1) =  * Seq.get fs i) /\ (Seq.length visited > 0 ->  * Seq.get fs 0 = C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func self /\  ^ Seq.get fs (Seq.length visited - 1) = C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func succ) /\ (Seq.length visited = 0 -> C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func self = C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func succ) /\ C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_init_iter self = C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_init_iter succ /\ (forall i : int . 0 <= i /\ i < Seq.length visited -> PostconditionMut0.postcondition_mut (Seq.get fs i) (Seq.get is i, CreusotContracts_Logic_Ghost_Ghost_Type.CreusotContracts_Logic_Ghost_Ghost_Type (SeqExt.subsequence (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type_Ghost_0 (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced succ)) 0 (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type_Ghost_0 (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced self)) + i))) (Seq.get visited i))
+  val produces (self : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f) (visited : Seq.seq b) (succ : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f) : bool
+    ensures { result = produces self visited succ }
+    
+end
+module CreusotContracts_Std1_Fun_Impl0_Precondition_Interface
+  type args
+  type f
+  predicate precondition (self : f) (_2' : args)
+end
+module CreusotContracts_Std1_Fun_Impl0_Precondition
+  type args
+  type f
+  predicate precondition (self : f) (_2' : args)
+  val precondition (self : f) (_2' : args) : bool
+    ensures { result = precondition self _2' }
+    
+end
+module C06DesugaredMap_Impl0_Invariant_Interface
+  type i
+  type b
+  type f
+  use C06DesugaredMap_Map_Type
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = i
+  predicate invariant' (self : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f)
+end
+module C06DesugaredMap_Impl0_Invariant
+  type i
+  type b
+  type f
+  use C06DesugaredMap_Map_Type
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = i
+  use seq.Seq
+  use prelude.Borrow
+  use CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition_Interface as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  type f = f
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut_Interface as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06DesugaredMap_Common_Iterator_Produces_Interface as Produces0 with type self = i, type Item0.item = Item0.item
+  predicate invariant' [#"../06_desugared_map.rs" 47 4 47 30] (self : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f)
+    
+   =
+    [#"../06_desugared_map.rs" 50 12 63 13] (forall initial : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f . Produces0.produces (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type_Ghost_0 (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_init_iter initial)) (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type_Ghost_0 (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced initial)) (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter initial) /\ (forall b : b . forall e : Item0.item . forall s : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f . Produces0.produces (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter initial) (Seq.singleton e) (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter s) -> (forall f : borrowed f .  * f = C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func initial /\  ^ f = C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func s -> PostconditionMut0.postcondition_mut f (e, C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced initial) b -> (forall e2 : Item0.item . forall i2 : i . Produces0.produces (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter s) (Seq.singleton e2) i2 -> Precondition0.precondition (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func s) (e2, C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced s))))) /\ (forall i2 : i . forall e : Item0.item . Produces0.produces (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter self) (Seq.singleton e) i2 -> Precondition0.precondition (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func self) (e, C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced self))
+  val invariant' (self : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f) : bool
+    ensures { result = invariant' self }
+    
+end
+module CreusotContracts_Std1_Fun_Impl0
+  type args
+  type f
+end
+module CreusotContracts_Std1_Fun_Impl1
+  type args
+  type f
+end
+module CreusotContracts_Std1_Fun_Impl1_FnMutOnce_Interface
+  type args
+  type f
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = f, type args = args
+  function fn_mut_once (self : f) (_2' : args) (_3' : Output0.output) : ()
+end
+module CreusotContracts_Std1_Fun_Impl1_FnMutOnce
+  type args
+  type f
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = f, type args = args
+  function fn_mut_once (self : f) (_2' : args) (_3' : Output0.output) : () =
+    ()
+  val fn_mut_once (self : f) (_2' : args) (_3' : Output0.output) : ()
+    ensures { result = fn_mut_once self _2' _3' }
+    
+end
+module CreusotContracts_Logic_Resolve_Resolve_Resolve_Interface
+  type self
+  predicate resolve (self : self)
+end
+module CreusotContracts_Logic_Resolve_Resolve_Resolve
+  type self
+  predicate resolve (self : self)
+  val resolve (self : self) : bool
+    ensures { result = resolve self }
+    
+end
+module C06DesugaredMap_Map_Interface
+  type i
+  type b
+  type f
+  use seq.Seq
+  use prelude.Borrow
+  use C06DesugaredMap_Map_Type
+  use CreusotContracts_Logic_Ghost_Ghost_Type
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = i
+  clone C06DesugaredMap_Impl0_Invariant_Interface as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut_Interface as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition_Interface as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  type f = f
+  clone C06DesugaredMap_Common_Iterator_Produces_Interface as Produces0 with type self = i, type Item0.item = Item0.item
+  val map [@cfg:stackify] (iter : i) (func : f) : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f
+    requires {[#"../06_desugared_map.rs" 69 0 71 2] forall i2 : i . forall e : Item0.item . Produces0.produces iter (Seq.singleton e) i2 -> Precondition0.precondition func (e, CreusotContracts_Logic_Ghost_Ghost_Type.CreusotContracts_Logic_Ghost_Ghost_Type (Seq.empty ))}
+    requires {[#"../06_desugared_map.rs" 73 0 78 2] forall initial : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f . forall b : b . forall e : Item0.item . forall s : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f . Produces0.produces (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter initial) (Seq.singleton e) (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter s) -> (forall f : borrowed f .  * f = C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func initial /\  ^ f = C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func s -> PostconditionMut0.postcondition_mut f (e, C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced initial) b -> (forall e2 : Item0.item . forall i2 : i . Produces0.produces (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter s) (Seq.singleton e2) i2 -> Precondition0.precondition (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func s) (e2, C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced s)))}
+    ensures { [#"../06_desugared_map.rs" 79 10 79 28] Invariant0.invariant' result }
+    
+end
+module C06DesugaredMap_Map
+  type i
+  type b
+  type f
+  use seq.Seq
+  use prelude.Borrow
+  use CreusotContracts_Logic_Ghost_Ghost_Type
+  use C06DesugaredMap_Map_Type
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = i
+  clone CreusotContracts_Std1_Fun_Impl1_FnMutOnce as FnMutOnce0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06DesugaredMap_Common_Iterator_Produces as Produces0 with type self = i, type Item0.item = Item0.item
+  clone C06DesugaredMap_Common_Iterator_ProducesTrans as ProducesTrans0 with type self = i,
+  predicate Produces0.produces = Produces0.produces, type Item0.item = Item0.item, axiom .
+  clone C06DesugaredMap_Common_Iterator_ProducesRefl as ProducesRefl0 with type self = i,
+  predicate Produces0.produces = Produces0.produces, type Item0.item = Item0.item, axiom .
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  type f = f
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06DesugaredMap_Impl0_Invariant as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item, predicate Produces0.produces = Produces0.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut,
+  predicate Precondition0.precondition = Precondition0.precondition
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = f
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = i
+  let rec cfg map [@cfg:stackify] [#"../06_desugared_map.rs" 80 0 80 108] (iter : i) (func : f) : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f
+    requires {[#"../06_desugared_map.rs" 69 0 71 2] forall i2 : i . forall e : Item0.item . Produces0.produces iter (Seq.singleton e) i2 -> Precondition0.precondition func (e, CreusotContracts_Logic_Ghost_Ghost_Type.CreusotContracts_Logic_Ghost_Ghost_Type (Seq.empty ))}
+    requires {[#"../06_desugared_map.rs" 73 0 78 2] forall initial : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f . forall b : b . forall e : Item0.item . forall s : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f . Produces0.produces (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter initial) (Seq.singleton e) (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter s) -> (forall f : borrowed f .  * f = C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func initial /\  ^ f = C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func s -> PostconditionMut0.postcondition_mut f (e, C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced initial) b -> (forall e2 : Item0.item . forall i2 : i . Produces0.produces (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter s) (Seq.singleton e2) i2 -> Precondition0.precondition (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func s) (e2, C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced s)))}
+    ensures { [#"../06_desugared_map.rs" 79 10 79 28] Invariant0.invariant' result }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f;
+  var iter_1 : i;
+  var func_2 : f;
+  var _6 : i;
+  var _7 : f;
+  var _8 : CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type i;
+  var _10 : ();
+  var _11 : CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item);
+  var _14 : ();
+  {
+    iter_1 <- iter;
+    func_2 <- func;
+    goto BB0
+  }
+  BB0 {
+    goto BB1
+  }
+  BB1 {
+    assume { Resolve0.resolve _6 };
+    _6 <- iter_1;
+    iter_1 <- any i;
+    assume { Resolve1.resolve _7 };
+    _7 <- func_2;
+    func_2 <- any f;
+    _10 <- ();
+    _8 <- ([#"../06_desugared_map.rs" 81 33 81 47] CreusotContracts_Logic_Ghost_Ghost_Type.CreusotContracts_Logic_Ghost_Ghost_Type iter_1);
+    goto BB2
+  }
+  BB2 {
+    _14 <- ();
+    _11 <- ([#"../06_desugared_map.rs" 81 59 81 80] CreusotContracts_Logic_Ghost_Ghost_Type.CreusotContracts_Logic_Ghost_Ghost_Type (Seq.empty ));
+    goto BB3
+  }
+  BB3 {
+    _0 <- C06DesugaredMap_Map_Type.C06DesugaredMap_Map_Type _6 _7 _11 _8;
+    goto BB4
+  }
+  BB4 {
+    goto BB5
+  }
+  BB5 {
+    goto BB6
+  }
+  BB6 {
+    goto BB7
+  }
+  BB7 {
+    goto BB8
+  }
+  BB8 {
+    return _0
+  }
+  
+end
+module Core_Option_Option_Type
+  type core_option_option_type 't =
+    | Core_Option_Option_None_Type
+    | Core_Option_Option_Some_Type 't
+    
+  let function core_option_option_type_Some_0 (self : core_option_option_type 't) : 't
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | Core_Option_Option_None_Type -> any 't
+      | Core_Option_Option_Some_Type a -> a
+      end
+end
+module C06DesugaredMap_Common_Iterator_Completed_Interface
+  type self
+  predicate completed (self : self)
+end
+module C06DesugaredMap_Common_Iterator_Completed
+  type self
+  predicate completed [#"../common.rs" 8 4 8 31] (self : self)
+  val completed (self : self) : bool
+    ensures { result = completed self }
+    
+end
+module C06DesugaredMap_Common_Iterator_Next_Interface
+  type self
+  use prelude.Borrow
+  use seq.Seq
+  use Core_Option_Option_Type
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06DesugaredMap_Common_Iterator_Produces_Interface as Produces0 with type self = self,
+  type Item0.item = Item0.item
+  clone C06DesugaredMap_Common_Iterator_Completed_Interface as Completed0 with type self = self
+  val next [@cfg:stackify] (self : borrowed self) : Core_Option_Option_Type.core_option_option_type Item0.item
+    ensures { [#"../common.rs" 23 14 26 5] match (result) with
+      | Core_Option_Option_Type.Core_Option_Option_None_Type -> Completed0.completed ( * self) /\ Produces0.produces ( * self) (Seq.empty ) ( ^ self)
+      | Core_Option_Option_Type.Core_Option_Option_Some_Type v -> Produces0.produces ( * self) (Seq.singleton v) ( ^ self) /\ not Completed0.completed ( * self)
+      end }
+    
+end
+module C06DesugaredMap_Common_Iterator_Next
+  type self
+  use prelude.Borrow
+  use seq.Seq
+  use Core_Option_Option_Type
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06DesugaredMap_Common_Iterator_Produces as Produces0 with type self = self, type Item0.item = Item0.item
+  clone C06DesugaredMap_Common_Iterator_Completed as Completed0 with type self = self
+  val next [@cfg:stackify] (self : borrowed self) : Core_Option_Option_Type.core_option_option_type Item0.item
+    ensures { [#"../common.rs" 23 14 26 5] match (result) with
+      | Core_Option_Option_Type.Core_Option_Option_None_Type -> Completed0.completed ( * self) /\ Produces0.produces ( * self) (Seq.empty ) ( ^ self)
+      | Core_Option_Option_Type.Core_Option_Option_Some_Type v -> Produces0.produces ( * self) (Seq.singleton v) ( ^ self) /\ not Completed0.completed ( * self)
+      end }
+    
+end
+module CreusotContracts_Logic_Resolve_Impl1_Resolve_Interface
+  type t
+  use prelude.Borrow
+  predicate resolve (self : borrowed t)
+end
+module CreusotContracts_Logic_Resolve_Impl1_Resolve
+  type t
+  use prelude.Borrow
+  predicate resolve (self : borrowed t) =
+     ^ self =  * self
+  val resolve (self : borrowed t) : bool
+    ensures { result = resolve self }
+    
+end
+module CreusotContracts_Std1_Fun_FnMutSpec_PostconditionMut_Interface
+  type self
+  type args
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = self, type args = args
+  predicate postcondition_mut (self : borrowed self) (_2' : args) (_3' : Output0.output)
+end
+module CreusotContracts_Std1_Fun_FnMutSpec_PostconditionMut
+  type self
+  type args
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = self, type args = args
+  predicate postcondition_mut (self : borrowed self) (_2' : args) (_3' : Output0.output)
+  val postcondition_mut (self : borrowed self) (_2' : args) (_3' : Output0.output) : bool
+    ensures { result = postcondition_mut self _2' _3' }
+    
+end
+module Core_Ops_Function_FnMut_CallMut_Interface
+  type self
+  type args
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = self, type args = args
+  clone CreusotContracts_Std1_Fun_FnMutSpec_PostconditionMut_Interface as PostconditionMut0 with type self = self,
+  type args = args, type Output0.output = Output0.output
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition_Interface as Precondition0 with type args = args, type f = self
+  val call_mut [@cfg:stackify] (self : borrowed self) (args : args) : Output0.output
+    requires {Precondition0.precondition ( * self) args}
+    ensures { PostconditionMut0.postcondition_mut self args result }
+    
+end
+module Core_Ops_Function_FnMut_CallMut
+  type self
+  type args
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = self, type args = args
+  clone CreusotContracts_Std1_Fun_FnMutSpec_PostconditionMut_Interface as PostconditionMut0 with type self = self,
+  type args = args, type Output0.output = Output0.output
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition_Interface as Precondition0 with type args = args, type f = self
+  val call_mut [@cfg:stackify] (self : borrowed self) (args : args) : Output0.output
+    requires {Precondition0.precondition ( * self) args}
+    ensures { PostconditionMut0.postcondition_mut self args result }
+    
+end
+module CreusotContracts_Logic_Resolve_Impl1
+  type t
+end
+module C06DesugaredMap_Next_Interface
+  type i
+  type b
+  type f
+  use prelude.Borrow
+  use Core_Option_Option_Type
+  use C06DesugaredMap_Map_Type
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = i
+  clone C06DesugaredMap_Impl0_Invariant_Interface as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  val next [@cfg:stackify] (self_ : borrowed (C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f)) : Core_Option_Option_Type.core_option_option_type b
+    requires {[#"../06_desugared_map.rs" 84 11 84 28] Invariant0.invariant' ( * self_)}
+    ensures { [#"../06_desugared_map.rs" 85 10 85 30] Invariant0.invariant' ( ^ self_) }
+    
+end
+module C06DesugaredMap_Next
+  type i
+  type b
+  type f
+  use prelude.Borrow
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type
+  use Core_Option_Option_Type
+  use C06DesugaredMap_Map_Type
+  clone C06DesugaredMap_Common_Iterator_Item_Type as Item0 with type self = i
+  clone CreusotContracts_Std1_Fun_Impl1_FnMutOnce as FnMutOnce0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06DesugaredMap_Common_Iterator_Produces as Produces0 with type self = i, type Item0.item = Item0.item
+  clone C06DesugaredMap_Common_Iterator_ProducesTrans as ProducesTrans0 with type self = i,
+  predicate Produces0.produces = Produces0.produces, type Item0.item = Item0.item, axiom .
+  clone C06DesugaredMap_Common_Iterator_ProducesRefl as ProducesRefl0 with type self = i,
+  predicate Produces0.produces = Produces0.produces, type Item0.item = Item0.item, axiom .
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  type f = f
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06DesugaredMap_Impl0_Invariant as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item, predicate Produces0.produces = Produces0.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut,
+  predicate Precondition0.precondition = Precondition0.precondition
+  use mach.int.Int
+  use prelude.IntSize
+  clone C06DesugaredMap_Common_Iterator_Completed as Completed0 with type self = i
+  clone Core_Ops_Function_FnMut_CallMut_Interface as CallMut0 with type self = f,
+  type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)),
+  predicate Precondition0.precondition = Precondition0.precondition,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut, type Output0.output = b
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve3 with type self = Item0.item
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = Core_Option_Option_Type.core_option_option_type Item0.item
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item)
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f
+  clone C06DesugaredMap_Common_Iterator_Next_Interface as Next0 with type self = i, type Item0.item = Item0.item,
+  predicate Completed0.completed = Completed0.completed, predicate Produces0.produces = Produces0.produces
+  let rec cfg next [@cfg:stackify] [#"../06_desugared_map.rs" 86 0 88 14] (self_ : borrowed (C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f)) : Core_Option_Option_Type.core_option_option_type b
+    requires {[#"../06_desugared_map.rs" 84 11 84 28] Invariant0.invariant' ( * self_)}
+    ensures { [#"../06_desugared_map.rs" 85 10 85 30] Invariant0.invariant' ( ^ self_) }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : Core_Option_Option_Type.core_option_option_type b;
+  var self__1 : borrowed (C06DesugaredMap_Map_Type.c06desugaredmap_map_type i Item0.item f);
+  var produced_4 : CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item);
+  var _7 : ();
+  var _8 : Core_Option_Option_Type.core_option_option_type Item0.item;
+  var _9 : borrowed i;
+  var _10 : isize;
+  var x_11 : Item0.item;
+  var _12 : CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item);
+  var _14 : ();
+  var _15 : b;
+  var _16 : borrowed f;
+  var _17 : (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item));
+  var _18 : Item0.item;
+  var _19 : CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item);
+  {
+    self__1 <- self_;
+    goto BB0
+  }
+  BB0 {
+    _7 <- ();
+    produced_4 <- ([#"../06_desugared_map.rs" 89 19 89 44] CreusotContracts_Logic_Ghost_Ghost_Type.CreusotContracts_Logic_Ghost_Ghost_Type (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type_Ghost_0 (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced ( * self__1))));
+    goto BB1
+  }
+  BB1 {
+    _9 <- borrow_mut (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_iter ( * self__1));
+    self__1 <- { self__1 with current = (let C06DesugaredMap_Map_Type.C06DesugaredMap_Map_Type a b c d =  * self__1 in C06DesugaredMap_Map_Type.C06DesugaredMap_Map_Type ( ^ _9) b c d) };
+    _8 <- ([#"../06_desugared_map.rs" 90 10 90 27] Next0.next _9);
+    goto BB2
+  }
+  BB2 {
+    switch (_8)
+      | Core_Option_Option_Type.Core_Option_Option_None_Type -> goto BB3
+      | Core_Option_Option_Type.Core_Option_Option_Some_Type _ -> goto BB5
+      end
+  }
+  BB3 {
+    assume { Resolve0.resolve self__1 };
+    assume { Resolve1.resolve produced_4 };
+    _0 <- Core_Option_Option_Type.Core_Option_Option_None_Type;
+    goto BB11
+  }
+  BB4 {
+    assume { Resolve0.resolve self__1 };
+    assume { Resolve1.resolve produced_4 };
+    assume { Resolve2.resolve _8 };
+    absurd
+  }
+  BB5 {
+    assume { Resolve3.resolve x_11 };
+    x_11 <- Core_Option_Option_Type.core_option_option_type_Some_0 _8;
+    _8 <- (let Core_Option_Option_Type.Core_Option_Option_Some_Type a = _8 in Core_Option_Option_Type.Core_Option_Option_Some_Type (any Item0.item));
+    _14 <- ();
+    _12 <- ([#"../06_desugared_map.rs" 93 29 93 56] CreusotContracts_Logic_Ghost_Ghost_Type.CreusotContracts_Logic_Ghost_Ghost_Type (Seq.snoc (CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type_Ghost_0 produced_4) x_11));
+    goto BB6
+  }
+  BB6 {
+    assume { Resolve1.resolve (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_produced ( * self__1)) };
+    self__1 <- { self__1 with current = (let C06DesugaredMap_Map_Type.C06DesugaredMap_Map_Type a b c d =  * self__1 in C06DesugaredMap_Map_Type.C06DesugaredMap_Map_Type a b _12 d) };
+    _12 <- any CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item);
+    _16 <- borrow_mut (C06DesugaredMap_Map_Type.c06desugaredmap_map_type_Map_func ( * self__1));
+    self__1 <- { self__1 with current = (let C06DesugaredMap_Map_Type.C06DesugaredMap_Map_Type a b c d =  * self__1 in C06DesugaredMap_Map_Type.C06DesugaredMap_Map_Type a ( ^ _16) c d) };
+    assume { Resolve0.resolve self__1 };
+    assume { Resolve3.resolve _18 };
+    _18 <- x_11;
+    x_11 <- any Item0.item;
+    assume { Resolve1.resolve _19 };
+    _19 <- produced_4;
+    produced_4 <- any CreusotContracts_Logic_Ghost_Ghost_Type.creusotcontracts_logic_ghost_ghost_type (Seq.seq Item0.item);
+    _17 <- (_18, _19);
+    _15 <- ([#"../06_desugared_map.rs" 94 17 94 42] CallMut0.call_mut _16 _17);
+    goto BB7
+  }
+  BB7 {
+    goto BB8
+  }
+  BB8 {
+    _0 <- Core_Option_Option_Type.Core_Option_Option_Some_Type _15;
+    goto BB9
+  }
+  BB9 {
+    goto BB10
+  }
+  BB10 {
+    goto BB11
+  }
+  BB11 {
+    goto BB12
+  }
+  BB12 {
+    assume { Resolve2.resolve _8 };
+    return _0
+  }
+  
+end

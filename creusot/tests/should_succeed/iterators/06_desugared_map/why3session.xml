@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="CVC4" version="1.8" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="1" name="Z3" version="4.8.14" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="2" name="Alt-Ergo" version="2.4.1" timelimit="1" steplimit="0" memlimit="1000"/>
+<file format="mlcfg">
+<path name=".."/><path name="06_desugared_map.mlcfg"/>
+<theory name="C06DesugaredMap_Map">
+ <goal name="map&#39;vc" expl="VC for map">
+ <transf name="split_vc" >
+  <goal name="map&#39;vc.0" expl="postcondition">
+  <transf name="inline_goal" >
+   <goal name="map&#39;vc.0.0" expl="postcondition">
+   <transf name="split_vc" >
+    <goal name="map&#39;vc.0.0.0" expl="postcondition">
+    <proof prover="0"><result status="failure" time="0.00"/></proof>
+    <proof prover="1"><result status="timeout" time="1.00"/></proof>
+    <proof prover="2"><result status="timeout" time="1.00"/></proof>
+    </goal>
+    <goal name="map&#39;vc.0.0.1" expl="postcondition" proved="true">
+    <proof prover="2"><result status="valid" time="0.01" steps="69"/></proof>
+    </goal>
+    <goal name="map&#39;vc.0.0.2" expl="postcondition" proved="true">
+    <proof prover="2"><result status="valid" time="0.01" steps="36"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+<theory name="C06DesugaredMap_Next" proved="true">
+ <goal name="next&#39;vc" expl="VC for next" proved="true">
+ <transf name="split_vc" proved="true" >
+  <goal name="next&#39;vc.0" expl="precondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.01" steps="190"/></proof>
+  </goal>
+  <goal name="next&#39;vc.1" expl="unreachable point" proved="true">
+  <proof prover="2"><result status="valid" time="0.01" steps="30"/></proof>
+  </goal>
+  <goal name="next&#39;vc.2" expl="postcondition" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="next&#39;vc.2.0" expl="postcondition" proved="true">
+   <transf name="inline_goal" proved="true" >
+    <goal name="next&#39;vc.2.0.0" expl="postcondition" proved="true">
+    <transf name="split_vc" proved="true" >
+     <goal name="next&#39;vc.2.0.0.0" expl="postcondition" proved="true">
+     <proof prover="2"><result status="valid" time="0.01" steps="63"/></proof>
+     </goal>
+     <goal name="next&#39;vc.2.0.0.1" expl="postcondition" proved="true">
+     <proof prover="1"><result status="valid" time="0.03" steps="122801"/></proof>
+     </goal>
+     <goal name="next&#39;vc.2.0.0.2" expl="postcondition" proved="true">
+     <transf name="assert" proved="true" arg1="(forall s : seq &#39;a. empty ++ s == s)">
+      <goal name="next&#39;vc.2.0.0.2.0" expl="asserted formula" proved="true">
+      <proof prover="2"><result status="valid" time="0.01" steps="100"/></proof>
+      </goal>
+      <goal name="next&#39;vc.2.0.0.2.1" expl="postcondition" proved="true">
+      <proof prover="2"><result status="valid" time="0.02" steps="195"/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="next&#39;vc.2.1" expl="postcondition" proved="true">
+   <transf name="inline_goal" proved="true" >
+    <goal name="next&#39;vc.2.1.0" expl="postcondition" proved="true">
+    <transf name="assert" proved="true" arg1="(forall s : seq &#39;a. empty ++ s == s)">
+     <goal name="next&#39;vc.2.1.0.0" expl="asserted formula" proved="true">
+     <proof prover="2"><result status="valid" time="0.01" steps="193"/></proof>
+     </goal>
+     <goal name="next&#39;vc.2.1.0.1" expl="postcondition" proved="true">
+     <proof prover="2"><result status="valid" time="0.03" steps="666"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>

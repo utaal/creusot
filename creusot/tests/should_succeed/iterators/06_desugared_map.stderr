@@ -1,0 +1,34 @@
+warning: struct `Map` is never constructed
+  --> 06_desugared_map.rs:11:8
+   |
+11 | struct Map<I, A, F> {
+   |        ^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: function `map` is never used
+  --> 06_desugared_map.rs:80:4
+   |
+80 | fn map<I: Iterator, B, F: FnMut(I::Item, Ghost<Seq<I::Item>>) -> B>(iter: I, func : F) -> Map<I, I::Item, F> {
+   |    ^^^
+
+warning: function `next` is never used
+  --> 06_desugared_map.rs:86:4
+   |
+86 | fn next<I: Iterator, B, F: FnMut(I::Item, Ghost<Seq<I::Item>>) -> B>(
+   |    ^^^^
+
+warning: associated function `produces` is never used
+  --> 06_desugared_map.rs:20:8
+   |
+20 |     fn produces(self, visited: Seq<B>, succ: Self) -> bool {
+   |        ^^^^^^^^
+
+warning: associated function `invariant` is never used
+  --> 06_desugared_map.rs:47:8
+   |
+47 |     fn invariant(self) -> bool {
+   |        ^^^^^^^^^
+
+warning: 5 warnings emitted
+
