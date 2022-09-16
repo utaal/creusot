@@ -1,0 +1,1387 @@
+
+module C06MapPrecond_Common_Iterator_Invariant_Interface
+  type self
+  predicate invariant' (self : self)
+end
+module C06MapPrecond_Common_Iterator_Invariant
+  type self
+  predicate invariant' [#"../common.rs" 28 4 28 30] (self : self) =
+    [#"../common.rs" 29 8 29 12] true
+  val invariant' (self : self) : bool
+    ensures { result = invariant' self }
+    
+end
+module CreusotContracts_Logic_Ghost_Ghost_Type
+  type t_ghost 't =
+    | C_Ghost 't
+    
+  let function ghost_0 (self : t_ghost 't) : 't = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | C_Ghost a -> a
+      end
+end
+module C06MapPrecond_Map_Type
+  use seq.Seq
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  type t_map 'i 'a 'f =
+    | C_Map 'i 'f (CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq 'a)) (CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost 'i)
+    
+  let function map_iter (self : t_map 'i 'a 'f) : 'i = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | C_Map a _ _ _ -> a
+      end
+  let function map_init_iter (self : t_map 'i 'a 'f) : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost 'i
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | C_Map _ _ _ a -> a
+      end
+  let function map_produced (self : t_map 'i 'a 'f) : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq 'a)
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | C_Map _ _ a _ -> a
+      end
+  let function map_func (self : t_map 'i 'a 'f) : 'f = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | C_Map _ a _ _ -> a
+      end
+end
+module C06MapPrecond_Common_Iterator_Item_Type
+  type self
+  type item
+end
+module C06MapPrecond_Common_Iterator_Produces_Interface
+  type self
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = self
+  predicate produces (self : self) (visited : Seq.seq Item0.item) (_3' : self)
+end
+module C06MapPrecond_Common_Iterator_Produces
+  type self
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = self
+  predicate produces [#"../common.rs" 8 4 8 65] (self : self) (visited : Seq.seq Item0.item) (_3' : self)
+  val produces (self : self) (visited : Seq.seq Item0.item) (_3' : self) : bool
+    ensures { result = produces self visited _3' }
+    
+end
+module C06MapPrecond_Common_Iterator_ProducesRefl_Interface
+  type self
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces0 with type self = self,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_Invariant_Interface as Invariant0 with type self = self
+  function produces_refl (a : self) : ()
+end
+module C06MapPrecond_Common_Iterator_ProducesRefl
+  type self
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces0 with type self = self,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_Invariant_Interface as Invariant0 with type self = self
+  function produces_refl [#"../common.rs" 16 4 16 30] (a : self) : ()
+  val produces_refl (a : self) : ()
+    requires {[#"../common.rs" 14 15 14 28] Invariant0.invariant' a}
+    ensures { result = produces_refl a }
+    
+  axiom produces_refl_spec : forall a : self . ([#"../common.rs" 14 15 14 28] Invariant0.invariant' a) -> ([#"../common.rs" 15 14 15 39] Produces0.produces a (Seq.empty ) a)
+end
+module C06MapPrecond_Common_Iterator_ProducesTrans_Interface
+  type self
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces0 with type self = self,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_Invariant_Interface as Invariant0 with type self = self
+  function produces_trans (a : self) (ab : Seq.seq Item0.item) (b : self) (bc : Seq.seq Item0.item) (c : self) : ()
+end
+module C06MapPrecond_Common_Iterator_ProducesTrans
+  type self
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces0 with type self = self,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_Invariant_Interface as Invariant0 with type self = self
+  function produces_trans [#"../common.rs" 25 4 25 91] (a : self) (ab : Seq.seq Item0.item) (b : self) (bc : Seq.seq Item0.item) (c : self) : ()
+    
+  val produces_trans (a : self) (ab : Seq.seq Item0.item) (b : self) (bc : Seq.seq Item0.item) (c : self) : ()
+    requires {[#"../common.rs" 19 15 19 28] Invariant0.invariant' a}
+    requires {[#"../common.rs" 20 15 20 28] Invariant0.invariant' b}
+    requires {[#"../common.rs" 21 15 21 28] Invariant0.invariant' c}
+    requires {[#"../common.rs" 22 15 22 32] Produces0.produces a ab b}
+    requires {[#"../common.rs" 23 15 23 32] Produces0.produces b bc c}
+    ensures { result = produces_trans a ab b bc c }
+    
+  axiom produces_trans_spec : forall a : self, ab : Seq.seq Item0.item, b : self, bc : Seq.seq Item0.item, c : self . ([#"../common.rs" 19 15 19 28] Invariant0.invariant' a) -> ([#"../common.rs" 20 15 20 28] Invariant0.invariant' b) -> ([#"../common.rs" 21 15 21 28] Invariant0.invariant' c) -> ([#"../common.rs" 22 15 22 32] Produces0.produces a ab b) -> ([#"../common.rs" 23 15 23 32] Produces0.produces b bc c) -> ([#"../common.rs" 24 14 24 42] Produces0.produces a (Seq.(++) ab bc) c)
+end
+module C06MapPrecond_Common_Iterator_Completed_Interface
+  type self
+  use prelude.Borrow
+  predicate completed (self : borrowed self)
+end
+module C06MapPrecond_Common_Iterator_Completed
+  type self
+  use prelude.Borrow
+  predicate completed [#"../common.rs" 11 4 11 36] (self : borrowed self)
+  val completed (self : borrowed self) : bool
+    ensures { result = completed self }
+    
+end
+module C06MapPrecond_Impl0_Completed_Interface
+  type i
+  type b
+  type f
+  use prelude.Borrow
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  predicate completed (self : borrowed (C06MapPrecond_Map_Type.t_map i Item0.item f))
+end
+module C06MapPrecond_Impl0_Completed
+  type i
+  type b
+  type f
+  use prelude.Borrow
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Common_Iterator_Completed_Interface as Completed0 with type self = i
+  predicate completed [#"../06_map_precond.rs" 24 4 24 35] (self : borrowed (C06MapPrecond_Map_Type.t_map i Item0.item f))
+    
+   =
+    [#"../06_map_precond.rs" 25 8 27 9] exists iter : borrowed i .  * iter = C06MapPrecond_Map_Type.map_iter ( * self) /\  ^ iter = C06MapPrecond_Map_Type.map_iter ( ^ self) /\ Completed0.completed iter
+  val completed (self : borrowed (C06MapPrecond_Map_Type.t_map i Item0.item f)) : bool
+    ensures { result = completed self }
+    
+end
+module Core_Ops_Function_FnOnce_Output_Type
+  type self
+  type args
+  type output
+end
+module CreusotContracts_Std1_Fun_Impl1_PostconditionMut_Interface
+  type args
+  type f
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = f, type args = args
+  predicate postcondition_mut (self : borrowed f) (_2' : args) (_3' : Output0.output)
+end
+module CreusotContracts_Std1_Fun_Impl1_PostconditionMut
+  type args
+  type f
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = f, type args = args
+  predicate postcondition_mut (self : borrowed f) (_2' : args) (_3' : Output0.output)
+  val postcondition_mut (self : borrowed f) (_2' : args) (_3' : Output0.output) : bool
+    ensures { result = postcondition_mut self _2' _3' }
+    
+end
+module CreusotContracts_Std1_Fun_Impl0_Precondition_Interface
+  type args
+  type f
+  predicate precondition (self : f) (_2' : args)
+end
+module CreusotContracts_Std1_Fun_Impl0_Precondition
+  type args
+  type f
+  predicate precondition (self : f) (_2' : args)
+  val precondition (self : f) (_2' : args) : bool
+    ensures { result = precondition self _2' }
+    
+end
+module C06MapPrecond_Impl0_Invariant_Interface
+  type i
+  type b
+  type f
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  predicate invariant' (self : C06MapPrecond_Map_Type.t_map i Item0.item f)
+end
+module C06MapPrecond_Impl0_Invariant
+  type i
+  type b
+  type f
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  use seq.Seq
+  use mach.int.Int
+  use mach.int.Int32
+  use seq_ext.SeqExt
+  use prelude.Borrow
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition_Interface as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut_Interface as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces0 with type self = i, type Item0.item = Item0.item
+  predicate invariant' [#"../06_map_precond.rs" 64 4 64 30] (self : C06MapPrecond_Map_Type.t_map i Item0.item f) =
+    [#"../06_map_precond.rs" 66 8 86 9] (forall initial : C06MapPrecond_Map_Type.t_map i Item0.item f . C06MapPrecond_Map_Type.map_init_iter self = C06MapPrecond_Map_Type.map_init_iter initial -> Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) >= Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced self)) -> Seq.(==) (SeqExt.subsequence (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) 0 (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced self)))) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced self)) -> Produces0.produces (C06MapPrecond_Map_Type.map_iter self) (SeqExt.subsequence (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced self))) (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)))) (C06MapPrecond_Map_Type.map_iter initial) -> Produces0.produces (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_init_iter initial)) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) (C06MapPrecond_Map_Type.map_iter initial) -> (forall b : b . forall e : Item0.item . forall i : i . Produces0.produces (C06MapPrecond_Map_Type.map_iter initial) (Seq.singleton e) i -> (forall f : borrowed f .  * f = C06MapPrecond_Map_Type.map_func initial -> PostconditionMut0.postcondition_mut f (e, C06MapPrecond_Map_Type.map_produced initial) b -> (forall e2 : Item0.item . forall i2 : i . Produces0.produces i (Seq.singleton e2) i2 -> Precondition0.precondition ( ^ f) (e2, CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (Seq.snoc (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) e)))))) /\ Produces0.produces (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_init_iter self)) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced self)) (C06MapPrecond_Map_Type.map_iter self) /\ (forall i2 : i . forall e : Item0.item . Produces0.produces (C06MapPrecond_Map_Type.map_iter self) (Seq.singleton e) i2 -> Precondition0.precondition (C06MapPrecond_Map_Type.map_func self) (e, C06MapPrecond_Map_Type.map_produced self))
+  val invariant' (self : C06MapPrecond_Map_Type.t_map i Item0.item f) : bool
+    ensures { result = invariant' self }
+    
+end
+module C06MapPrecond_Impl0_Produces_Interface
+  type i
+  type b
+  type f
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  predicate produces (self : C06MapPrecond_Map_Type.t_map i Item0.item f) (visited : Seq.seq b) (succ : C06MapPrecond_Map_Type.t_map i Item0.item f)
+    
+end
+module C06MapPrecond_Impl0_Produces
+  type i
+  type b
+  type f
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  use mach.int.Int
+  use mach.int.Int32
+  use seq_ext.SeqExt
+  use prelude.Borrow
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut_Interface as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces0 with type self = i, type Item0.item = Item0.item
+  predicate produces [#"../06_map_precond.rs" 45 4 45 67] (self : C06MapPrecond_Map_Type.t_map i Item0.item f) (visited : Seq.seq b) (succ : C06MapPrecond_Map_Type.t_map i Item0.item f)
+    
+   =
+    [#"../06_map_precond.rs" 46 8 60 9] Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced self)) + Seq.length visited = Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced succ)) /\ Seq.(==) (SeqExt.subsequence (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced succ)) 0 (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced self)))) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced self)) /\ C06MapPrecond_Map_Type.map_init_iter self = C06MapPrecond_Map_Type.map_init_iter succ /\ Produces0.produces (C06MapPrecond_Map_Type.map_iter self) (SeqExt.subsequence (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced succ)) (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced self))) (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced succ)))) (C06MapPrecond_Map_Type.map_iter succ) /\ (exists fs : Seq.seq (borrowed f) . Seq.length fs = Seq.length visited /\ (forall i : int . 1 <= i /\ i < Seq.length fs ->  ^ Seq.get fs (i - 1) =  * Seq.get fs i) /\ (Seq.length visited > 0 ->  * Seq.get fs 0 = C06MapPrecond_Map_Type.map_func self /\  ^ Seq.get fs (Seq.length visited - 1) = C06MapPrecond_Map_Type.map_func succ) /\ (Seq.length visited = 0 -> C06MapPrecond_Map_Type.map_func self = C06MapPrecond_Map_Type.map_func succ) /\ (forall i : int . 0 <= i /\ i < Seq.length visited -> PostconditionMut0.postcondition_mut (Seq.get fs i) (Seq.get (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced succ)) (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced self)) + i), CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (SeqExt.subsequence (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced succ)) 0 (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced self)) + i))) (Seq.get visited i)))
+  val produces (self : C06MapPrecond_Map_Type.t_map i Item0.item f) (visited : Seq.seq b) (succ : C06MapPrecond_Map_Type.t_map i Item0.item f) : bool
+    ensures { result = produces self visited succ }
+    
+end
+module CreusotContracts_Std1_Fun_Impl1_FnMutOnce_Interface
+  type args
+  type f
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = f, type args = args
+  function fn_mut_once (self : f) (_2' : args) (_3' : Output0.output) : ()
+end
+module CreusotContracts_Std1_Fun_Impl1_FnMutOnce
+  type args
+  type f
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = f, type args = args
+  function fn_mut_once (self : f) (_2' : args) (_3' : Output0.output) : () =
+    ()
+  val fn_mut_once (self : f) (_2' : args) (_3' : Output0.output) : ()
+    ensures { result = fn_mut_once self _2' _3' }
+    
+end
+module C06MapPrecond_Impl0_ProducesRefl_Interface
+  type i
+  type b
+  type f
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Produces_Interface as Produces0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Impl0_Invariant_Interface as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  function produces_refl (a : C06MapPrecond_Map_Type.t_map i Item0.item f) : ()
+end
+module C06MapPrecond_Impl0_ProducesRefl
+  type i
+  type b
+  type f
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Produces_Interface as Produces0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Impl0_Invariant_Interface as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  function produces_refl [#"../06_map_precond.rs" 33 4 33 29] (a : C06MapPrecond_Map_Type.t_map i Item0.item f) : () =
+    [#"../06_map_precond.rs" 30 4 30 10] ()
+  val produces_refl (a : C06MapPrecond_Map_Type.t_map i Item0.item f) : ()
+    requires {[#"../06_map_precond.rs" 31 15 31 28] Invariant0.invariant' a}
+    ensures { result = produces_refl a }
+    
+  axiom produces_refl_spec : forall a : C06MapPrecond_Map_Type.t_map i Item0.item f . ([#"../06_map_precond.rs" 31 15 31 28] Invariant0.invariant' a) -> ([#"../06_map_precond.rs" 32 14 32 39] Produces0.produces a (Seq.empty ) a)
+end
+module C06MapPrecond_Impl0_ProducesRefl_Impl
+  type i
+  type b
+  type f
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Invariant as Invariant1 with type self = i
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl1_FnMutOnce as FnMutOnce0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06MapPrecond_Common_Iterator_Produces as Produces1 with type self = i, type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_ProducesTrans as ProducesTrans0 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces1.produces,
+  type Item0.item = Item0.item, axiom .
+  clone C06MapPrecond_Common_Iterator_ProducesRefl as ProducesRefl0 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces1.produces,
+  type Item0.item = Item0.item, axiom .
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Produces as Produces0 with type i = i, type b = b, type f = f, type Item0.item = Item0.item,
+  predicate Produces0.produces = Produces1.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut
+  clone C06MapPrecond_Impl0_Invariant as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item, predicate Produces0.produces = Produces1.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut,
+  predicate Precondition0.precondition = Precondition0.precondition
+  let rec ghost function produces_refl (a : C06MapPrecond_Map_Type.t_map i Item0.item f) : ()
+    requires {[#"../06_map_precond.rs" 31 15 31 28] Invariant0.invariant' a}
+    ensures { [#"../06_map_precond.rs" 32 14 32 39] Produces0.produces a (Seq.empty ) a }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    [#"../06_map_precond.rs" 30 4 30 10] ()
+end
+module C06MapPrecond_Impl0_ProducesTrans_Interface
+  type i
+  type b
+  type f
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Produces_Interface as Produces0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Impl0_Invariant_Interface as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  function produces_trans (a : C06MapPrecond_Map_Type.t_map i Item0.item f) (ab : Seq.seq b) (b : C06MapPrecond_Map_Type.t_map i Item0.item f) (bc : Seq.seq b) (c : C06MapPrecond_Map_Type.t_map i Item0.item f) : ()
+    
+end
+module C06MapPrecond_Impl0_ProducesTrans
+  type i
+  type b
+  type f
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Produces_Interface as Produces0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Impl0_Invariant_Interface as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  function produces_trans [#"../06_map_precond.rs" 42 4 42 90] (a : C06MapPrecond_Map_Type.t_map i Item0.item f) (ab : Seq.seq b) (b : C06MapPrecond_Map_Type.t_map i Item0.item f) (bc : Seq.seq b) (c : C06MapPrecond_Map_Type.t_map i Item0.item f) : ()
+    
+   =
+    [#"../06_map_precond.rs" 35 4 35 10] ()
+  val produces_trans (a : C06MapPrecond_Map_Type.t_map i Item0.item f) (ab : Seq.seq b) (b : C06MapPrecond_Map_Type.t_map i Item0.item f) (bc : Seq.seq b) (c : C06MapPrecond_Map_Type.t_map i Item0.item f) : ()
+    requires {[#"../06_map_precond.rs" 36 15 36 28] Invariant0.invariant' a}
+    requires {[#"../06_map_precond.rs" 37 15 37 28] Invariant0.invariant' b}
+    requires {[#"../06_map_precond.rs" 38 15 38 28] Invariant0.invariant' c}
+    requires {[#"../06_map_precond.rs" 39 15 39 32] Produces0.produces a ab b}
+    requires {[#"../06_map_precond.rs" 40 15 40 32] Produces0.produces b bc c}
+    ensures { result = produces_trans a ab b bc c }
+    
+  axiom produces_trans_spec : forall a : C06MapPrecond_Map_Type.t_map i Item0.item f, ab : Seq.seq b, b : C06MapPrecond_Map_Type.t_map i Item0.item f, bc : Seq.seq b, c : C06MapPrecond_Map_Type.t_map i Item0.item f . ([#"../06_map_precond.rs" 36 15 36 28] Invariant0.invariant' a) -> ([#"../06_map_precond.rs" 37 15 37 28] Invariant0.invariant' b) -> ([#"../06_map_precond.rs" 38 15 38 28] Invariant0.invariant' c) -> ([#"../06_map_precond.rs" 39 15 39 32] Produces0.produces a ab b) -> ([#"../06_map_precond.rs" 40 15 40 32] Produces0.produces b bc c) -> ([#"../06_map_precond.rs" 41 14 41 42] Produces0.produces a (Seq.(++) ab bc) c)
+end
+module C06MapPrecond_Impl0_ProducesTrans_Impl
+  type i
+  type b
+  type f
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Invariant as Invariant1 with type self = i
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl1_FnMutOnce as FnMutOnce0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06MapPrecond_Common_Iterator_Produces as Produces1 with type self = i, type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_ProducesTrans as ProducesTrans0 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces1.produces,
+  type Item0.item = Item0.item, axiom .
+  clone C06MapPrecond_Common_Iterator_ProducesRefl as ProducesRefl0 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces1.produces,
+  type Item0.item = Item0.item, axiom .
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Produces as Produces0 with type i = i, type b = b, type f = f, type Item0.item = Item0.item,
+  predicate Produces0.produces = Produces1.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut
+  clone C06MapPrecond_Impl0_Invariant as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item, predicate Produces0.produces = Produces1.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut,
+  predicate Precondition0.precondition = Precondition0.precondition
+  let rec ghost function produces_trans (a : C06MapPrecond_Map_Type.t_map i Item0.item f) (ab : Seq.seq b) (b : C06MapPrecond_Map_Type.t_map i Item0.item f) (bc : Seq.seq b) (c : C06MapPrecond_Map_Type.t_map i Item0.item f) : ()
+    requires {[#"../06_map_precond.rs" 36 15 36 28] Invariant0.invariant' a}
+    requires {[#"../06_map_precond.rs" 37 15 37 28] Invariant0.invariant' b}
+    requires {[#"../06_map_precond.rs" 38 15 38 28] Invariant0.invariant' c}
+    requires {[#"../06_map_precond.rs" 39 15 39 32] Produces0.produces a ab b}
+    requires {[#"../06_map_precond.rs" 40 15 40 32] Produces0.produces b bc c}
+    ensures { [#"../06_map_precond.rs" 41 14 41 42] Produces0.produces a (Seq.(++) ab bc) c }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    [#"../06_map_precond.rs" 35 4 35 10] ()
+end
+module Core_Option_Option_Type
+  type t_option 't =
+    | C_None
+    | C_Some 't
+    
+  let function some_0 (self : t_option 't) : 't = [@vc:do_not_keep_trace] [@vc:sp]
+    match (self) with
+      | C_None -> any 't
+      | C_Some a -> a
+      end
+end
+module C06MapPrecond_Common_Iterator_Next_Interface
+  type self
+  use prelude.Borrow
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces0 with type self = self,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_Completed_Interface as Completed0 with type self = self
+  use Core_Option_Option_Type as Core_Option_Option_Type
+  clone C06MapPrecond_Common_Iterator_Invariant_Interface as Invariant0 with type self = self
+  val next [@cfg:stackify] (self : borrowed self) : Core_Option_Option_Type.t_option Item0.item
+    requires {[#"../common.rs" 32 4 32 40] Invariant0.invariant' ( * self)}
+    ensures { [#"../common.rs" 32 4 32 40] Invariant0.invariant' ( ^ self) }
+    ensures { [#"../common.rs" 33 14 36 5] match (result) with
+      | Core_Option_Option_Type.C_None -> Completed0.completed self /\ Produces0.produces ( * self) (Seq.empty ) ( ^ self)
+      | Core_Option_Option_Type.C_Some v -> Produces0.produces ( * self) (Seq.singleton v) ( ^ self)
+      end }
+    
+end
+module C06MapPrecond_Common_Iterator_Next
+  type self
+  use prelude.Borrow
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = self
+  clone C06MapPrecond_Common_Iterator_Produces as Produces0 with type self = self, type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_Completed as Completed0 with type self = self
+  use Core_Option_Option_Type as Core_Option_Option_Type
+  clone C06MapPrecond_Common_Iterator_Invariant as Invariant0 with type self = self
+  val next [@cfg:stackify] (self : borrowed self) : Core_Option_Option_Type.t_option Item0.item
+    requires {[#"../common.rs" 32 4 32 40] Invariant0.invariant' ( * self)}
+    ensures { [#"../common.rs" 32 4 32 40] Invariant0.invariant' ( ^ self) }
+    ensures { [#"../common.rs" 33 14 36 5] match (result) with
+      | Core_Option_Option_Type.C_None -> Completed0.completed self /\ Produces0.produces ( * self) (Seq.empty ) ( ^ self)
+      | Core_Option_Option_Type.C_Some v -> Produces0.produces ( * self) (Seq.singleton v) ( ^ self)
+      end }
+    
+end
+module CreusotContracts_Logic_Resolve_Impl1_Resolve_Interface
+  type t
+  use prelude.Borrow
+  predicate resolve (self : borrowed t)
+end
+module CreusotContracts_Logic_Resolve_Impl1_Resolve
+  type t
+  use prelude.Borrow
+  predicate resolve (self : borrowed t) =
+     ^ self =  * self
+  val resolve (self : borrowed t) : bool
+    ensures { result = resolve self }
+    
+end
+module CreusotContracts_Logic_Resolve_Resolve_Resolve_Interface
+  type self
+  predicate resolve (self : self)
+end
+module CreusotContracts_Logic_Resolve_Resolve_Resolve
+  type self
+  predicate resolve (self : self)
+  val resolve (self : self) : bool
+    ensures { result = resolve self }
+    
+end
+module CreusotContracts_Std1_Fun_FnMutSpec_PostconditionMut_Interface
+  type self
+  type args
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = self, type args = args
+  predicate postcondition_mut (self : borrowed self) (_2' : args) (_3' : Output0.output)
+end
+module CreusotContracts_Std1_Fun_FnMutSpec_PostconditionMut
+  type self
+  type args
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = self, type args = args
+  predicate postcondition_mut (self : borrowed self) (_2' : args) (_3' : Output0.output)
+  val postcondition_mut (self : borrowed self) (_2' : args) (_3' : Output0.output) : bool
+    ensures { result = postcondition_mut self _2' _3' }
+    
+end
+module Core_Ops_Function_FnMut_CallMut_Interface
+  type self
+  type args
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = self, type args = args
+  clone CreusotContracts_Std1_Fun_FnMutSpec_PostconditionMut_Interface as PostconditionMut0 with type self = self,
+  type args = args, type Output0.output = Output0.output
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition_Interface as Precondition0 with type args = args, type f = self
+  val call_mut [@cfg:stackify] (self : borrowed self) (args : args) : Output0.output
+    requires {Precondition0.precondition ( * self) args}
+    ensures { PostconditionMut0.postcondition_mut self args result }
+    
+end
+module Core_Ops_Function_FnMut_CallMut
+  type self
+  type args
+  use prelude.Borrow
+  clone Core_Ops_Function_FnOnce_Output_Type as Output0 with type self = self, type args = args
+  clone CreusotContracts_Std1_Fun_FnMutSpec_PostconditionMut_Interface as PostconditionMut0 with type self = self,
+  type args = args, type Output0.output = Output0.output
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition_Interface as Precondition0 with type args = args, type f = self
+  val call_mut [@cfg:stackify] (self : borrowed self) (args : args) : Output0.output
+    requires {Precondition0.precondition ( * self) args}
+    ensures { PostconditionMut0.postcondition_mut self args result }
+    
+end
+module C06MapPrecond_Impl1_InvTrans_Interface
+  type i
+  type b
+  type f
+  use seq.Seq
+  use mach.int.Int
+  use mach.int.Int32
+  use seq_ext.SeqExt
+  use prelude.Borrow
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition_Interface as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut_Interface as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces1 with type self = i, type Item0.item = Item0.item
+  clone C06MapPrecond_Impl0_Produces_Interface as Produces0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Impl0_Invariant_Interface as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  function inv_trans (a : C06MapPrecond_Map_Type.t_map i Item0.item f) (seq : Seq.seq b) (b : C06MapPrecond_Map_Type.t_map i Item0.item f) : ()
+    
+end
+module C06MapPrecond_Impl1_InvTrans
+  type i
+  type b
+  type f
+  use seq.Seq
+  use mach.int.Int
+  use mach.int.Int32
+  use seq_ext.SeqExt
+  use prelude.Borrow
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition_Interface as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut_Interface as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces1 with type self = i, type Item0.item = Item0.item
+  clone C06MapPrecond_Impl0_Produces_Interface as Produces0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Impl0_Invariant_Interface as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  function inv_trans [#"../06_map_precond.rs" 130 4 130 47] (a : C06MapPrecond_Map_Type.t_map i Item0.item f) (seq : Seq.seq b) (b : C06MapPrecond_Map_Type.t_map i Item0.item f) : ()
+    
+   =
+    [#"../06_map_precond.rs" 109 4 109 12] ()
+  val inv_trans (a : C06MapPrecond_Map_Type.t_map i Item0.item f) (seq : Seq.seq b) (b : C06MapPrecond_Map_Type.t_map i Item0.item f) : ()
+    requires {[#"../06_map_precond.rs" 110 15 110 28] Invariant0.invariant' a}
+    requires {[#"../06_map_precond.rs" 111 15 111 33] Produces0.produces a seq b}
+    requires {[#"../06_map_precond.rs" 112 4 112 58] Produces1.produces (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_init_iter b)) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced b)) (C06MapPrecond_Map_Type.map_iter b)}
+    ensures { result = inv_trans a seq b }
+    
+  axiom inv_trans_spec : forall a : C06MapPrecond_Map_Type.t_map i Item0.item f, seq : Seq.seq b, b : C06MapPrecond_Map_Type.t_map i Item0.item f . ([#"../06_map_precond.rs" 110 15 110 28] Invariant0.invariant' a) -> ([#"../06_map_precond.rs" 111 15 111 33] Produces0.produces a seq b) -> ([#"../06_map_precond.rs" 112 4 112 58] Produces1.produces (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_init_iter b)) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced b)) (C06MapPrecond_Map_Type.map_iter b)) -> ([#"../06_map_precond.rs" 113 4 129 6] forall initial : C06MapPrecond_Map_Type.t_map i Item0.item f . C06MapPrecond_Map_Type.map_init_iter b = C06MapPrecond_Map_Type.map_init_iter initial -> Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) >= Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced b)) -> Seq.(==) (SeqExt.subsequence (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) 0 (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced b)))) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced b)) -> Produces1.produces (C06MapPrecond_Map_Type.map_iter b) (SeqExt.subsequence (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced b))) (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)))) (C06MapPrecond_Map_Type.map_iter initial) -> Produces1.produces (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_init_iter initial)) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) (C06MapPrecond_Map_Type.map_iter initial) -> (forall b : b . forall e : Item0.item . forall i : i . Produces1.produces (C06MapPrecond_Map_Type.map_iter initial) (Seq.singleton e) i -> (forall f : borrowed f .  * f = C06MapPrecond_Map_Type.map_func initial -> PostconditionMut0.postcondition_mut f (e, C06MapPrecond_Map_Type.map_produced initial) b -> (forall e2 : Item0.item . forall i2 : i . Produces1.produces i (Seq.singleton e2) i2 -> Precondition0.precondition ( ^ f) (e2, CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (Seq.snoc (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) e))))))
+end
+module C06MapPrecond_Impl1_InvTrans_Impl
+  type i
+  type b
+  type f
+  use seq.Seq
+  use mach.int.Int
+  use mach.int.Int32
+  use seq_ext.SeqExt
+  use prelude.Borrow
+  clone C06MapPrecond_Common_Iterator_Invariant as Invariant1 with type self = i
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl1_FnMutOnce as FnMutOnce0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06MapPrecond_Common_Iterator_Produces as Produces1 with type self = i, type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_ProducesTrans as ProducesTrans1 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces1.produces,
+  type Item0.item = Item0.item, axiom .
+  clone C06MapPrecond_Common_Iterator_ProducesRefl as ProducesRefl1 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces1.produces,
+  type Item0.item = Item0.item, axiom .
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06MapPrecond_Impl0_Produces as Produces0 with type i = i, type b = b, type f = f, type Item0.item = Item0.item,
+  predicate Produces0.produces = Produces1.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f
+  clone C06MapPrecond_Impl0_Invariant as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item, predicate Produces0.produces = Produces1.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut,
+  predicate Precondition0.precondition = Precondition0.precondition
+  clone C06MapPrecond_Impl0_ProducesTrans as ProducesTrans0 with type i = i, type b = b, type f = f,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = Item0.item, axiom .
+  clone C06MapPrecond_Impl0_ProducesRefl as ProducesRefl0 with type i = i, type b = b, type f = f,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = Item0.item, axiom .
+  let rec ghost function inv_trans (a : C06MapPrecond_Map_Type.t_map i Item0.item f) (seq : Seq.seq b) (b : C06MapPrecond_Map_Type.t_map i Item0.item f) : ()
+    requires {[#"../06_map_precond.rs" 110 15 110 28] Invariant0.invariant' a}
+    requires {[#"../06_map_precond.rs" 111 15 111 33] Produces0.produces a seq b}
+    requires {[#"../06_map_precond.rs" 112 4 112 58] Produces1.produces (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_init_iter b)) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced b)) (C06MapPrecond_Map_Type.map_iter b)}
+    ensures { [#"../06_map_precond.rs" 113 4 129 6] forall initial : C06MapPrecond_Map_Type.t_map i Item0.item f . C06MapPrecond_Map_Type.map_init_iter b = C06MapPrecond_Map_Type.map_init_iter initial -> Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) >= Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced b)) -> Seq.(==) (SeqExt.subsequence (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) 0 (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced b)))) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced b)) -> Produces1.produces (C06MapPrecond_Map_Type.map_iter b) (SeqExt.subsequence (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced b))) (Seq.length (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)))) (C06MapPrecond_Map_Type.map_iter initial) -> Produces1.produces (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_init_iter initial)) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) (C06MapPrecond_Map_Type.map_iter initial) -> (forall b : b . forall e : Item0.item . forall i : i . Produces1.produces (C06MapPrecond_Map_Type.map_iter initial) (Seq.singleton e) i -> (forall f : borrowed f .  * f = C06MapPrecond_Map_Type.map_func initial -> PostconditionMut0.postcondition_mut f (e, C06MapPrecond_Map_Type.map_produced initial) b -> (forall e2 : Item0.item . forall i2 : i . Produces1.produces i (Seq.singleton e2) i2 -> Precondition0.precondition ( ^ f) (e2, CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (Seq.snoc (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) e))))) }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    [#"../06_map_precond.rs" 109 4 109 12] ()
+end
+module C06MapPrecond_Impl0_Next_Interface
+  type i
+  type b
+  type f
+  use prelude.Borrow
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Produces_Interface as Produces0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  clone C06MapPrecond_Impl0_Completed_Interface as Completed0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  use Core_Option_Option_Type as Core_Option_Option_Type
+  clone C06MapPrecond_Impl0_Invariant_Interface as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  val next [@cfg:stackify] (self : borrowed (C06MapPrecond_Map_Type.t_map i Item0.item f)) : Core_Option_Option_Type.t_option b
+    requires {[#"../06_map_precond.rs" 89 4 89 40] Invariant0.invariant' ( * self)}
+    ensures { [#"../06_map_precond.rs" 89 4 89 40] Invariant0.invariant' ( ^ self) }
+    ensures { [#"../06_map_precond.rs" 90 14 93 5] match (result) with
+      | Core_Option_Option_Type.C_None -> Completed0.completed self /\ Produces0.produces ( * self) (Seq.empty ) ( ^ self)
+      | Core_Option_Option_Type.C_Some v -> Produces0.produces ( * self) (Seq.singleton v) ( ^ self)
+      end }
+    
+end
+module C06MapPrecond_Impl0_Next
+  type i
+  type b
+  type f
+  use prelude.Borrow
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Invariant as Invariant1 with type self = i
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl1_FnMutOnce as FnMutOnce0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06MapPrecond_Common_Iterator_Produces as Produces1 with type self = i, type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_ProducesTrans as ProducesTrans0 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces1.produces,
+  type Item0.item = Item0.item, axiom .
+  clone C06MapPrecond_Common_Iterator_ProducesRefl as ProducesRefl0 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces1.produces,
+  type Item0.item = Item0.item, axiom .
+  clone C06MapPrecond_Common_Iterator_Completed as Completed1 with type self = i
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Produces as Produces0 with type i = i, type b = b, type f = f, type Item0.item = Item0.item,
+  predicate Produces0.produces = Produces1.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut
+  clone C06MapPrecond_Impl0_Completed as Completed0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item, predicate Completed0.completed = Completed1.completed
+  use Core_Option_Option_Type as Core_Option_Option_Type
+  clone C06MapPrecond_Impl0_Invariant as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item, predicate Produces0.produces = Produces1.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut,
+  predicate Precondition0.precondition = Precondition0.precondition
+  use seq.FreeMonoid
+  use mach.int.Int
+  use prelude.IntSize
+  clone Core_Ops_Function_FnMut_CallMut_Interface as CallMut0 with type self = f,
+  type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  predicate Precondition0.precondition = Precondition0.precondition,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut, type Output0.output = b
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve3 with type self = Item0.item
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = Core_Option_Option_Type.t_option Item0.item
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = C06MapPrecond_Map_Type.t_map i Item0.item f
+  clone C06MapPrecond_Common_Iterator_Next_Interface as Next0 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', type Item0.item = Item0.item,
+  predicate Completed0.completed = Completed1.completed, predicate Produces0.produces = Produces1.produces
+  clone C06MapPrecond_Impl1_InvTrans as InvTrans0 with type i = i, type b = b, type f = f,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces0.produces,
+  predicate Produces1.produces = Produces1.produces, type Item0.item = Item0.item,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut,
+  predicate Precondition0.precondition = Precondition0.precondition, axiom .
+  let rec cfg next [@cfg:stackify] [#"../06_map_precond.rs" 94 4 94 44] (self : borrowed (C06MapPrecond_Map_Type.t_map i Item0.item f)) : Core_Option_Option_Type.t_option b
+    requires {[#"../06_map_precond.rs" 89 4 89 40] Invariant0.invariant' ( * self)}
+    ensures { [#"../06_map_precond.rs" 89 4 89 40] Invariant0.invariant' ( ^ self) }
+    ensures { [#"../06_map_precond.rs" 90 14 93 5] match (result) with
+      | Core_Option_Option_Type.C_None -> Completed0.completed self /\ Produces0.produces ( * self) (Seq.empty ) ( ^ self)
+      | Core_Option_Option_Type.C_Some v -> Produces0.produces ( * self) (Seq.singleton v) ( ^ self)
+      end }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : Core_Option_Option_Type.t_option b;
+  var self_1 : borrowed (C06MapPrecond_Map_Type.t_map i Item0.item f);
+  var _5 : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost ();
+  var _8 : ();
+  var _9 : ();
+  var produced_11 : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item);
+  var _14 : ();
+  var _15 : Core_Option_Option_Type.t_option Item0.item;
+  var _16 : borrowed i;
+  var _17 : isize;
+  var v_18 : Item0.item;
+  var _19 : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item);
+  var _21 : ();
+  var _22 : b;
+  var _23 : borrowed f;
+  var _24 : (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item));
+  var _25 : Item0.item;
+  var _26 : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item);
+  {
+    self_1 <- self;
+    goto BB0
+  }
+  BB0 {
+    _8 <- ();
+    _5 <- ([#"../06_map_precond.rs" 95 16 95 58] CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (let _ = FreeMonoid.left_neutral  in ()));
+    goto BB1
+  }
+  BB1 {
+    assert { [#"../06_map_precond.rs" 96 22 96 37] let _ = () in true };
+    _9 <- ();
+    _14 <- ();
+    produced_11 <- ([#"../06_map_precond.rs" 97 23 97 48] CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced ( * self_1))));
+    goto BB2
+  }
+  BB2 {
+    _16 <- borrow_mut (C06MapPrecond_Map_Type.map_iter ( * self_1));
+    self_1 <- { self_1 with current = (let C06MapPrecond_Map_Type.C_Map a b c d =  * self_1 in C06MapPrecond_Map_Type.C_Map ( ^ _16) b c d) };
+    _15 <- ([#"../06_map_precond.rs" 98 14 98 30] Next0.next _16);
+    goto BB3
+  }
+  BB3 {
+    switch (_15)
+      | Core_Option_Option_Type.C_None -> goto BB4
+      | Core_Option_Option_Type.C_Some _ -> goto BB6
+      end
+  }
+  BB4 {
+    assume { Resolve0.resolve self_1 };
+    assume { Resolve1.resolve produced_11 };
+    _0 <- Core_Option_Option_Type.C_None;
+    goto BB12
+  }
+  BB5 {
+    assume { Resolve0.resolve self_1 };
+    assume { Resolve1.resolve produced_11 };
+    assume { Resolve2.resolve _15 };
+    absurd
+  }
+  BB6 {
+    assume { Resolve3.resolve v_18 };
+    v_18 <- Core_Option_Option_Type.some_0 _15;
+    _15 <- (let Core_Option_Option_Type.C_Some a = _15 in Core_Option_Option_Type.C_Some (any Item0.item));
+    _21 <- ();
+    _19 <- ([#"../06_map_precond.rs" 100 32 100 59] CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (Seq.snoc (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 produced_11) v_18));
+    goto BB7
+  }
+  BB7 {
+    assume { Resolve1.resolve (C06MapPrecond_Map_Type.map_produced ( * self_1)) };
+    self_1 <- { self_1 with current = (let C06MapPrecond_Map_Type.C_Map a b c d =  * self_1 in C06MapPrecond_Map_Type.C_Map a b _19 d) };
+    _19 <- any CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item);
+    _23 <- borrow_mut (C06MapPrecond_Map_Type.map_func ( * self_1));
+    self_1 <- { self_1 with current = (let C06MapPrecond_Map_Type.C_Map a b c d =  * self_1 in C06MapPrecond_Map_Type.C_Map a ( ^ _23) c d) };
+    assume { Resolve0.resolve self_1 };
+    assume { Resolve3.resolve _25 };
+    _25 <- v_18;
+    v_18 <- any Item0.item;
+    assume { Resolve1.resolve _26 };
+    _26 <- produced_11;
+    produced_11 <- any CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item);
+    _24 <- (_25, _26);
+    _22 <- ([#"../06_map_precond.rs" 101 21 101 45] CallMut0.call_mut _23 _24);
+    goto BB8
+  }
+  BB8 {
+    goto BB9
+  }
+  BB9 {
+    _0 <- Core_Option_Option_Type.C_Some _22;
+    goto BB10
+  }
+  BB10 {
+    goto BB11
+  }
+  BB11 {
+    goto BB12
+  }
+  BB12 {
+    goto BB13
+  }
+  BB13 {
+    assume { Resolve2.resolve _15 };
+    return _0
+  }
+  
+end
+module C06MapPrecond_Map_Interface
+  type i
+  type b
+  type f
+  use seq.Seq
+  use prelude.Borrow
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use seq.Seq
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Invariant_Interface as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut_Interface as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition_Interface as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces0 with type self = i, type Item0.item = Item0.item
+  val map [@cfg:stackify] (iter : i) (func : f) : C06MapPrecond_Map_Type.t_map i Item0.item f
+    requires {[#"../06_map_precond.rs" 133 0 133 123] forall i2 : i . forall e : Item0.item . Produces0.produces iter (Seq.singleton e) i2 -> Precondition0.precondition func (e, CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (Seq.empty ))}
+    requires {[#"../06_map_precond.rs" 134 0 145 2] forall initial : C06MapPrecond_Map_Type.t_map i Item0.item f . CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_init_iter initial) = iter -> Produces0.produces (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_init_iter initial)) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) (C06MapPrecond_Map_Type.map_iter initial) -> (forall b : b . forall e : Item0.item . forall i : i . Produces0.produces (C06MapPrecond_Map_Type.map_iter initial) (Seq.singleton e) i -> (forall f : borrowed f .  * f = C06MapPrecond_Map_Type.map_func initial -> PostconditionMut0.postcondition_mut f (e, C06MapPrecond_Map_Type.map_produced initial) b -> (forall e2 : Item0.item . forall i2 : i . Produces0.produces i (Seq.singleton e2) i2 -> Precondition0.precondition ( ^ f) (e2, CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (Seq.snoc (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) e)))))}
+    ensures { [#"../06_map_precond.rs" 146 10 146 28] Invariant0.invariant' result }
+    ensures { [#"../06_map_precond.rs" 147 10 147 91] result = C06MapPrecond_Map_Type.C_Map iter func (CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (Seq.empty )) (CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost iter) }
+    
+end
+module C06MapPrecond_Map
+  type i
+  type b
+  type f
+  use seq.Seq
+  use prelude.Borrow
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut as PostconditionMut0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06MapPrecond_Common_Iterator_Produces as Produces0 with type self = i, type Item0.item = Item0.item
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Produces as Produces1 with type i = i, type b = b, type f = f, type Item0.item = Item0.item,
+  predicate Produces0.produces = Produces0.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut
+  clone C06MapPrecond_Common_Iterator_Invariant as Invariant1 with type self = i
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition as Precondition0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f
+  clone C06MapPrecond_Impl0_Invariant as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item0.item, predicate Produces0.produces = Produces0.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut,
+  predicate Precondition0.precondition = Precondition0.precondition
+  clone C06MapPrecond_Impl0_ProducesTrans as ProducesTrans1 with type i = i, type b = b, type f = f,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces1.produces,
+  type Item0.item = Item0.item, axiom .
+  clone C06MapPrecond_Impl0_ProducesRefl as ProducesRefl1 with type i = i, type b = b, type f = f,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces1.produces,
+  type Item0.item = Item0.item, axiom .
+  clone CreusotContracts_Std1_Fun_Impl1_FnMutOnce as FnMutOnce0 with type args = (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)),
+  type f = f, type Output0.output = b
+  clone C06MapPrecond_Common_Iterator_ProducesTrans as ProducesTrans0 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = Item0.item, axiom .
+  clone C06MapPrecond_Common_Iterator_ProducesRefl as ProducesRefl0 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = Item0.item, axiom .
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = f
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = i
+  let rec cfg map [@cfg:stackify] [#"../06_map_precond.rs" 148 0 151 23] (iter : i) (func : f) : C06MapPrecond_Map_Type.t_map i Item0.item f
+    requires {[#"../06_map_precond.rs" 133 0 133 123] forall i2 : i . forall e : Item0.item . Produces0.produces iter (Seq.singleton e) i2 -> Precondition0.precondition func (e, CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (Seq.empty ))}
+    requires {[#"../06_map_precond.rs" 134 0 145 2] forall initial : C06MapPrecond_Map_Type.t_map i Item0.item f . CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_init_iter initial) = iter -> Produces0.produces (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_init_iter initial)) (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) (C06MapPrecond_Map_Type.map_iter initial) -> (forall b : b . forall e : Item0.item . forall i : i . Produces0.produces (C06MapPrecond_Map_Type.map_iter initial) (Seq.singleton e) i -> (forall f : borrowed f .  * f = C06MapPrecond_Map_Type.map_func initial -> PostconditionMut0.postcondition_mut f (e, C06MapPrecond_Map_Type.map_produced initial) b -> (forall e2 : Item0.item . forall i2 : i . Produces0.produces i (Seq.singleton e2) i2 -> Precondition0.precondition ( ^ f) (e2, CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (Seq.snoc (CreusotContracts_Logic_Ghost_Ghost_Type.ghost_0 (C06MapPrecond_Map_Type.map_produced initial)) e)))))}
+    ensures { [#"../06_map_precond.rs" 146 10 146 28] Invariant0.invariant' result }
+    ensures { [#"../06_map_precond.rs" 147 10 147 91] result = C06MapPrecond_Map_Type.C_Map iter func (CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (Seq.empty )) (CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost iter) }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : C06MapPrecond_Map_Type.t_map i Item0.item f;
+  var iter_1 : i;
+  var func_2 : f;
+  var _7 : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost i;
+  var _9 : ();
+  var _10 : i;
+  var _11 : f;
+  var _12 : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item);
+  var _15 : ();
+  {
+    iter_1 <- iter;
+    func_2 <- func;
+    goto BB0
+  }
+  BB0 {
+    goto BB1
+  }
+  BB1 {
+    goto BB2
+  }
+  BB2 {
+    goto BB3
+  }
+  BB3 {
+    _9 <- ();
+    _7 <- ([#"../06_map_precond.rs" 152 21 152 34] CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost iter_1);
+    goto BB4
+  }
+  BB4 {
+    assume { Resolve0.resolve _10 };
+    _10 <- iter_1;
+    iter_1 <- any i;
+    assume { Resolve1.resolve _11 };
+    _11 <- func_2;
+    func_2 <- any f;
+    _15 <- ();
+    _12 <- ([#"../06_map_precond.rs" 152 58 152 77] CreusotContracts_Logic_Ghost_Ghost_Type.C_Ghost (Seq.empty ));
+    goto BB5
+  }
+  BB5 {
+    _0 <- C06MapPrecond_Map_Type.C_Map _10 _11 _12 _7;
+    goto BB6
+  }
+  BB6 {
+    goto BB7
+  }
+  BB7 {
+    goto BB8
+  }
+  BB8 {
+    goto BB9
+  }
+  BB9 {
+    goto BB10
+  }
+  BB10 {
+    return _0
+  }
+  
+end
+module C06MapPrecond_Identity_Closure0_Interface
+  type i
+  use prelude.Borrow
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  type c06mapprecond_identity_closure0  =
+    | C06MapPrecond_Identity_Closure0
+    
+  predicate precondition [@cfg:stackify] (_1' : c06mapprecond_identity_closure0) (args : (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)))
+    
+   =
+    let (x, _3') = args in true
+  predicate postcondition_mut [@cfg:stackify] (_1' : borrowed c06mapprecond_identity_closure0) (args : (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item))) (result : Item0.item)
+    
+   =
+    let (x, _3') = args in true
+  predicate postcondition_once [@cfg:stackify] (_1' : c06mapprecond_identity_closure0) (args : (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item))) (result : Item0.item)
+    
+   =
+    let (x, _3') = args in true
+  predicate resolve (_1' : c06mapprecond_identity_closure0) =
+    true
+  val c06MapPrecond_Identity_Closure0 [@cfg:stackify] (_1' : borrowed c06mapprecond_identity_closure0) (x : Item0.item) (_3' : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)) : Item0.item
+    ensures { true }
+    
+end
+module C06MapPrecond_Identity_Closure0
+  type i
+  type c06mapprecond_identity_closure0  =
+    | C06MapPrecond_Identity_Closure0
+    
+  use prelude.Borrow
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  clone C06MapPrecond_Common_Iterator_Produces as Produces0 with type self = i, type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_Invariant as Invariant0 with type self = i
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_ProducesTrans as ProducesTrans0 with type self = i,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = Item0.item, axiom .
+  clone C06MapPrecond_Common_Iterator_ProducesRefl as ProducesRefl0 with type self = i,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = Item0.item, axiom .
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  predicate precondition [@cfg:stackify] (_1' : c06mapprecond_identity_closure0) (args : (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)))
+    
+   =
+    let (x, _3') = args in true
+  predicate postcondition_mut [@cfg:stackify] (_1' : borrowed c06mapprecond_identity_closure0) (args : (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item))) (result : Item0.item)
+    
+   =
+    let (x, _3') = args in true
+  predicate postcondition_once [@cfg:stackify] (_1' : c06mapprecond_identity_closure0) (args : (Item0.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item))) (result : Item0.item)
+    
+   =
+    let (x, _3') = args in true
+  predicate resolve (_1' : c06mapprecond_identity_closure0) =
+    true
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve2 with type self = CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)
+  clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = c06mapprecond_identity_closure0
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = Item0.item
+  let rec cfg c06MapPrecond_Identity_Closure0 [@cfg:stackify] [#"../06_map_precond.rs" 156 14 156 20] (_1' : borrowed c06mapprecond_identity_closure0) (x : Item0.item) (_3' : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item)) : Item0.item
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : Item0.item;
+  var _1 : borrowed c06mapprecond_identity_closure0;
+  var x_2 : Item0.item;
+  var _3 : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item0.item);
+  {
+    _1 <- _1';
+    x_2 <- x;
+    _3 <- _3';
+    goto BB0
+  }
+  BB0 {
+    assume { Resolve0.resolve _0 };
+    _0 <- x_2;
+    x_2 <- any Item0.item;
+    assume { Resolve1.resolve _1 };
+    assume { Resolve2.resolve _3 };
+    goto BB1
+  }
+  BB1 {
+    return _0
+  }
+  
+end
+module C06MapPrecond_Identity_Interface
+  type i
+  val identity [@cfg:stackify] (iter : i) : ()
+end
+module C06MapPrecond_Identity
+  type i
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item0 with type self = i
+  clone C06MapPrecond_Common_Iterator_Produces as Produces0 with type self = i, type Item0.item = Item0.item
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone C06MapPrecond_Identity_Closure0_Interface as Closure00 with type i = i, type Item0.item = Item0.item, axiom .
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Produces as Produces1 with type i = i, type b = Item0.item,
+  type f = Closure00.c06mapprecond_identity_closure0,
+  predicate PostconditionMut0.postcondition_mut = Closure00.postcondition_mut, type Item0.item = Item0.item,
+  predicate Produces0.produces = Produces0.produces
+  clone C06MapPrecond_Common_Iterator_Invariant as Invariant1 with type self = i
+  clone C06MapPrecond_Impl0_Invariant as Invariant0 with type i = i, type b = Item0.item,
+  type f = Closure00.c06mapprecond_identity_closure0,
+  predicate PostconditionMut0.postcondition_mut = Closure00.postcondition_mut,
+  predicate Precondition0.precondition = Closure00.precondition, type Item0.item = Item0.item,
+  predicate Produces0.produces = Produces0.produces
+  clone C06MapPrecond_Impl0_ProducesTrans as ProducesTrans1 with type i = i, type b = Item0.item,
+  type f = Closure00.c06mapprecond_identity_closure0, type Item0.item = Item0.item,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces1.produces, axiom .
+  clone C06MapPrecond_Impl0_ProducesRefl as ProducesRefl1 with type i = i, type b = Item0.item,
+  type f = Closure00.c06mapprecond_identity_closure0, type Item0.item = Item0.item,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces1.produces, axiom .
+  clone C06MapPrecond_Common_Iterator_ProducesTrans as ProducesTrans0 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = Item0.item, axiom .
+  clone C06MapPrecond_Common_Iterator_ProducesRefl as ProducesRefl0 with type self = i,
+  predicate Invariant0.invariant' = Invariant1.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = Item0.item, axiom .
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = C06MapPrecond_Map_Type.t_map i Item0.item Closure00.c06mapprecond_identity_closure0
+  clone C06MapPrecond_Map_Interface as Map0 with type i = i, type b = Item0.item,
+  type f = Closure00.c06mapprecond_identity_closure0, predicate Precondition0.precondition = Closure00.precondition,
+  predicate PostconditionMut0.postcondition_mut = Closure00.postcondition_mut, type Item0.item = Item0.item,
+  predicate Produces0.produces = Produces0.produces, predicate Invariant0.invariant' = Invariant0.invariant'
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = i
+  let rec cfg identity [@cfg:stackify] [#"../06_map_precond.rs" 155 0 155 33] (iter : i) : ()
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : ();
+  var iter_1 : i;
+  var _2 : C06MapPrecond_Map_Type.t_map i Item0.item Closure00.c06mapprecond_identity_closure0;
+  var _3 : i;
+  var _4 : Closure00.c06mapprecond_identity_closure0;
+  {
+    iter_1 <- iter;
+    goto BB0
+  }
+  BB0 {
+    assume { Resolve0.resolve _3 };
+    _3 <- iter_1;
+    iter_1 <- any i;
+    _4 <- Closure00.C06MapPrecond_Identity_Closure0;
+    _2 <- ([#"../06_map_precond.rs" 156 4 156 23] Map0.map _3 _4);
+    goto BB1
+  }
+  BB1 {
+    goto BB2
+  }
+  BB2 {
+    assume { Resolve1.resolve _2 };
+    _0 <- ();
+    goto BB3
+  }
+  BB3 {
+    return _0
+  }
+  
+end
+module CreusotContracts_Logic_Resolve_Impl2_Resolve_Interface
+  type t
+  predicate resolve (self : t)
+end
+module CreusotContracts_Logic_Resolve_Impl2_Resolve
+  type t
+  predicate resolve (self : t) =
+    true
+  val resolve (self : t) : bool
+    ensures { result = resolve self }
+    
+end
+module C06MapPrecond_Increment_Closure2_Interface
+  type i
+  use mach.int.UInt32
+  use mach.int.Int
+  use mach.int.Int32
+  use prelude.Borrow
+  use seq.Seq
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  type c06mapprecond_increment_closure2  =
+    | C06MapPrecond_Increment_Closure2
+    
+  predicate precondition [@cfg:stackify] (_1' : c06mapprecond_increment_closure2) (args : (uint32, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq uint32)))
+    
+   =
+    let (x, _3') = args in [#"../06_map_precond.rs" 164 19 164 27] UInt32.to_int x <= 15
+  predicate postcondition [@cfg:stackify] (_1' : c06mapprecond_increment_closure2) (args : (uint32, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq uint32))) (result : uint32)
+    
+   =
+    let (x, _3') = args in true
+  predicate postcondition_mut [@cfg:stackify] (_1' : borrowed c06mapprecond_increment_closure2) (args : (uint32, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq uint32))) (result : uint32)
+    
+   =
+    let (x, _3') = args in true
+  predicate postcondition_once [@cfg:stackify] (_1' : c06mapprecond_increment_closure2) (args : (uint32, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq uint32))) (result : uint32)
+    
+   =
+    let (x, _3') = args in true
+  predicate resolve (_1' : c06mapprecond_increment_closure2) =
+    true
+  val c06MapPrecond_Increment_Closure2 [@cfg:stackify] (_1' : c06mapprecond_increment_closure2) (x : uint32) (_3' : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq uint32)) : uint32
+    requires {[#"../06_map_precond.rs" 164 19 164 27] UInt32.to_int x <= 15}
+    
+end
+module C06MapPrecond_Increment_Closure2
+  type i
+  type c06mapprecond_increment_closure2  =
+    | C06MapPrecond_Increment_Closure2
+    
+  use mach.int.UInt32
+  use mach.int.Int
+  use mach.int.Int32
+  use prelude.Borrow
+  use seq.Seq
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  predicate precondition [@cfg:stackify] (_1' : c06mapprecond_increment_closure2) (args : (uint32, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq uint32)))
+    
+   =
+    let (x, _3') = args in [#"../06_map_precond.rs" 164 19 164 27] UInt32.to_int x <= 15
+  predicate postcondition [@cfg:stackify] (_1' : c06mapprecond_increment_closure2) (args : (uint32, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq uint32))) (result : uint32)
+    
+   =
+    let (x, _3') = args in true
+  predicate postcondition_mut [@cfg:stackify] (_1' : borrowed c06mapprecond_increment_closure2) (args : (uint32, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq uint32))) (result : uint32)
+    
+   =
+    let (x, _3') = args in true
+  predicate postcondition_once [@cfg:stackify] (_1' : c06mapprecond_increment_closure2) (args : (uint32, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq uint32))) (result : uint32)
+    
+   =
+    let (x, _3') = args in true
+  predicate resolve (_1' : c06mapprecond_increment_closure2) =
+    true
+  let rec cfg c06MapPrecond_Increment_Closure2 [@cfg:stackify] [#"../06_map_precond.rs" 165 8 165 19] (_1' : c06mapprecond_increment_closure2) (x : uint32) (_3' : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq uint32)) : uint32
+    requires {[#"../06_map_precond.rs" 164 19 164 27] UInt32.to_int x <= 15}
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : uint32;
+  var _1 : c06mapprecond_increment_closure2;
+  var x_2 : uint32;
+  var _3 : CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq uint32);
+  var _4 : uint32;
+  {
+    _1 <- _1';
+    x_2 <- x;
+    _3 <- _3';
+    goto BB0
+  }
+  BB0 {
+    _4 <- x_2;
+    _0 <- ([#"../06_map_precond.rs" 165 20 165 25] _4 + (1 : uint32));
+    return _0
+  }
+  
+end
+module C06MapPrecond_Increment_Interface
+  type i
+  use seq.Seq
+  use mach.int.Int
+  use mach.int.UInt32
+  use mach.int.Int32
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces0 with type self = i, type Item0.item = uint32
+  clone C06MapPrecond_Common_Iterator_Invariant_Interface as Invariant0 with type self = i
+  val increment [@cfg:stackify] (iter : i) : ()
+    requires {[#"../06_map_precond.rs" 159 11 159 27] Invariant0.invariant' iter}
+    requires {[#"../06_map_precond.rs" 160 0 160 126] forall fin : i . forall prod : Seq.seq uint32 . Produces0.produces iter prod fin -> (forall x : int . 0 <= x /\ x < Seq.length prod -> Seq.get prod x <= (10 : uint32))}
+    
+end
+module C06MapPrecond_Increment
+  type i
+  use seq.Seq
+  use mach.int.Int
+  use mach.int.UInt32
+  use mach.int.Int32
+  clone C06MapPrecond_Common_Iterator_Produces as Produces0 with type self = i, type Item0.item = uint32
+  clone C06MapPrecond_Common_Iterator_Invariant as Invariant0 with type self = i
+  clone C06MapPrecond_Common_Iterator_ProducesTrans as ProducesTrans0 with type self = i,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = uint32, axiom .
+  clone C06MapPrecond_Common_Iterator_ProducesRefl as ProducesRefl0 with type self = i,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = uint32, axiom .
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone C06MapPrecond_Increment_Closure2_Interface as Closure20 with type i = i, axiom .
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Produces as Produces1 with type i = i, type b = uint32,
+  type f = Closure20.c06mapprecond_increment_closure2,
+  predicate PostconditionMut0.postcondition_mut = Closure20.postcondition_mut, type Item0.item = uint32,
+  predicate Produces0.produces = Produces0.produces
+  clone C06MapPrecond_Impl0_Invariant as Invariant1 with type i = i, type b = uint32,
+  type f = Closure20.c06mapprecond_increment_closure2,
+  predicate PostconditionMut0.postcondition_mut = Closure20.postcondition_mut,
+  predicate Precondition0.precondition = Closure20.precondition, type Item0.item = uint32,
+  predicate Produces0.produces = Produces0.produces
+  clone C06MapPrecond_Impl0_ProducesTrans as ProducesTrans1 with type i = i, type b = uint32,
+  type f = Closure20.c06mapprecond_increment_closure2, predicate Invariant0.invariant' = Invariant1.invariant',
+  predicate Produces0.produces = Produces1.produces, type Item0.item = uint32, axiom .
+  clone C06MapPrecond_Impl0_ProducesRefl as ProducesRefl1 with type i = i, type b = uint32,
+  type f = Closure20.c06mapprecond_increment_closure2, predicate Invariant0.invariant' = Invariant1.invariant',
+  predicate Produces0.produces = Produces1.produces, type Item0.item = uint32, axiom .
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve1 with type self = C06MapPrecond_Map_Type.t_map i uint32 Closure20.c06mapprecond_increment_closure2
+  clone C06MapPrecond_Map_Interface as Map0 with type i = i, type b = uint32,
+  type f = Closure20.c06mapprecond_increment_closure2, predicate Precondition0.precondition = Closure20.precondition,
+  predicate PostconditionMut0.postcondition_mut = Closure20.postcondition_mut, type Item0.item = uint32,
+  predicate Produces0.produces = Produces0.produces, predicate Invariant0.invariant' = Invariant1.invariant'
+  clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve0 with type self = i
+  let rec cfg increment [@cfg:stackify] [#"../06_map_precond.rs" 161 0 161 46] (iter : i) : ()
+    requires {[#"../06_map_precond.rs" 159 11 159 27] Invariant0.invariant' iter}
+    requires {[#"../06_map_precond.rs" 160 0 160 126] forall fin : i . forall prod : Seq.seq uint32 . Produces0.produces iter prod fin -> (forall x : int . 0 <= x /\ x < Seq.length prod -> Seq.get prod x <= (10 : uint32))}
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : ();
+  var iter_1 : i;
+  var _4 : C06MapPrecond_Map_Type.t_map i uint32 Closure20.c06mapprecond_increment_closure2;
+  var _5 : i;
+  var _6 : Closure20.c06mapprecond_increment_closure2;
+  var closure_7 : Closure20.c06mapprecond_increment_closure2;
+  {
+    iter_1 <- iter;
+    goto BB0
+  }
+  BB0 {
+    goto BB1
+  }
+  BB1 {
+    goto BB2
+  }
+  BB2 {
+    assume { Resolve0.resolve _5 };
+    _5 <- iter_1;
+    iter_1 <- any i;
+    closure_7 <- Closure20.C06MapPrecond_Increment_Closure2;
+    assume { Closure20.resolve _6 };
+    _6 <- closure_7;
+    assume { Closure20.resolve closure_7 };
+    _4 <- ([#"../06_map_precond.rs" 162 4 166 5] Map0.map _5 _6);
+    goto BB3
+  }
+  BB3 {
+    goto BB4
+  }
+  BB4 {
+    assume { Resolve1.resolve _4 };
+    _0 <- ();
+    goto BB5
+  }
+  BB5 {
+    return _0
+  }
+  
+end
+module C06MapPrecond_Impl0_Item_Type
+  type i
+  type b
+  type f
+  type item  =
+    b
+end
+module C06MapPrecond_Impl0
+  type i
+  type b
+  type f
+  use seq.Seq
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item2 with type self = i
+  use seq.Seq
+  use CreusotContracts_Logic_Ghost_Ghost_Type as CreusotContracts_Logic_Ghost_Ghost_Type
+  clone CreusotContracts_Std1_Fun_Impl0_Precondition as Precondition0 with type args = (Item2.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item2.item)),
+  type f = f
+  clone C06MapPrecond_Common_Iterator_Completed as Completed2 with type self = i
+  clone CreusotContracts_Std1_Fun_Impl1_PostconditionMut as PostconditionMut0 with type args = (Item2.item, CreusotContracts_Logic_Ghost_Ghost_Type.t_ghost (Seq.seq Item2.item)),
+  type f = f, type Output0.output = b
+  clone C06MapPrecond_Common_Iterator_Produces as Produces2 with type self = i, type Item0.item = Item2.item
+  use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
+  clone C06MapPrecond_Impl0_Invariant as Invariant0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item2.item, predicate Produces0.produces = Produces2.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut,
+  predicate Precondition0.precondition = Precondition0.precondition
+  clone C06MapPrecond_Impl0_Item_Type as Item0 with type i = i, type b = b, type f = f
+  clone C06MapPrecond_Impl0_Produces as Produces0 with type i = i, type b = b, type f = f, type Item0.item = Item2.item,
+  predicate Produces0.produces = Produces2.produces,
+  predicate PostconditionMut0.postcondition_mut = PostconditionMut0.postcondition_mut
+  clone C06MapPrecond_Impl0_ProducesRefl as ProducesRefl0 with type i = i, type b = b, type f = f,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = Item2.item, axiom .
+  clone C06MapPrecond_Common_Iterator_ProducesRefl_Interface as ProducesRefl1 with type self = C06MapPrecond_Map_Type.t_map i Item2.item f,
+  function produces_refl = ProducesRefl0.produces_refl, predicate Invariant0.invariant' = Invariant0.invariant',
+  predicate Produces0.produces = Produces0.produces, type Item0.item = Item0.item, axiom .
+  clone C06MapPrecond_Impl0_Completed as Completed0 with type i = i, type b = b, type f = f,
+  type Item0.item = Item2.item, predicate Completed0.completed = Completed2.completed
+  clone C06MapPrecond_Common_Iterator_Completed_Interface as Completed1 with type self = C06MapPrecond_Map_Type.t_map i Item2.item f,
+  predicate completed = Completed0.completed
+  clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces1 with type self = C06MapPrecond_Map_Type.t_map i Item2.item f,
+  predicate produces = Produces0.produces, type Item0.item = Item0.item
+  clone C06MapPrecond_Common_Iterator_Item_Type as Item1 with type self = C06MapPrecond_Map_Type.t_map i Item2.item f,
+  type item = Item0.item
+  goal produces_refl_spec : forall a : C06MapPrecond_Map_Type.t_map i Item2.item f . (([#"../common.rs" 14 15 14 28] Invariant0.invariant' a) -> ([#"../06_map_precond.rs" 31 15 31 28] Invariant0.invariant' a)) /\ (forall result : () . ([#"../06_map_precond.rs" 32 14 32 39] Produces0.produces a (Seq.empty ) a) -> ([#"../common.rs" 15 14 15 39] Produces0.produces a (Seq.empty ) a))
+  clone C06MapPrecond_Impl0_ProducesTrans as ProducesTrans0 with type i = i, type b = b, type f = f,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Produces0.produces = Produces0.produces,
+  type Item0.item = Item2.item, axiom .
+  clone C06MapPrecond_Common_Iterator_ProducesTrans_Interface as ProducesTrans1 with type self = C06MapPrecond_Map_Type.t_map i Item2.item f,
+  function produces_trans = ProducesTrans0.produces_trans, predicate Invariant0.invariant' = Invariant0.invariant',
+  predicate Produces0.produces = Produces0.produces, type Item0.item = Item0.item, axiom .
+  goal produces_trans_spec : forall a : C06MapPrecond_Map_Type.t_map i Item2.item f, ab : Seq.seq b, b : C06MapPrecond_Map_Type.t_map i Item2.item f, bc : Seq.seq b, c : C06MapPrecond_Map_Type.t_map i Item2.item f . (([#"../common.rs" 23 15 23 32] Produces0.produces b bc c) && ([#"../common.rs" 22 15 22 32] Produces0.produces a ab b) && ([#"../common.rs" 21 15 21 28] Invariant0.invariant' c) && ([#"../common.rs" 20 15 20 28] Invariant0.invariant' b) && ([#"../common.rs" 19 15 19 28] Invariant0.invariant' a) -> ([#"../06_map_precond.rs" 40 15 40 32] Produces0.produces b bc c) && ([#"../06_map_precond.rs" 39 15 39 32] Produces0.produces a ab b) && ([#"../06_map_precond.rs" 38 15 38 28] Invariant0.invariant' c) && ([#"../06_map_precond.rs" 37 15 37 28] Invariant0.invariant' b) && ([#"../06_map_precond.rs" 36 15 36 28] Invariant0.invariant' a)) /\ (forall result : () . ([#"../06_map_precond.rs" 41 14 41 42] Produces0.produces a (Seq.(++) ab bc) c) -> ([#"../common.rs" 24 14 24 42] Produces0.produces a (Seq.(++) ab bc) c))
+  use Core_Option_Option_Type as Core_Option_Option_Type
+  clone C06MapPrecond_Impl0_Next_Interface as Next0 with type i = i, type b = b, type f = f,
+  predicate Invariant0.invariant' = Invariant0.invariant', predicate Completed0.completed = Completed0.completed,
+  predicate Produces0.produces = Produces0.produces, type Item0.item = Item2.item
+  clone C06MapPrecond_Common_Iterator_Next_Interface as Next1 with type self = C06MapPrecond_Map_Type.t_map i Item2.item f,
+  val next = Next0.next, predicate Invariant0.invariant' = Invariant0.invariant', type Item0.item = Item0.item,
+  predicate Completed0.completed = Completed0.completed, predicate Produces0.produces = Produces0.produces
+  clone C06MapPrecond_Common_Iterator_Invariant_Interface as Invariant1 with type self = C06MapPrecond_Map_Type.t_map i Item2.item f,
+  predicate invariant' = Invariant0.invariant'
+end
