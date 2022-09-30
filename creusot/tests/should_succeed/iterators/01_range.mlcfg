@@ -90,7 +90,7 @@ module C01Range_Impl0_Produces
   use mach.int.Int
   use prelude.IntSize
   use C01Range_Range_Type as C01Range_Range_Type
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.Int64
   predicate produces [#"../01_range.rs" 25 4 25 64] (self : C01Range_Range_Type.t_range) (visited : Seq.seq isize) (o : C01Range_Range_Type.t_range)
     
@@ -294,7 +294,7 @@ end
 module C01Range_SumRange_Interface
   use mach.int.Int64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.IntSize
   val sum_range [@cfg:stackify] (n : isize) : isize
     requires {[#"../01_range.rs" 67 11 67 18] Int64.to_int n >= 0}
@@ -304,7 +304,7 @@ end
 module C01Range_SumRange
   use mach.int.Int64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.IntSize
   use prelude.Ghost
   use seq.Seq

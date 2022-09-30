@@ -10,5 +10,5 @@ pub fn no_bounds_check(_x: i32, _y: i32) -> i32 {
 
 #[logic]
 pub fn no_conversion(x: u32) -> Int {
-    x.model()
+    x.shallow_model()
 }

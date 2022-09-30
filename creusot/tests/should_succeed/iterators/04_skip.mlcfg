@@ -91,7 +91,7 @@ module C04Skip_Impl0_Completed
   use C04Skip_Skip_Type as C04Skip_Skip_Type
   use mach.int.UInt64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use seq.Seq
   clone C04Skip_Common_Iterator_Completed_Stub as Completed0 with type self = i
   clone C04Skip_Common_Iterator_Item_Type as Item0 with type self = i
@@ -188,7 +188,7 @@ module C04Skip_Impl0_Produces
   use C04Skip_Skip_Type as C04Skip_Skip_Type
   use mach.int.UInt64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   clone C04Skip_Common_Iterator_Produces_Stub as Produces0 with type self = i, type Item0.item = Item0.item
   predicate produces [#"../04_skip.rs" 33 4 33 64] (self : C04Skip_Skip_Type.t_skip i) (visited : Seq.seq Item0.item) (o : C04Skip_Skip_Type.t_skip i)
     
@@ -350,15 +350,15 @@ module Core_Option_Option_Type
     | C_Some 't
     
 end
-module CreusotContracts_Std1_Default_DefaultSpec_DefaultLog_Stub
+module CreusotContracts_Std1_Default_Default_DefaultLog_Stub
   type self
   function default_log (_ : ()) : self
 end
-module CreusotContracts_Std1_Default_DefaultSpec_DefaultLog_Interface
+module CreusotContracts_Std1_Default_Default_DefaultLog_Interface
   type self
   function default_log (_ : ()) : self
 end
-module CreusotContracts_Std1_Default_DefaultSpec_DefaultLog
+module CreusotContracts_Std1_Default_Default_DefaultLog
   type self
   function default_log (_ : ()) : self
   val default_log (_wild0 : ()) : self
@@ -368,7 +368,7 @@ end
 module Core_Mem_Take_Interface
   type t
   use prelude.Borrow
-  clone CreusotContracts_Std1_Default_DefaultSpec_DefaultLog_Stub as DefaultLog0 with type self = t
+  clone CreusotContracts_Std1_Default_Default_DefaultLog_Stub as DefaultLog0 with type self = t
   val take [@cfg:stackify] (dest : borrowed t) : t
     ensures { result =  * dest }
     ensures {  ^ dest = DefaultLog0.default_log () }
@@ -377,7 +377,7 @@ end
 module Core_Mem_Take
   type t
   use prelude.Borrow
-  clone CreusotContracts_Std1_Default_DefaultSpec_DefaultLog_Interface as DefaultLog0 with type self = t
+  clone CreusotContracts_Std1_Default_Default_DefaultLog_Interface as DefaultLog0 with type self = t
   val take [@cfg:stackify] (dest : borrowed t) : t
     ensures { result =  * dest }
     ensures {  ^ dest = DefaultLog0.default_log () }
@@ -532,7 +532,7 @@ module C04Skip_Impl0_Next
   use mach.int.Int
   use prelude.UIntSize
   use mach.int.UInt64
-  use mach.int.Int32
+  use prelude.Int128
   clone CreusotContracts_Std1_Default_Impl2_DefaultLog as DefaultLog0
   use prelude.Ghost
   clone CreusotContracts_Logic_Resolve_Resolve_Resolve as Resolve3 with type self = Core_Option_Option_Type.t_option Item0.item

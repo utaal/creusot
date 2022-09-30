@@ -1,10 +1,7 @@
 use super::lower::{mk_binders, Lower};
 use crate::{
     ctx::PreludeModule,
-    translation::{
-        traits::resolve_opt,
-        ty::translate_ty,
-    },
+    translation::{traits::resolve_opt, ty::translate_ty},
     util::get_builtin,
 };
 use creusot_rustc::{
@@ -149,7 +146,7 @@ impl<'tcx> Lower<'_, '_, 'tcx> {
             } else if !self.ctx.opts.bounds_check {
                 return Some(args.remove(0));
             }
-        } else if builtin_attr == Some(Symbol::intern("mach.int.UInt128.to_int")) {
+        } else if builtin_attr == Some(Symbol::intern("prelude.UInt128.to_int")) {
             if let Exp::Const(Constant::Uint(v, _)) = args[0] {
                 return Some(Exp::Const(Constant::Uint(v, None)));
             } else if !self.ctx.opts.bounds_check {
@@ -179,7 +176,7 @@ impl<'tcx> Lower<'_, '_, 'tcx> {
             } else if !self.ctx.opts.bounds_check {
                 return Some(args.remove(0));
             }
-        } else if builtin_attr == Some(Symbol::intern("mach.int.Int128.to_int")) {
+        } else if builtin_attr == Some(Symbol::intern("prelude.Int128.to_int")) {
             if let Exp::Const(Constant::Int(v, _)) = args[0] {
                 return Some(Exp::Const(Constant::Int(v, None)));
             } else if !self.ctx.opts.bounds_check {

@@ -58,7 +58,7 @@ end
 module Core_Num_Impl7_WrappingAdd_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -72,7 +72,7 @@ end
 module Core_Num_Impl7_WrappingAdd
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -101,49 +101,34 @@ module Core_Num_Impl7_SaturatingAdd
     ensures { UInt8.to_int self + UInt8.to_int rhs > UInt8.to_int (255 : uint8) -> UInt8.to_int result = UInt8.to_int (255 : uint8) }
     
 end
-module CreusotContracts_Logic_Model_Impl5_Model_Stub
-  function model (self : bool) : bool
-end
-module CreusotContracts_Logic_Model_Impl5_Model_Interface
-  function model (self : bool) : bool
-end
-module CreusotContracts_Logic_Model_Impl5_Model
-  function model (self : bool) : bool =
-    self
-  val model (self : bool) : bool
-    ensures { result = model self }
-    
-end
 module Core_Num_Impl7_OverflowingAdd_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Stub as Model0
   val overflowing_add [@cfg:stackify] (self : uint8) (rhs : uint8) : (uint8, bool)
     ensures { UInt8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (UInt8.to_int self + UInt8.to_int rhs) (Power.power 2 8) + UInt8.to_int (0 : uint8) }
     ensures { UInt8.to_int self + UInt8.to_int rhs >= UInt8.to_int (0 : uint8) /\ UInt8.to_int self + UInt8.to_int rhs <= UInt8.to_int (255 : uint8) -> UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self + UInt8.to_int rhs }
     ensures { UInt8.to_int self + UInt8.to_int rhs < UInt8.to_int (0 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self + UInt8.to_int rhs + k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
     ensures { UInt8.to_int self + UInt8.to_int rhs > UInt8.to_int (255 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self + UInt8.to_int rhs - k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (UInt8.to_int self + UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self + UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
+    ensures { (let (_, a) = result in a) = (UInt8.to_int self + UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self + UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
     
 end
 module Core_Num_Impl7_OverflowingAdd
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Interface as Model0
   val overflowing_add [@cfg:stackify] (self : uint8) (rhs : uint8) : (uint8, bool)
     ensures { UInt8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (UInt8.to_int self + UInt8.to_int rhs) (Power.power 2 8) + UInt8.to_int (0 : uint8) }
     ensures { UInt8.to_int self + UInt8.to_int rhs >= UInt8.to_int (0 : uint8) /\ UInt8.to_int self + UInt8.to_int rhs <= UInt8.to_int (255 : uint8) -> UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self + UInt8.to_int rhs }
     ensures { UInt8.to_int self + UInt8.to_int rhs < UInt8.to_int (0 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self + UInt8.to_int rhs + k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
     ensures { UInt8.to_int self + UInt8.to_int rhs > UInt8.to_int (255 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self + UInt8.to_int rhs - k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (UInt8.to_int self + UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self + UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
+    ensures { (let (_, a) = result in a) = (UInt8.to_int self + UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self + UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
     
 end
 module CreusotContracts_Logic_Resolve_Resolve_Resolve_Stub
@@ -209,10 +194,9 @@ module CheckedOps_TestU8AddExample
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = uint8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = uint8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl7_OverflowingAdd_Interface as OverflowingAdd0 with function Model0.model = Model0.model
+  clone Core_Num_Impl7_OverflowingAdd_Interface as OverflowingAdd0
   clone Core_Num_Impl7_SaturatingAdd_Interface as SaturatingAdd0
   clone Core_Num_Impl7_WrappingAdd_Interface as WrappingAdd0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = uint8
@@ -459,7 +443,7 @@ end
 module CheckedOps_TestU8AddOverflow_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_u8_add_overflow [@cfg:stackify] (a : uint8) : ()
     requires {[#"../checked_ops.rs" 22 11 22 18] UInt8.to_int a <> 0}
     
@@ -467,16 +451,15 @@ end
 module CheckedOps_TestU8AddOverflow
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.Borrow
   use Core_Option_Option_Type as Core_Option_Option_Type
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = uint8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = uint8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl7_OverflowingAdd_Interface as OverflowingAdd0 with function Model0.model = Model0.model
+  clone Core_Num_Impl7_OverflowingAdd_Interface as OverflowingAdd0
   clone Core_Num_Impl7_SaturatingAdd_Interface as SaturatingAdd0
   clone Core_Num_Impl7_WrappingAdd_Interface as WrappingAdd0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = uint8
@@ -629,7 +612,7 @@ end
 module CheckedOps_TestU8WrappingAdd_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_u8_wrapping_add [@cfg:stackify] (a : uint8) (b : uint8) : uint8
     ensures { [#"../checked_ops.rs" 33 10 33 56] UInt8.to_int result = UInt8.to_int a + UInt8.to_int b \/ UInt8.to_int result = UInt8.to_int a + UInt8.to_int b - 256 }
     
@@ -637,7 +620,7 @@ end
 module CheckedOps_TestU8WrappingAdd
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   clone Core_Num_Impl7_WrappingAdd_Interface as WrappingAdd0
   let rec cfg test_u8_wrapping_add [@cfg:stackify] [#"../checked_ops.rs" 34 0 34 47] (a : uint8) (b : uint8) : uint8
     ensures { [#"../checked_ops.rs" 33 10 33 56] UInt8.to_int result = UInt8.to_int a + UInt8.to_int b \/ UInt8.to_int result = UInt8.to_int a + UInt8.to_int b - 256 }
@@ -677,13 +660,12 @@ module CheckedOps_TestU8OverflowingAdd
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = uint8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = uint8
   clone Core_Num_Impl7_CheckedAdd_Interface as CheckedAdd0
   clone Core_Num_Impl7_WrappingAdd_Interface as WrappingAdd0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = uint8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl7_OverflowingAdd_Interface as OverflowingAdd0 with function Model0.model = Model0.model
+  clone Core_Num_Impl7_OverflowingAdd_Interface as OverflowingAdd0
   let rec cfg test_u8_overflowing_add [@cfg:stackify] [#"../checked_ops.rs" 39 0 39 44] (a : uint8) (b : uint8) : ()
    = [@vc:do_not_keep_trace] [@vc:sp]
   var _0 : ();
@@ -802,7 +784,7 @@ end
 module Core_Num_Impl7_WrappingSub_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -816,7 +798,7 @@ end
 module Core_Num_Impl7_WrappingSub
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -848,33 +830,31 @@ end
 module Core_Num_Impl7_OverflowingSub_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Stub as Model0
   val overflowing_sub [@cfg:stackify] (self : uint8) (rhs : uint8) : (uint8, bool)
     ensures { UInt8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (UInt8.to_int self - UInt8.to_int rhs) (Power.power 2 8) + UInt8.to_int (0 : uint8) }
     ensures { UInt8.to_int self - UInt8.to_int rhs >= UInt8.to_int (0 : uint8) /\ UInt8.to_int self - UInt8.to_int rhs <= UInt8.to_int (255 : uint8) -> UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self - UInt8.to_int rhs }
     ensures { UInt8.to_int self - UInt8.to_int rhs < UInt8.to_int (0 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self - UInt8.to_int rhs + k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
     ensures { UInt8.to_int self - UInt8.to_int rhs > UInt8.to_int (255 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self - UInt8.to_int rhs - k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (UInt8.to_int self - UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self - UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
+    ensures { (let (_, a) = result in a) = (UInt8.to_int self - UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self - UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
     
 end
 module Core_Num_Impl7_OverflowingSub
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Interface as Model0
   val overflowing_sub [@cfg:stackify] (self : uint8) (rhs : uint8) : (uint8, bool)
     ensures { UInt8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (UInt8.to_int self - UInt8.to_int rhs) (Power.power 2 8) + UInt8.to_int (0 : uint8) }
     ensures { UInt8.to_int self - UInt8.to_int rhs >= UInt8.to_int (0 : uint8) /\ UInt8.to_int self - UInt8.to_int rhs <= UInt8.to_int (255 : uint8) -> UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self - UInt8.to_int rhs }
     ensures { UInt8.to_int self - UInt8.to_int rhs < UInt8.to_int (0 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self - UInt8.to_int rhs + k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
     ensures { UInt8.to_int self - UInt8.to_int rhs > UInt8.to_int (255 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self - UInt8.to_int rhs - k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (UInt8.to_int self - UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self - UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
+    ensures { (let (_, a) = result in a) = (UInt8.to_int self - UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self - UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
     
 end
 module CheckedOps_TestU8SubExample_Interface
@@ -888,10 +868,9 @@ module CheckedOps_TestU8SubExample
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = uint8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = uint8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl7_OverflowingSub_Interface as OverflowingSub0 with function Model0.model = Model0.model
+  clone Core_Num_Impl7_OverflowingSub_Interface as OverflowingSub0
   clone Core_Num_Impl7_SaturatingSub_Interface as SaturatingSub0
   clone Core_Num_Impl7_WrappingSub_Interface as WrappingSub0
   clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = uint8
@@ -1138,7 +1117,7 @@ end
 module CheckedOps_TestU8SubOverflow_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_u8_sub_overflow [@cfg:stackify] (a : uint8) : ()
     requires {[#"../checked_ops.rs" 62 11 62 18] UInt8.to_int a <> 0}
     
@@ -1146,16 +1125,15 @@ end
 module CheckedOps_TestU8SubOverflow
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.Borrow
   use Core_Option_Option_Type as Core_Option_Option_Type
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = uint8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = uint8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl7_OverflowingSub_Interface as OverflowingSub0 with function Model0.model = Model0.model
+  clone Core_Num_Impl7_OverflowingSub_Interface as OverflowingSub0
   clone Core_Num_Impl7_SaturatingSub_Interface as SaturatingSub0
   clone Core_Num_Impl7_WrappingSub_Interface as WrappingSub0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = uint8
@@ -1312,7 +1290,7 @@ end
 module CheckedOps_TestU8WrappingSub_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_u8_wrapping_sub [@cfg:stackify] (a : uint8) (b : uint8) : uint8
     ensures { [#"../checked_ops.rs" 73 10 73 56] UInt8.to_int result = UInt8.to_int a - UInt8.to_int b \/ UInt8.to_int result = UInt8.to_int a - UInt8.to_int b + 256 }
     
@@ -1320,7 +1298,7 @@ end
 module CheckedOps_TestU8WrappingSub
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   clone Core_Num_Impl7_WrappingSub_Interface as WrappingSub0
   let rec cfg test_u8_wrapping_sub [@cfg:stackify] [#"../checked_ops.rs" 74 0 74 47] (a : uint8) (b : uint8) : uint8
     ensures { [#"../checked_ops.rs" 73 10 73 56] UInt8.to_int result = UInt8.to_int a - UInt8.to_int b \/ UInt8.to_int result = UInt8.to_int a - UInt8.to_int b + 256 }
@@ -1360,13 +1338,12 @@ module CheckedOps_TestU8OverflowingSub
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = uint8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = uint8
   clone Core_Num_Impl7_CheckedSub_Interface as CheckedSub0
   clone Core_Num_Impl7_WrappingSub_Interface as WrappingSub0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = uint8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl7_OverflowingSub_Interface as OverflowingSub0 with function Model0.model = Model0.model
+  clone Core_Num_Impl7_OverflowingSub_Interface as OverflowingSub0
   let rec cfg test_u8_overflowing_sub [@cfg:stackify] [#"../checked_ops.rs" 79 0 79 44] (a : uint8) (b : uint8) : ()
    = [@vc:do_not_keep_trace] [@vc:sp]
   var _0 : ();
@@ -1485,7 +1462,7 @@ end
 module Core_Num_Impl7_WrappingMul_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -1499,7 +1476,7 @@ end
 module Core_Num_Impl7_WrappingMul
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -1531,33 +1508,31 @@ end
 module Core_Num_Impl7_OverflowingMul_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Stub as Model0
   val overflowing_mul [@cfg:stackify] (self : uint8) (rhs : uint8) : (uint8, bool)
     ensures { UInt8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (UInt8.to_int self * UInt8.to_int rhs) (Power.power 2 8) + UInt8.to_int (0 : uint8) }
     ensures { UInt8.to_int self * UInt8.to_int rhs >= UInt8.to_int (0 : uint8) /\ UInt8.to_int self * UInt8.to_int rhs <= UInt8.to_int (255 : uint8) -> UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self * UInt8.to_int rhs }
     ensures { UInt8.to_int self * UInt8.to_int rhs < UInt8.to_int (0 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self * UInt8.to_int rhs + k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
     ensures { UInt8.to_int self * UInt8.to_int rhs > UInt8.to_int (255 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self * UInt8.to_int rhs - k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (UInt8.to_int self * UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self * UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
+    ensures { (let (_, a) = result in a) = (UInt8.to_int self * UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self * UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
     
 end
 module Core_Num_Impl7_OverflowingMul
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Interface as Model0
   val overflowing_mul [@cfg:stackify] (self : uint8) (rhs : uint8) : (uint8, bool)
     ensures { UInt8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (UInt8.to_int self * UInt8.to_int rhs) (Power.power 2 8) + UInt8.to_int (0 : uint8) }
     ensures { UInt8.to_int self * UInt8.to_int rhs >= UInt8.to_int (0 : uint8) /\ UInt8.to_int self * UInt8.to_int rhs <= UInt8.to_int (255 : uint8) -> UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self * UInt8.to_int rhs }
     ensures { UInt8.to_int self * UInt8.to_int rhs < UInt8.to_int (0 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self * UInt8.to_int rhs + k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
     ensures { UInt8.to_int self * UInt8.to_int rhs > UInt8.to_int (255 : uint8) -> (exists k : int . k > 0 /\ UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self * UInt8.to_int rhs - k * (UInt8.to_int (255 : uint8) - UInt8.to_int (0 : uint8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (UInt8.to_int self * UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self * UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
+    ensures { (let (_, a) = result in a) = (UInt8.to_int self * UInt8.to_int rhs < UInt8.to_int (0 : uint8) \/ UInt8.to_int self * UInt8.to_int rhs > UInt8.to_int (255 : uint8)) }
     
 end
 module CheckedOps_TestU8MulExample_Interface
@@ -1571,10 +1546,9 @@ module CheckedOps_TestU8MulExample
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = uint8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = uint8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl7_OverflowingMul_Interface as OverflowingMul0 with function Model0.model = Model0.model
+  clone Core_Num_Impl7_OverflowingMul_Interface as OverflowingMul0
   clone Core_Num_Impl7_SaturatingMul_Interface as SaturatingMul0
   clone Core_Num_Impl7_WrappingMul_Interface as WrappingMul0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = uint8
@@ -1830,10 +1804,9 @@ module CheckedOps_TestU8MulZero
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = uint8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = uint8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl7_OverflowingMul_Interface as OverflowingMul0 with function Model0.model = Model0.model
+  clone Core_Num_Impl7_OverflowingMul_Interface as OverflowingMul0
   clone Core_Num_Impl7_SaturatingMul_Interface as SaturatingMul0
   clone Core_Num_Impl7_WrappingMul_Interface as WrappingMul0
   clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = uint8
@@ -1986,13 +1959,12 @@ module CheckedOps_TestU8OverflowingMul
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = uint8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = uint8
   clone Core_Num_Impl7_CheckedMul_Interface as CheckedMul0
   clone Core_Num_Impl7_WrappingMul_Interface as WrappingMul0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = uint8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl7_OverflowingMul_Interface as OverflowingMul0 with function Model0.model = Model0.model
+  clone Core_Num_Impl7_OverflowingMul_Interface as OverflowingMul0
   let rec cfg test_u8_overflowing_mul [@cfg:stackify] [#"../checked_ops.rs" 111 0 111 44] (a : uint8) (b : uint8) : ()
    = [@vc:do_not_keep_trace] [@vc:sp]
   var _0 : ();
@@ -2093,7 +2065,7 @@ end
 module Core_Num_Impl7_CheckedDiv_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use Core_Option_Option_Type as Core_Option_Option_Type
   val checked_div [@cfg:stackify] (self : uint8) (rhs : uint8) : Core_Option_Option_Type.t_option uint8
     ensures { (result = Core_Option_Option_Type.C_None) = (UInt8.to_int rhs = 0 \/ UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1) }
@@ -2103,7 +2075,7 @@ end
 module Core_Num_Impl7_CheckedDiv
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use Core_Option_Option_Type as Core_Option_Option_Type
   val checked_div [@cfg:stackify] (self : uint8) (rhs : uint8) : Core_Option_Option_Type.t_option uint8
     ensures { (result = Core_Option_Option_Type.C_None) = (UInt8.to_int rhs = 0 \/ UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1) }
@@ -2113,7 +2085,7 @@ end
 module Core_Num_Impl7_WrappingDiv_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val wrapping_div [@cfg:stackify] (self : uint8) (rhs : uint8) : uint8
     requires {UInt8.to_int rhs <> 0}
     ensures { UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1 -> UInt8.to_int result = UInt8.to_int self }
@@ -2123,7 +2095,7 @@ end
 module Core_Num_Impl7_WrappingDiv
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val wrapping_div [@cfg:stackify] (self : uint8) (rhs : uint8) : uint8
     requires {UInt8.to_int rhs <> 0}
     ensures { UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1 -> UInt8.to_int result = UInt8.to_int self }
@@ -2133,7 +2105,7 @@ end
 module Core_Num_Impl7_SaturatingDiv_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val saturating_div [@cfg:stackify] (self : uint8) (rhs : uint8) : uint8
     requires {UInt8.to_int rhs <> 0}
     ensures { UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1 -> UInt8.to_int result = UInt8.to_int (0 : uint8) }
@@ -2143,7 +2115,7 @@ end
 module Core_Num_Impl7_SaturatingDiv
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val saturating_div [@cfg:stackify] (self : uint8) (rhs : uint8) : uint8
     requires {UInt8.to_int rhs <> 0}
     ensures { UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1 -> UInt8.to_int result = UInt8.to_int (0 : uint8) }
@@ -2153,25 +2125,23 @@ end
 module Core_Num_Impl7_OverflowingDiv_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
-  clone CreusotContracts_Logic_Model_Impl5_Model_Stub as Model0
+  use prelude.Int128
   val overflowing_div [@cfg:stackify] (self : uint8) (rhs : uint8) : (uint8, bool)
     requires {UInt8.to_int rhs <> 0}
     ensures { UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1 -> UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self }
     ensures { UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1 \/ UInt8.to_int (let (a, _) = result in a) = div (UInt8.to_int self) (UInt8.to_int rhs) }
-    ensures { Model0.model (let (_, a) = result in a) = (UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1) }
+    ensures { (let (_, a) = result in a) = (UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1) }
     
 end
 module Core_Num_Impl7_OverflowingDiv
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
-  clone CreusotContracts_Logic_Model_Impl5_Model_Interface as Model0
+  use prelude.Int128
   val overflowing_div [@cfg:stackify] (self : uint8) (rhs : uint8) : (uint8, bool)
     requires {UInt8.to_int rhs <> 0}
     ensures { UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1 -> UInt8.to_int (let (a, _) = result in a) = UInt8.to_int self }
     ensures { UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1 \/ UInt8.to_int (let (a, _) = result in a) = div (UInt8.to_int self) (UInt8.to_int rhs) }
-    ensures { Model0.model (let (_, a) = result in a) = (UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1) }
+    ensures { (let (_, a) = result in a) = (UInt8.to_int self = UInt8.to_int (0 : uint8) /\ UInt8.to_int rhs = - 1) }
     
 end
 module CheckedOps_TestU8DivExample_Interface
@@ -2185,10 +2155,9 @@ module CheckedOps_TestU8DivExample
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = uint8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = uint8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl7_OverflowingDiv_Interface as OverflowingDiv0 with function Model0.model = Model0.model
+  clone Core_Num_Impl7_OverflowingDiv_Interface as OverflowingDiv0
   clone Core_Num_Impl7_SaturatingDiv_Interface as SaturatingDiv0
   clone Core_Num_Impl7_WrappingDiv_Interface as WrappingDiv0
   clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = uint8
@@ -2348,7 +2317,7 @@ end
 module CheckedOps_TestU8DivNoOverflow_Interface
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_u8_div_no_overflow [@cfg:stackify] (a : uint8) (b : uint8) : ()
     requires {[#"../checked_ops.rs" 127 11 127 18] UInt8.to_int b <> 0}
     
@@ -2356,15 +2325,14 @@ end
 module CheckedOps_TestU8DivNoOverflow
   use prelude.UInt8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use Core_Option_Option_Type as Core_Option_Option_Type
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = uint8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = uint8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl7_OverflowingDiv_Interface as OverflowingDiv0 with function Model0.model = Model0.model
+  clone Core_Num_Impl7_OverflowingDiv_Interface as OverflowingDiv0
   clone Core_Num_Impl7_SaturatingDiv_Interface as SaturatingDiv0
   clone Core_Num_Impl7_WrappingDiv_Interface as WrappingDiv0
   clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = uint8
@@ -2639,7 +2607,7 @@ end
 module Core_Num_Impl1_WrappingAdd_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -2653,7 +2621,7 @@ end
 module Core_Num_Impl1_WrappingAdd
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -2685,33 +2653,31 @@ end
 module Core_Num_Impl1_OverflowingAdd_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Stub as Model0
   val overflowing_add [@cfg:stackify] (self : int8) (rhs : int8) : (int8, bool)
     ensures { Int8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (Int8.to_int self + Int8.to_int rhs) (Power.power 2 8) + Int8.to_int (-128 : int8) }
     ensures { Int8.to_int self + Int8.to_int rhs >= Int8.to_int (-128 : int8) /\ Int8.to_int self + Int8.to_int rhs <= Int8.to_int (127 : int8) -> Int8.to_int (let (a, _) = result in a) = Int8.to_int self + Int8.to_int rhs }
     ensures { Int8.to_int self + Int8.to_int rhs < Int8.to_int (-128 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self + Int8.to_int rhs + k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
     ensures { Int8.to_int self + Int8.to_int rhs > Int8.to_int (127 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self + Int8.to_int rhs - k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (Int8.to_int self + Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self + Int8.to_int rhs > Int8.to_int (127 : int8)) }
+    ensures { (let (_, a) = result in a) = (Int8.to_int self + Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self + Int8.to_int rhs > Int8.to_int (127 : int8)) }
     
 end
 module Core_Num_Impl1_OverflowingAdd
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Interface as Model0
   val overflowing_add [@cfg:stackify] (self : int8) (rhs : int8) : (int8, bool)
     ensures { Int8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (Int8.to_int self + Int8.to_int rhs) (Power.power 2 8) + Int8.to_int (-128 : int8) }
     ensures { Int8.to_int self + Int8.to_int rhs >= Int8.to_int (-128 : int8) /\ Int8.to_int self + Int8.to_int rhs <= Int8.to_int (127 : int8) -> Int8.to_int (let (a, _) = result in a) = Int8.to_int self + Int8.to_int rhs }
     ensures { Int8.to_int self + Int8.to_int rhs < Int8.to_int (-128 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self + Int8.to_int rhs + k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
     ensures { Int8.to_int self + Int8.to_int rhs > Int8.to_int (127 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self + Int8.to_int rhs - k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (Int8.to_int self + Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self + Int8.to_int rhs > Int8.to_int (127 : int8)) }
+    ensures { (let (_, a) = result in a) = (Int8.to_int self + Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self + Int8.to_int rhs > Int8.to_int (127 : int8)) }
     
 end
 module CheckedOps_TestI8AddExample_Interface
@@ -2725,10 +2691,9 @@ module CheckedOps_TestI8AddExample
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingAdd_Interface as OverflowingAdd0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingAdd_Interface as OverflowingAdd0
   clone Core_Num_Impl1_SaturatingAdd_Interface as SaturatingAdd0
   clone Core_Num_Impl1_WrappingAdd_Interface as WrappingAdd0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = int8
@@ -3088,7 +3053,7 @@ end
 module CheckedOps_TestI8AddOverflowPos_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_i8_add_overflow_pos [@cfg:stackify] (a : int8) : ()
     requires {[#"../checked_ops.rs" 164 11 164 17] Int8.to_int a > 0}
     
@@ -3096,16 +3061,15 @@ end
 module CheckedOps_TestI8AddOverflowPos
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.Borrow
   use Core_Option_Option_Type as Core_Option_Option_Type
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingAdd_Interface as OverflowingAdd0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingAdd_Interface as OverflowingAdd0
   clone Core_Num_Impl1_SaturatingAdd_Interface as SaturatingAdd0
   clone Core_Num_Impl1_WrappingAdd_Interface as WrappingAdd0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = int8
@@ -3262,7 +3226,7 @@ end
 module CheckedOps_TestI8AddOverflowNeg_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_i8_add_overflow_neg [@cfg:stackify] (a : int8) : ()
     requires {[#"../checked_ops.rs" 174 11 174 17] Int8.to_int a < 0}
     
@@ -3270,16 +3234,15 @@ end
 module CheckedOps_TestI8AddOverflowNeg
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.Borrow
   use Core_Option_Option_Type as Core_Option_Option_Type
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingAdd_Interface as OverflowingAdd0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingAdd_Interface as OverflowingAdd0
   clone Core_Num_Impl1_SaturatingAdd_Interface as SaturatingAdd0
   clone Core_Num_Impl1_WrappingAdd_Interface as WrappingAdd0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = int8
@@ -3436,7 +3399,7 @@ end
 module CheckedOps_TestI8WrappingAdd_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_i8_wrapping_add [@cfg:stackify] (a : int8) (b : int8) : int8
     ensures { [#"../checked_ops.rs" 185 10 185 84] Int8.to_int result = Int8.to_int a + Int8.to_int b \/ Int8.to_int result = Int8.to_int a + Int8.to_int b - 256 \/ Int8.to_int result = Int8.to_int a + Int8.to_int b + 256 }
     
@@ -3444,7 +3407,7 @@ end
 module CheckedOps_TestI8WrappingAdd
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   clone Core_Num_Impl1_WrappingAdd_Interface as WrappingAdd0
   let rec cfg test_i8_wrapping_add [@cfg:stackify] [#"../checked_ops.rs" 186 0 186 47] (a : int8) (b : int8) : int8
     ensures { [#"../checked_ops.rs" 185 10 185 84] Int8.to_int result = Int8.to_int a + Int8.to_int b \/ Int8.to_int result = Int8.to_int a + Int8.to_int b - 256 \/ Int8.to_int result = Int8.to_int a + Int8.to_int b + 256 }
@@ -3484,13 +3447,12 @@ module CheckedOps_TestI8OverflowingAdd
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = int8
   clone Core_Num_Impl1_CheckedAdd_Interface as CheckedAdd0
   clone Core_Num_Impl1_WrappingAdd_Interface as WrappingAdd0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingAdd_Interface as OverflowingAdd0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingAdd_Interface as OverflowingAdd0
   let rec cfg test_i8_overflowing_add [@cfg:stackify] [#"../checked_ops.rs" 191 0 191 44] (a : int8) (b : int8) : ()
    = [@vc:do_not_keep_trace] [@vc:sp]
   var _0 : ();
@@ -3609,7 +3571,7 @@ end
 module Core_Num_Impl1_WrappingSub_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -3623,7 +3585,7 @@ end
 module Core_Num_Impl1_WrappingSub
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -3655,33 +3617,31 @@ end
 module Core_Num_Impl1_OverflowingSub_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Stub as Model0
   val overflowing_sub [@cfg:stackify] (self : int8) (rhs : int8) : (int8, bool)
     ensures { Int8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (Int8.to_int self - Int8.to_int rhs) (Power.power 2 8) + Int8.to_int (-128 : int8) }
     ensures { Int8.to_int self - Int8.to_int rhs >= Int8.to_int (-128 : int8) /\ Int8.to_int self - Int8.to_int rhs <= Int8.to_int (127 : int8) -> Int8.to_int (let (a, _) = result in a) = Int8.to_int self - Int8.to_int rhs }
     ensures { Int8.to_int self - Int8.to_int rhs < Int8.to_int (-128 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self - Int8.to_int rhs + k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
     ensures { Int8.to_int self - Int8.to_int rhs > Int8.to_int (127 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self - Int8.to_int rhs - k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (Int8.to_int self - Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self - Int8.to_int rhs > Int8.to_int (127 : int8)) }
+    ensures { (let (_, a) = result in a) = (Int8.to_int self - Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self - Int8.to_int rhs > Int8.to_int (127 : int8)) }
     
 end
 module Core_Num_Impl1_OverflowingSub
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Interface as Model0
   val overflowing_sub [@cfg:stackify] (self : int8) (rhs : int8) : (int8, bool)
     ensures { Int8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (Int8.to_int self - Int8.to_int rhs) (Power.power 2 8) + Int8.to_int (-128 : int8) }
     ensures { Int8.to_int self - Int8.to_int rhs >= Int8.to_int (-128 : int8) /\ Int8.to_int self - Int8.to_int rhs <= Int8.to_int (127 : int8) -> Int8.to_int (let (a, _) = result in a) = Int8.to_int self - Int8.to_int rhs }
     ensures { Int8.to_int self - Int8.to_int rhs < Int8.to_int (-128 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self - Int8.to_int rhs + k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
     ensures { Int8.to_int self - Int8.to_int rhs > Int8.to_int (127 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self - Int8.to_int rhs - k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (Int8.to_int self - Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self - Int8.to_int rhs > Int8.to_int (127 : int8)) }
+    ensures { (let (_, a) = result in a) = (Int8.to_int self - Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self - Int8.to_int rhs > Int8.to_int (127 : int8)) }
     
 end
 module CheckedOps_TestI8SubExample_Interface
@@ -3695,10 +3655,9 @@ module CheckedOps_TestI8SubExample
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingSub_Interface as OverflowingSub0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingSub_Interface as OverflowingSub0
   clone Core_Num_Impl1_SaturatingSub_Interface as SaturatingSub0
   clone Core_Num_Impl1_WrappingSub_Interface as WrappingSub0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = int8
@@ -4058,7 +4017,7 @@ end
 module CheckedOps_TestI8SubOverflowPos_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_i8_sub_overflow_pos [@cfg:stackify] (a : int8) : ()
     requires {[#"../checked_ops.rs" 219 11 219 17] Int8.to_int a > 0}
     
@@ -4066,16 +4025,15 @@ end
 module CheckedOps_TestI8SubOverflowPos
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.Borrow
   use Core_Option_Option_Type as Core_Option_Option_Type
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingSub_Interface as OverflowingSub0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingSub_Interface as OverflowingSub0
   clone Core_Num_Impl1_SaturatingSub_Interface as SaturatingSub0
   clone Core_Num_Impl1_WrappingSub_Interface as WrappingSub0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = int8
@@ -4232,7 +4190,7 @@ end
 module CheckedOps_TestI8SubOverflowNeg_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_i8_sub_overflow_neg [@cfg:stackify] (a : int8) : ()
     requires {[#"../checked_ops.rs" 229 11 229 17] Int8.to_int a < 0}
     
@@ -4240,16 +4198,15 @@ end
 module CheckedOps_TestI8SubOverflowNeg
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.Borrow
   use Core_Option_Option_Type as Core_Option_Option_Type
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingSub_Interface as OverflowingSub0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingSub_Interface as OverflowingSub0
   clone Core_Num_Impl1_SaturatingSub_Interface as SaturatingSub0
   clone Core_Num_Impl1_WrappingSub_Interface as WrappingSub0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = int8
@@ -4410,7 +4367,7 @@ end
 module CheckedOps_TestI8WrappingSub_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_i8_wrapping_sub [@cfg:stackify] (a : int8) (b : int8) : int8
     ensures { [#"../checked_ops.rs" 240 10 240 84] Int8.to_int result = Int8.to_int a - Int8.to_int b \/ Int8.to_int result = Int8.to_int a - Int8.to_int b + 256 \/ Int8.to_int result = Int8.to_int a - Int8.to_int b - 256 }
     
@@ -4418,7 +4375,7 @@ end
 module CheckedOps_TestI8WrappingSub
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   clone Core_Num_Impl1_WrappingSub_Interface as WrappingSub0
   let rec cfg test_i8_wrapping_sub [@cfg:stackify] [#"../checked_ops.rs" 241 0 241 47] (a : int8) (b : int8) : int8
     ensures { [#"../checked_ops.rs" 240 10 240 84] Int8.to_int result = Int8.to_int a - Int8.to_int b \/ Int8.to_int result = Int8.to_int a - Int8.to_int b + 256 \/ Int8.to_int result = Int8.to_int a - Int8.to_int b - 256 }
@@ -4458,13 +4415,12 @@ module CheckedOps_TestI8OverflowingSub
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = int8
   clone Core_Num_Impl1_CheckedSub_Interface as CheckedSub0
   clone Core_Num_Impl1_WrappingSub_Interface as WrappingSub0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingSub_Interface as OverflowingSub0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingSub_Interface as OverflowingSub0
   let rec cfg test_i8_overflowing_sub [@cfg:stackify] [#"../checked_ops.rs" 246 0 246 44] (a : int8) (b : int8) : ()
    = [@vc:do_not_keep_trace] [@vc:sp]
   var _0 : ();
@@ -4583,7 +4539,7 @@ end
 module Core_Num_Impl1_WrappingMul_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -4597,7 +4553,7 @@ end
 module Core_Num_Impl1_WrappingMul
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
@@ -4629,33 +4585,31 @@ end
 module Core_Num_Impl1_OverflowingMul_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Stub as Model0
   val overflowing_mul [@cfg:stackify] (self : int8) (rhs : int8) : (int8, bool)
     ensures { Int8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (Int8.to_int self * Int8.to_int rhs) (Power.power 2 8) + Int8.to_int (-128 : int8) }
     ensures { Int8.to_int self * Int8.to_int rhs >= Int8.to_int (-128 : int8) /\ Int8.to_int self * Int8.to_int rhs <= Int8.to_int (127 : int8) -> Int8.to_int (let (a, _) = result in a) = Int8.to_int self * Int8.to_int rhs }
     ensures { Int8.to_int self * Int8.to_int rhs < Int8.to_int (-128 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self * Int8.to_int rhs + k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
     ensures { Int8.to_int self * Int8.to_int rhs > Int8.to_int (127 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self * Int8.to_int rhs - k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (Int8.to_int self * Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self * Int8.to_int rhs > Int8.to_int (127 : int8)) }
+    ensures { (let (_, a) = result in a) = (Int8.to_int self * Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self * Int8.to_int rhs > Int8.to_int (127 : int8)) }
     
 end
 module Core_Num_Impl1_OverflowingMul
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   use int.Power
   use int.EuclideanDivision
-  clone CreusotContracts_Logic_Model_Impl5_Model_Interface as Model0
   val overflowing_mul [@cfg:stackify] (self : int8) (rhs : int8) : (int8, bool)
     ensures { Int8.to_int (let (a, _) = result in a) = EuclideanDivision.mod (Int8.to_int self * Int8.to_int rhs) (Power.power 2 8) + Int8.to_int (-128 : int8) }
     ensures { Int8.to_int self * Int8.to_int rhs >= Int8.to_int (-128 : int8) /\ Int8.to_int self * Int8.to_int rhs <= Int8.to_int (127 : int8) -> Int8.to_int (let (a, _) = result in a) = Int8.to_int self * Int8.to_int rhs }
     ensures { Int8.to_int self * Int8.to_int rhs < Int8.to_int (-128 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self * Int8.to_int rhs + k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
     ensures { Int8.to_int self * Int8.to_int rhs > Int8.to_int (127 : int8) -> (exists k : int . k > 0 /\ Int8.to_int (let (a, _) = result in a) = Int8.to_int self * Int8.to_int rhs - k * (Int8.to_int (127 : int8) - Int8.to_int (-128 : int8) + 1)) }
-    ensures { Model0.model (let (_, a) = result in a) = (Int8.to_int self * Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self * Int8.to_int rhs > Int8.to_int (127 : int8)) }
+    ensures { (let (_, a) = result in a) = (Int8.to_int self * Int8.to_int rhs < Int8.to_int (-128 : int8) \/ Int8.to_int self * Int8.to_int rhs > Int8.to_int (127 : int8)) }
     
 end
 module CheckedOps_TestI8MulExample_Interface
@@ -4669,10 +4623,9 @@ module CheckedOps_TestI8MulExample
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingMul_Interface as OverflowingMul0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingMul_Interface as OverflowingMul0
   clone Core_Num_Impl1_SaturatingMul_Interface as SaturatingMul0
   clone Core_Num_Impl1_WrappingMul_Interface as WrappingMul0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = int8
@@ -5041,10 +4994,9 @@ module CheckedOps_TestI8MulZero
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingMul_Interface as OverflowingMul0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingMul_Interface as OverflowingMul0
   clone Core_Num_Impl1_SaturatingMul_Interface as SaturatingMul0
   clone Core_Num_Impl1_WrappingMul_Interface as WrappingMul0
   clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = int8
@@ -5197,13 +5149,12 @@ module CheckedOps_TestI8OverflowingMul
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone Core_Option_Impl0_IsNone_Interface as IsNone0 with type t = int8
   clone Core_Num_Impl1_CheckedMul_Interface as CheckedMul0
   clone Core_Num_Impl1_WrappingMul_Interface as WrappingMul0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingMul_Interface as OverflowingMul0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingMul_Interface as OverflowingMul0
   let rec cfg test_i8_overflowing_mul [@cfg:stackify] [#"../checked_ops.rs" 283 0 283 44] (a : int8) (b : int8) : ()
    = [@vc:do_not_keep_trace] [@vc:sp]
   var _0 : ();
@@ -5304,7 +5255,7 @@ end
 module Core_Num_Impl1_CheckedDiv_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use Core_Option_Option_Type as Core_Option_Option_Type
   val checked_div [@cfg:stackify] (self : int8) (rhs : int8) : Core_Option_Option_Type.t_option int8
     ensures { (result = Core_Option_Option_Type.C_None) = (Int8.to_int rhs = 0 \/ Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1) }
@@ -5314,7 +5265,7 @@ end
 module Core_Num_Impl1_CheckedDiv
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use Core_Option_Option_Type as Core_Option_Option_Type
   val checked_div [@cfg:stackify] (self : int8) (rhs : int8) : Core_Option_Option_Type.t_option int8
     ensures { (result = Core_Option_Option_Type.C_None) = (Int8.to_int rhs = 0 \/ Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1) }
@@ -5324,7 +5275,7 @@ end
 module Core_Num_Impl1_WrappingDiv_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val wrapping_div [@cfg:stackify] (self : int8) (rhs : int8) : int8
     requires {Int8.to_int rhs <> 0}
     ensures { Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1 -> Int8.to_int result = Int8.to_int self }
@@ -5334,7 +5285,7 @@ end
 module Core_Num_Impl1_WrappingDiv
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val wrapping_div [@cfg:stackify] (self : int8) (rhs : int8) : int8
     requires {Int8.to_int rhs <> 0}
     ensures { Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1 -> Int8.to_int result = Int8.to_int self }
@@ -5344,7 +5295,7 @@ end
 module Core_Num_Impl1_SaturatingDiv_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val saturating_div [@cfg:stackify] (self : int8) (rhs : int8) : int8
     requires {Int8.to_int rhs <> 0}
     ensures { Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1 -> Int8.to_int result = Int8.to_int (-128 : int8) }
@@ -5354,7 +5305,7 @@ end
 module Core_Num_Impl1_SaturatingDiv
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val saturating_div [@cfg:stackify] (self : int8) (rhs : int8) : int8
     requires {Int8.to_int rhs <> 0}
     ensures { Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1 -> Int8.to_int result = Int8.to_int (-128 : int8) }
@@ -5364,25 +5315,23 @@ end
 module Core_Num_Impl1_OverflowingDiv_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
-  clone CreusotContracts_Logic_Model_Impl5_Model_Stub as Model0
+  use prelude.Int128
   val overflowing_div [@cfg:stackify] (self : int8) (rhs : int8) : (int8, bool)
     requires {Int8.to_int rhs <> 0}
     ensures { Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1 -> Int8.to_int (let (a, _) = result in a) = Int8.to_int self }
     ensures { Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1 \/ Int8.to_int (let (a, _) = result in a) = div (Int8.to_int self) (Int8.to_int rhs) }
-    ensures { Model0.model (let (_, a) = result in a) = (Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1) }
+    ensures { (let (_, a) = result in a) = (Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1) }
     
 end
 module Core_Num_Impl1_OverflowingDiv
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
-  clone CreusotContracts_Logic_Model_Impl5_Model_Interface as Model0
+  use prelude.Int128
   val overflowing_div [@cfg:stackify] (self : int8) (rhs : int8) : (int8, bool)
     requires {Int8.to_int rhs <> 0}
     ensures { Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1 -> Int8.to_int (let (a, _) = result in a) = Int8.to_int self }
     ensures { Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1 \/ Int8.to_int (let (a, _) = result in a) = div (Int8.to_int self) (Int8.to_int rhs) }
-    ensures { Model0.model (let (_, a) = result in a) = (Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1) }
+    ensures { (let (_, a) = result in a) = (Int8.to_int self = Int8.to_int (-128 : int8) /\ Int8.to_int rhs = - 1) }
     
 end
 module CheckedOps_TestI8DivExample_Interface
@@ -5396,10 +5345,9 @@ module CheckedOps_TestI8DivExample
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingDiv_Interface as OverflowingDiv0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingDiv_Interface as OverflowingDiv0
   clone Core_Num_Impl1_SaturatingDiv_Interface as SaturatingDiv0
   clone Core_Num_Impl1_WrappingDiv_Interface as WrappingDiv0
   clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = int8
@@ -5785,7 +5733,7 @@ end
 module CheckedOps_TestI8DivNoOverflow_Interface
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_i8_div_no_overflow [@cfg:stackify] (a : int8) (b : int8) : ()
     requires {[#"../checked_ops.rs" 312 11 312 46] Int8.to_int b <> 0 /\ (Int8.to_int a <> - 128 \/ Int8.to_int b <> - 1)}
     
@@ -5793,15 +5741,14 @@ end
 module CheckedOps_TestI8DivNoOverflow
   use prelude.Int8
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use Core_Option_Option_Type as Core_Option_Option_Type
   use prelude.Bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve2 with type t = bool
   clone CreusotContracts_Logic_Resolve_Impl2_Resolve as Resolve1 with type t = int8
-  clone CreusotContracts_Logic_Model_Impl5_Model as Model0
   clone CreusotContracts_Logic_Resolve_Impl0_Resolve as Resolve0 with type t1 = int8, type t2 = bool,
     predicate Resolve0.resolve = Resolve1.resolve, predicate Resolve1.resolve = Resolve2.resolve
-  clone Core_Num_Impl1_OverflowingDiv_Interface as OverflowingDiv0 with function Model0.model = Model0.model
+  clone Core_Num_Impl1_OverflowingDiv_Interface as OverflowingDiv0
   clone Core_Num_Impl1_SaturatingDiv_Interface as SaturatingDiv0
   clone Core_Num_Impl1_WrappingDiv_Interface as WrappingDiv0
   clone Core_Option_Impl0_Unwrap_Interface as Unwrap0 with type t = int8

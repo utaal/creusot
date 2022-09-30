@@ -21,8 +21,9 @@ end
 module C07MutableCapture_TestFnmut_Closure1_Interface
   use mach.int.UInt32
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.Borrow
+  use mach.int.Int32
   type c07mutablecapture_testfnmut_closure1  =
     | C07MutableCapture_TestFnmut_Closure1 (borrowed uint32)
     
@@ -37,14 +38,14 @@ module C07MutableCapture_TestFnmut_Closure1_Interface
   predicate postcondition_mut [@cfg:stackify] (_1' : borrowed c07mutablecapture_testfnmut_closure1) (_ : ()) (result : int32)
     
    =
-    ([#"../07_mutable_capture.rs" 8 18 8 37] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) + 1) &&  ^ c07mutablecapture_testfnmut_closure1_0 ( ^ _1') =  ^ c07mutablecapture_testfnmut_closure1_0 ( * _1')
+    ([#"../07_mutable_capture.rs" 8 18 8 35] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) + 1) &&  ^ c07mutablecapture_testfnmut_closure1_0 ( ^ _1') =  ^ c07mutablecapture_testfnmut_closure1_0 ( * _1')
   predicate postcondition_once [@cfg:stackify] (_1' : c07mutablecapture_testfnmut_closure1) (_ : ()) (result : int32) =
-    [#"../07_mutable_capture.rs" 8 18 8 37] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 _1') = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 _1') + 1
+    [#"../07_mutable_capture.rs" 8 18 8 35] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 _1') = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 _1') + 1
   predicate resolve (_1' : c07mutablecapture_testfnmut_closure1) =
     Resolve0.resolve (c07mutablecapture_testfnmut_closure1_0 _1')
   val c07MutableCapture_TestFnmut_Closure1 [@cfg:stackify] (_1' : borrowed c07mutablecapture_testfnmut_closure1) : int32
     requires {[#"../07_mutable_capture.rs" 7 19 7 33] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) < 1000000}
-    ensures { [#"../07_mutable_capture.rs" 8 18 8 37] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( ^ _1')) = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) + 1 }
+    ensures { [#"../07_mutable_capture.rs" 8 18 8 35] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( ^ _1')) = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) + 1 }
     ensures {  ^ c07mutablecapture_testfnmut_closure1_0 ( ^ _1') =  ^ c07mutablecapture_testfnmut_closure1_0 ( * _1') }
     
 end
@@ -60,6 +61,7 @@ module C07MutableCapture_TestFnmut_Closure1
     match (self) with
       | C07MutableCapture_TestFnmut_Closure1 a -> a
       end
+  use prelude.Int128
   use mach.int.Int32
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = uint32
   predicate precondition [@cfg:stackify] (_1' : c07mutablecapture_testfnmut_closure1) (_ : ()) =
@@ -67,15 +69,15 @@ module C07MutableCapture_TestFnmut_Closure1
   predicate postcondition_mut [@cfg:stackify] (_1' : borrowed c07mutablecapture_testfnmut_closure1) (_ : ()) (result : int32)
     
    =
-    ([#"../07_mutable_capture.rs" 8 18 8 37] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) + 1) &&  ^ c07mutablecapture_testfnmut_closure1_0 ( ^ _1') =  ^ c07mutablecapture_testfnmut_closure1_0 ( * _1')
+    ([#"../07_mutable_capture.rs" 8 18 8 35] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) + 1) &&  ^ c07mutablecapture_testfnmut_closure1_0 ( ^ _1') =  ^ c07mutablecapture_testfnmut_closure1_0 ( * _1')
   predicate postcondition_once [@cfg:stackify] (_1' : c07mutablecapture_testfnmut_closure1) (_ : ()) (result : int32) =
-    [#"../07_mutable_capture.rs" 8 18 8 37] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 _1') = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 _1') + 1
+    [#"../07_mutable_capture.rs" 8 18 8 35] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 _1') = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 _1') + 1
   predicate resolve (_1' : c07mutablecapture_testfnmut_closure1) =
     Resolve0.resolve (c07mutablecapture_testfnmut_closure1_0 _1')
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve1 with type t = c07mutablecapture_testfnmut_closure1
   let rec cfg c07MutableCapture_TestFnmut_Closure1 [@cfg:stackify] [#"../07_mutable_capture.rs" 9 8 9 10] (_1' : borrowed c07mutablecapture_testfnmut_closure1) : int32
     requires {[#"../07_mutable_capture.rs" 7 19 7 33] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) < 1000000}
-    ensures { [#"../07_mutable_capture.rs" 8 18 8 37] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( ^ _1')) = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) + 1 }
+    ensures { [#"../07_mutable_capture.rs" 8 18 8 35] UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( ^ _1')) = UInt32.to_int ( * c07mutablecapture_testfnmut_closure1_0 ( * _1')) + 1 }
     
    = [@vc:do_not_keep_trace] [@vc:sp]
   var _0 : int32;
@@ -111,7 +113,7 @@ end
 module C07MutableCapture_TestFnmut_Interface
   use mach.int.UInt32
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   val test_fnmut [@cfg:stackify] (x : uint32) : ()
     requires {[#"../07_mutable_capture.rs" 4 11 4 24] UInt32.to_int x = 100000}
     
@@ -119,8 +121,9 @@ end
 module C07MutableCapture_TestFnmut
   use mach.int.UInt32
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.Borrow
+  use mach.int.Int32
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = uint32
   clone C07MutableCapture_TestFnmut_Closure1_Interface as Closure10 with predicate Resolve0.resolve = Resolve0.resolve,
     axiom .

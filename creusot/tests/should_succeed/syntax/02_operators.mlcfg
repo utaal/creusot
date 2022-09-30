@@ -2,7 +2,7 @@
 module C02Operators_Division_Interface
   use mach.int.UInt64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.UIntSize
   val division [@cfg:stackify] (x : usize) (y : usize) : usize
     requires {[#"../02_operators.rs" 7 11 7 17] UInt64.to_int y > 0}
@@ -11,7 +11,7 @@ end
 module C02Operators_Division
   use mach.int.UInt64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.UIntSize
   let rec cfg division [@cfg:stackify] [#"../02_operators.rs" 8 0 8 40] (x : usize) (y : usize) : usize
     requires {[#"../02_operators.rs" 7 11 7 17] UInt64.to_int y > 0}
@@ -60,7 +60,7 @@ end
 module C02Operators_Modulus_Interface
   use mach.int.UInt64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.UIntSize
   val modulus [@cfg:stackify] (x : usize) (y : usize) : usize
     requires {[#"../02_operators.rs" 22 11 22 17] UInt64.to_int y > 0}
@@ -69,7 +69,7 @@ end
 module C02Operators_Modulus
   use mach.int.UInt64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.UIntSize
   let rec cfg modulus [@cfg:stackify] [#"../02_operators.rs" 23 0 23 39] (x : usize) (y : usize) : usize
     requires {[#"../02_operators.rs" 22 11 22 17] UInt64.to_int y > 0}
@@ -218,7 +218,7 @@ end
 module C02Operators_Sub_Interface
   use mach.int.UInt64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.UIntSize
   val sub [@cfg:stackify] (x : usize) (y : usize) : usize
     requires {[#"../02_operators.rs" 62 11 62 23] UInt64.to_int x - UInt64.to_int y >= 0}
@@ -227,7 +227,7 @@ end
 module C02Operators_Sub
   use mach.int.UInt64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.UIntSize
   let rec cfg sub [@cfg:stackify] [#"../02_operators.rs" 63 0 63 35] (x : usize) (y : usize) : usize
     requires {[#"../02_operators.rs" 62 11 62 23] UInt64.to_int x - UInt64.to_int y >= 0}
@@ -270,7 +270,7 @@ end
 module C02Operators_Expression_Interface
   use mach.int.UInt64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.UIntSize
   val expression [@cfg:stackify] (x : usize) (y : usize) (z : usize) : bool
     requires {[#"../02_operators.rs" 74 11 74 17] UInt64.to_int y > 0}
@@ -281,7 +281,7 @@ end
 module C02Operators_Expression
   use mach.int.UInt64
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.UIntSize
   let rec cfg expression [@cfg:stackify] [#"../02_operators.rs" 77 0 77 51] (x : usize) (y : usize) (z : usize) : bool
     requires {[#"../02_operators.rs" 74 11 74 17] UInt64.to_int y > 0}

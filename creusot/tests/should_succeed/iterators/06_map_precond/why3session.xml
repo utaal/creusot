@@ -35,7 +35,7 @@
     <proof prover="2"><result status="valid" time="0.01" steps="19"/></proof>
     </goal>
     <goal name="produces_trans&#39;vc.0.0.1" expl="postcondition" proved="true">
-    <proof prover="2"><result status="valid" time="0.03" steps="863"/></proof>
+    <proof prover="2"><result status="valid" time="0.03" steps="576"/></proof>
     </goal>
     <goal name="produces_trans&#39;vc.0.0.2" expl="postcondition" proved="true">
     <proof prover="2"><result status="valid" time="0.00" steps="14"/></proof>
@@ -43,7 +43,7 @@
     <goal name="produces_trans&#39;vc.0.0.3" expl="postcondition" proved="true">
     <transf name="use_th" proved="true" arg1="seq.FreeMonoid">
      <goal name="produces_trans&#39;vc.0.0.3.0" expl="postcondition" proved="true">
-     <proof prover="2"><result status="valid" time="0.47" steps="4261"/></proof>
+     <proof prover="2"><result status="valid" time="0.30" steps="4249"/></proof>
      </goal>
     </transf>
     </goal>
@@ -65,30 +65,30 @@
            <proof prover="2"><result status="valid" time="0.01" steps="50"/></proof>
            </goal>
            <goal name="produces_trans&#39;vc.0.0.4.0.0.0.0.0.0.1" proved="true">
-           <proof prover="2"><result status="valid" time="0.05" steps="842"/></proof>
+           <proof prover="2"><result status="valid" time="0.05" steps="573"/></proof>
            </goal>
            <goal name="produces_trans&#39;vc.0.0.4.0.0.0.0.0.0.2" proved="true">
-           <proof prover="2"><result status="valid" time="0.03" steps="577"/></proof>
+           <proof prover="2"><result status="valid" time="0.03" steps="465"/></proof>
            </goal>
            <goal name="produces_trans&#39;vc.0.0.4.0.0.0.0.0.0.3" proved="true">
            <proof prover="2"><result status="valid" time="0.03" steps="409"/></proof>
            </goal>
            <goal name="produces_trans&#39;vc.0.0.4.0.0.0.0.0.0.4" proved="true">
-           <proof prover="2"><result status="valid" time="0.01" steps="149"/></proof>
+           <proof prover="2"><result status="valid" time="0.01" steps="151"/></proof>
            </goal>
            <goal name="produces_trans&#39;vc.0.0.4.0.0.0.0.0.0.5" proved="true">
            <transf name="case" proved="true" arg1="(i &lt; length ab)">
             <goal name="produces_trans&#39;vc.0.0.4.0.0.0.0.0.0.5.0" expl="true case" proved="true">
             <transf name="use_th" proved="true" arg1="seq.FreeMonoid">
              <goal name="produces_trans&#39;vc.0.0.4.0.0.0.0.0.0.5.0.0" expl="true case" proved="true">
-             <proof prover="0"><result status="valid" time="1.35" steps="135913"/></proof>
+             <proof prover="0"><result status="valid" time="0.92" steps="135913"/></proof>
              </goal>
             </transf>
             </goal>
             <goal name="produces_trans&#39;vc.0.0.4.0.0.0.0.0.0.5.1" expl="false case" proved="true">
             <transf name="use_th" proved="true" arg1="seq.FreeMonoid">
              <goal name="produces_trans&#39;vc.0.0.4.0.0.0.0.0.0.5.1.0" expl="false case" proved="true">
-             <proof prover="2"><result status="valid" time="1.15" steps="7927"/></proof>
+             <proof prover="2"><result status="valid" time="1.15" steps="7924"/></proof>
              </goal>
             </transf>
             </goal>
@@ -157,7 +157,7 @@
     <proof prover="2"><result status="valid" time="0.03" steps="169"/></proof>
     </goal>
     <goal name="next&#39;vc.3.0.1" expl="postcondition" proved="true">
-    <proof prover="2"><result status="valid" time="0.02" steps="349"/></proof>
+    <proof prover="2"><result status="valid" time="0.02" steps="348"/></proof>
     </goal>
    </transf>
    </goal>
@@ -178,7 +178,7 @@
         <proof prover="2"><result status="valid" time="0.01" steps="120"/></proof>
         </goal>
         <goal name="next&#39;vc.3.1.1.0.0.0.1" expl="postcondition" proved="true">
-        <proof prover="2"><result status="valid" time="0.02" steps="250"/></proof>
+        <proof prover="2"><result status="valid" time="0.02" steps="251"/></proof>
         </goal>
         <goal name="next&#39;vc.3.1.1.0.0.0.2" expl="postcondition" proved="true">
         <proof prover="2"><result status="valid" time="0.01" steps="103"/></proof>
@@ -189,7 +189,7 @@
         <goal name="next&#39;vc.3.1.1.0.0.0.4" expl="postcondition" proved="true">
         <transf name="exists" proved="true" arg1="(singleton _21)">
          <goal name="next&#39;vc.3.1.1.0.0.0.4.0" proved="true">
-         <proof prover="2"><result status="valid" time="0.04" steps="586"/></proof>
+         <proof prover="2"><result status="valid" time="0.04" steps="591"/></proof>
          </goal>
         </transf>
         </goal>
@@ -208,10 +208,10 @@
   <goal name="next&#39;vc.4" expl="postcondition" proved="true">
   <transf name="split_vc" proved="true" >
    <goal name="next&#39;vc.4.0" expl="postcondition" proved="true">
-   <proof prover="2"><result status="valid" time="0.16" steps="326"/></proof>
+   <proof prover="2"><result status="valid" time="0.16" steps="325"/></proof>
    </goal>
    <goal name="next&#39;vc.4.1" expl="postcondition" proved="true">
-   <proof prover="2"><result status="valid" time="0.36" steps="2786"/></proof>
+   <proof prover="2"><result status="valid" time="0.36" steps="2788"/></proof>
    </goal>
   </transf>
   </goal>
@@ -259,7 +259,7 @@
 </theory>
 <theory name="C06MapPrecond_Identity" proved="true">
  <goal name="identity&#39;vc" expl="VC for identity" proved="true">
- <proof prover="2"><result status="valid" time="0.04" steps="582"/></proof>
+ <proof prover="2"><result status="valid" time="0.04" steps="583"/></proof>
  </goal>
 </theory>
 <theory name="C06MapPrecond_Increment_Closure4" proved="true">
@@ -291,7 +291,7 @@
   <proof prover="2"><result status="valid" time="0.01" steps="84"/></proof>
   </goal>
   <goal name="counter&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="409"/></proof>
+  <proof prover="2"><result status="valid" time="0.03" steps="411"/></proof>
   </goal>
   <goal name="counter&#39;vc.2" expl="precondition" proved="true">
   <proof prover="2"><result status="valid" time="0.01" steps="30"/></proof>

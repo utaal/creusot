@@ -267,7 +267,7 @@ module C06MapPrecond_Impl1_InnerExtension
   use prelude.Ghost
   use seq.Seq
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use seq_ext.SeqExt
   clone C06MapPrecond_Common_Iterator_Produces_Stub as Produces0 with type self = i, type Item0.item = Item0.item
   predicate inner_extension [#"../06_map_precond.rs" 100 4 100 49] (self : C06MapPrecond_Map_Type.t_map i Item0.item f) (other : C06MapPrecond_Map_Type.t_map i Item0.item f)
@@ -336,7 +336,7 @@ module C06MapPrecond_Impl0_Produces
   use C06MapPrecond_Map_Type as C06MapPrecond_Map_Type
   use prelude.Ghost
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use seq_ext.SeqExt
   use prelude.Borrow
   use seq.Seq
@@ -1638,7 +1638,7 @@ module C06MapPrecond_Increment_Closure4_Interface
   type i
   use mach.int.UInt32
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.Borrow
   use prelude.Ghost
   use seq.Seq
@@ -1675,7 +1675,7 @@ module C06MapPrecond_Increment_Closure4
     
   use mach.int.UInt32
   use mach.int.Int
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.Borrow
   use prelude.Ghost
   use seq.Seq
@@ -1742,7 +1742,7 @@ module C06MapPrecond_Increment_Interface
   use seq.Seq
   use mach.int.Int
   use mach.int.UInt32
-  use mach.int.Int32
+  use prelude.Int128
   clone C06MapPrecond_Common_Iterator_Produces_Stub as Produces0 with type self = i, type Item0.item = uint32
   clone C06MapPrecond_Common_Iterator_Completed_Stub as Completed0 with type self = i
   clone C06MapPrecond_Common_Iterator_Invariant_Stub as Invariant0 with type self = i
@@ -1759,7 +1759,7 @@ module C06MapPrecond_Increment
   use seq.Seq
   use mach.int.Int
   use mach.int.UInt32
-  use mach.int.Int32
+  use prelude.Int128
   clone C06MapPrecond_Common_Iterator_Produces_Interface as Produces0 with type self = i, type Item0.item = uint32
   clone C06MapPrecond_Common_Iterator_Invariant_Interface as Invariant0 with type self = i
   clone C06MapPrecond_Common_Iterator_ProducesTrans as ProducesTrans0 with type self = i,
@@ -1889,7 +1889,7 @@ module C06MapPrecond_Counter_Closure3_Interface
   use seq.Seq
   use mach.int.Int
   use prelude.UIntSize
-  use mach.int.Int32
+  use prelude.Int128
   use prelude.Borrow
   use mach.int.UInt32
   type c06mapprecond_counter_closure3  =
@@ -1937,7 +1937,7 @@ module C06MapPrecond_Counter_Closure3
   use mach.int.UInt64
   use prelude.Ghost
   use seq.Seq
-  use mach.int.Int32
+  use prelude.Int128
   use mach.int.UInt32
   clone CreusotContracts_Logic_Resolve_Impl1_Resolve as Resolve0 with type t = usize
   predicate precondition [@cfg:stackify] (_1' : c06mapprecond_counter_closure3) (args : (uint32, Ghost.ghost_ty (Seq.seq uint32)))
