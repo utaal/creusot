@@ -97,13 +97,7 @@ pub(crate) fn translate_function<'tcx, 'sess>(
 
         decls.push(promoted);
     }
-    let mut sig = signature_of(ctx, &mut names, def_id);
-
-    def_id
-        .as_local()
-        .map(|d| ctx.def_span(d))
-        .and_then(|span| ctx.span_attr(span))
-        .map(|attr| sig.attrs.push(attr));
+    let sig = signature_of(ctx, &mut names, def_id);
 
     let func_translator = BodyTranslator::build_context(tcx, ctx, &body, &mut names, sig, def_id);
 

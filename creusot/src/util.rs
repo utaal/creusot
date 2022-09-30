@@ -416,6 +416,12 @@ pub(crate) fn sig_to_why3<'tcx>(
         attrs.push(declaration::Attribute::Attr("cfg:stackify".into()))
     };
 
+    def_id
+        .as_local()
+        .map(|d| ctx.def_span(d))
+        .and_then(|span| ctx.span_attr(span))
+        .map(|attr| attrs.push(attr));
+
     let retty = names.with_public_clones(|names| {
         translation::ty::translate_ty(ctx, names, span, pre_sig.output)
     });
