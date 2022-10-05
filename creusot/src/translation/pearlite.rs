@@ -94,6 +94,7 @@ pub enum TermKind<'tcx> {
     Projection { lhs: Box<Term<'tcx>>, name: Field, def: DefId, substs: SubstsRef<'tcx> },
     Old { term: Box<Term<'tcx>> },
     Closure { args: Vec<Pattern<'tcx>>, body: Box<Term<'tcx>> },
+    Reborrow { cur: Box<Term<'tcx>>, fin: Box<Term<'tcx>> },
     Absurd,
 }
 impl<'tcx> TypeFoldable<'tcx> for Literal {
@@ -357,7 +358,9 @@ impl<'a, 'tcx> ThirTerm<'a, 'tcx> {
                 if let ExprKind::Deref { arg } = self.thir[arg].kind {
                     self.expr_term(arg)
                 } else {
-                    Err(Error::new(self.thir[arg].span, "cannot perform a mutable borrow"))
+                    let (cur, fin) = self.logical_reborrow(arg)?;
+
+                    Ok(Term { ty, span, kind: TermKind::Reborrow { cur: box cur, fin: box fin } })
                 }
             }
             ExprKind::Adt(box AdtExpr { adt_def, variant_index, ref fields, .. }) => {
@@ -379,7 +382,9 @@ impl<'a, 'tcx> ThirTerm<'a, 'tcx> {
             // Can it happen?
             ExprKind::Deref { arg } => {
                 if self.thir[arg].ty.is_box() || self.thir[arg].ty.ref_mutability() == Some(Not) {
-                    self.expr_term(arg)
+                    let mut arg = self.expr_term(arg)?;
+                    arg.ty = arg.ty.builtin_deref(false).expect("expected &T").ty;
+                    Ok(arg)
                 } else {
                     Ok(Term { ty, span, kind: TermKind::Cur { term: box self.expr_term(arg)? } })
                 }
@@ -408,42 +413,8 @@ impl<'a, 'tcx> ThirTerm<'a, 'tcx> {
                 })
             }
             ExprKind::Field { lhs, name, .. } => {
-                let pat =
-                    field_pattern(self.thir[lhs].ty, name).expect("expr_term: no term for field");
-
-                match &self.thir[lhs].ty.kind() {
-                    TyKind::Adt(def, substs) => {
-                        let lhs = self.expr_term(lhs)?;
-                        Ok(Term {
-                            ty,
-                            span,
-                            kind: TermKind::Projection {
-                                lhs: box lhs,
-                                name,
-                                def: def.did(),
-                                substs,
-                            },
-                        })
-                    }
-                    TyKind::Tuple(_) => {
-                        let lhs = self.expr_term(lhs)?;
-                        Ok(Term {
-                            ty,
-                            span,
-                            kind: TermKind::Let {
-                                pattern: pat,
-                                // this is the wrong type
-                                body: box Term {
-                                    ty: lhs.ty,
-                                    span: creusot_rustc::span::DUMMY_SP,
-                                    kind: TermKind::Var(Symbol::intern("a")),
-                                },
-                                arg: box lhs,
-                            },
-                        })
-                    }
-                    _ => unreachable!(),
-                }
+                let lhs = self.expr_term(lhs)?;
+                Ok(Term { ty, span, kind: self.mk_projection(lhs, name)? })
             }
             ExprKind::Tuple { ref fields } => {
                 let fields: Vec<_> =
@@ -621,6 +592,77 @@ impl<'a, 'tcx> ThirTerm<'a, 'tcx> {
                 Ok(((name.name, ty), pearlite(self.tcx, closure_id)?))
             }
             _ => Err(Error::new(self.thir[body].span, "unexpected error in quantifier")),
+        }
+    }
+
+    fn logical_reborrow(&self, rebor_id: ExprId) -> Result<(Term<'tcx>, Term<'tcx>), Error> {
+        let ty = self.thir[rebor_id].ty;
+        let span = self.thir[rebor_id].span;
+        match &self.thir[rebor_id].kind {
+            ExprKind::Scope { value, .. } => self.logical_reborrow(*value),
+            ExprKind::Block { block } => {
+                let Block { stmts, expr, .. } = &self.thir[*block];
+                assert!(stmts.is_empty());
+                self.logical_reborrow(expr.unwrap())
+            }
+            ExprKind::Field { lhs, variant_index: _, name } => {
+                let (cur, fin) = self.logical_reborrow(*lhs)?;
+                Ok((
+                    Term { ty, span, kind: self.mk_projection(cur, *name)? },
+                    Term { ty, span, kind: self.mk_projection(fin, *name)? },
+                ))
+            }
+            ExprKind::Deref { arg } => match &self.thir[*arg].kind {
+                // Perhaps the root doesn't need to be a variable? could be a projection? (&mut T, T).0
+                ExprKind::VarRef { .. } => {
+                    let expr = self.expr_term(*arg)?;
+
+                    let ty = expr.ty.builtin_deref(false).expect("expected reference type").ty;
+                    Ok((
+                        Term {
+                            ty,
+                            span: expr.span,
+                            kind: TermKind::Cur { term: box expr.clone() },
+                        },
+                        Term { ty, span: expr.span, kind: TermKind::Fin { term: box expr } },
+                    ))
+                }
+                _ => {
+                    let (cur, fin) = self.logical_reborrow(*arg)?;
+                    let ty = cur.ty.builtin_deref(false).expect("expected reference type").ty;
+                    Ok((
+                        Term { ty, span: cur.span, kind: TermKind::Cur { term: box cur } },
+                        Term { ty, span: fin.span, kind: TermKind::Cur { term: box fin } },
+                    ))
+                }
+            },
+            _ => Err(Error::new(
+                span,
+                "unsupported logical reborrow, only simple field projections are supproted, sorry",
+            )),
+        }
+    }
+
+    fn mk_projection(&self, lhs: Term<'tcx>, name: Field) -> Result<TermKind<'tcx>, Error> {
+        let pat = field_pattern(lhs.ty, name).expect("mk_projection: no term for field");
+
+        match &lhs.ty.kind() {
+            TyKind::Adt(def, substs) => {
+                Ok(TermKind::Projection { lhs: box lhs, name, def: def.did(), substs })
+            }
+            TyKind::Tuple(_) => {
+                Ok(TermKind::Let {
+                    pattern: pat,
+                    // this is the wrong type
+                    body: box Term {
+                        ty: lhs.ty,
+                        span: creusot_rustc::span::DUMMY_SP,
+                        kind: TermKind::Var(Symbol::intern("a")),
+                    },
+                    arg: box lhs,
+                })
+            }
+            _ => unreachable!(),
         }
     }
 }
@@ -810,6 +852,10 @@ pub fn super_visit_term<'tcx, V: TermVisitor<'tcx>>(term: &Term<'tcx>, visitor: 
         TermKind::Old { term } => visitor.visit_term(&*term),
         TermKind::Closure { args: _, body } => visitor.visit_term(&*body),
         TermKind::Absurd => {}
+        TermKind::Reborrow { cur, fin } => {
+            visitor.visit_term(&*cur);
+            visitor.visit_term(&*fin)
+        }
     }
 }
 
@@ -862,6 +908,10 @@ pub(crate) fn super_visit_mut_term<'tcx, V: TermVisitorMut<'tcx>>(
         TermKind::Old { term } => visitor.visit_mut_term(&mut *term),
         TermKind::Closure { args: _, body } => visitor.visit_mut_term(&mut *body),
         TermKind::Absurd => {}
+        TermKind::Reborrow { cur, fin } => {
+            visitor.visit_mut_term(&mut *cur);
+            visitor.visit_mut_term(&mut *fin)
+        }
     }
 }
 
@@ -962,6 +1012,10 @@ impl<'tcx> Term<'tcx> {
                 body.subst_inner(&bound, inv_subst);
             }
             TermKind::Absurd => {}
+            TermKind::Reborrow { cur, fin } => {
+                cur.subst_inner(bound, inv_subst);
+                fin.subst_inner(bound, inv_subst)
+            }
         }
     }
 }
